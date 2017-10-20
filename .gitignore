@@ -1,1 +1,43 @@
-# Add any directories, files, or patterns you don't want to be tracked by version control
+# Compiled source
+__pycache__/
+*.com
+*.class
+*.dll
+*.exe
+*.o
+*.so
+*.resources
+*.pyc
+
+# Packages
+*.7z
+*.dmg
+*.gz
+*.iso
+*.jar
+*.rar
+*.tar
+*.zip
+
+# OS generated files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+Icon?
+ehthumbs.db
+Thumbs.db
+*.bak
+*.suo
+
+# special files
+*.komodoproject
+.settings
+.project
+.pydevproject
+.komodotools
+.vscode
+
+# project
+*/settings/local.py
