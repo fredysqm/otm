@@ -43,7 +43,7 @@ INSTALLED_APPS = [
     'reservas',
     'logentry',
     #3RD
-    
+    'crispy_forms',
 ]
 
 MIDDLEWARE = [
