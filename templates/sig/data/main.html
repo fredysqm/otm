@@ -1,0 +1,11 @@
+{% extends 'base.html' %}{% load staticfiles %}{% load crispy_forms_tags %}
+
+{% block title %}Principal{% endblock %}
+
+{% block menu %}
+    {% include 'menu.html' with active_tab='sig_data_main' %}
+{% endblock %}
+
+{% block content %}
+    <div>Inicio</div>
+{% endblock %}

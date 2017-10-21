@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+
+{% block title %}Cerrar sesión{% endblock %}
+
+{% block content %}
+<div class="col-md-12 padding-auth-msg">
+    <div class="well bs-component">
+        <legend><span class="glyphicon glyphicon-lock"></span> ¡Sesión cerrada!</legend>
+        <p>
+            Ha cerrado correctamente su sesión.
+            <h5>Volver a <a href="{% url 'sig_client_main' %}"><span class="glyphicon glyphicon-log-in"></span> Iniciar sesión</a></h5>
+        </p>
+    </div>
+</div>
+{% endblock %}

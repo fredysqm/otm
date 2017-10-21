@@ -2,12 +2,6 @@ from django.db import models
 from django.core import validators
 
 
-TIPO_DOC_PROVEEDOR = (
-    ('D', 'DNI'),
-    ('R', 'RUC'),
-    ('N', 'NIT'),
-)
-
 class TipoDocProveedor(models.Model):
     siglas = models.CharField (
         max_length=3,
@@ -31,18 +25,17 @@ class TipoDocProveedor(models.Model):
         ]
     )
 
-    def save(self, *args, **kwargs):
+    def clean(self):
         self.siglas = ' '.join(self.siglas.upper().split())
         self.nombre = ' '.join(self.nombre.upper().split())
-        super(TipoDocProveedor, self).save(*args, **kwargs)
 
     def __str__(self):
         return ('%s' % (self.siglas,))
 
     class Meta:
         unique_together = ( ('siglas',), ('nombre',) )
-        verbose_name = ('Tipo de documento proveedor')
-        verbose_name_plural = ('Tipos de documento proveedor')
+        verbose_name = ('tipo de documento proveedor')
+        verbose_name_plural = ('tipos de documento proveedor')
 
 
 class Proveedor(models.Model):
@@ -84,10 +77,18 @@ class Proveedor(models.Model):
         ]
     )
 
-    def save(self, *args, **kwargs):
+    def clean(self):
         self.razon_social = ' '.join(self.razon_social.upper().split())
         self.direccion = ' '.join(self.direccion.upper().split())
-        super(Proveedor, self).save(*args, **kwargs)
+        if self.tipo_documento.pk == 1: #RUC
+            if len(self.nro_documento) != 11:
+                raise validators.ValidationError('Número de documento RUC debe tener 11 dígitos.')
+        elif self.tipo_documento.pk == 2: #DNI
+            if len(self.nro_documento) != 8:
+                raise validators.ValidationError('Número de documento DNI debe tener 8 dígitos.')
+        elif self.tipo_documento.pk == 3: #NIT
+            if len(self.nro_documento) != 10:
+                raise validators.ValidationError("Número de documento NIT debe tener 10 dígitos.")
 
     def __str__(self):
         return ('%s (%s %s)' % (self.razon_social, self.tipo_documento, self.nro_documento))
