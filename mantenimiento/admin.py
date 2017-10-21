@@ -1,5 +1,5 @@
 from django.contrib import admin
-from mantent.models import Proveedor, TipoDocProveedor
+from mantenimiento.models import Proveedor, TipoDocProveedor
 
 
 class ProveedorAdmin(admin.ModelAdmin):

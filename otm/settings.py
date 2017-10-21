@@ -38,10 +38,12 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     #ME
-    'mantent',
+    'autenticacion',
+    'mantenimiento',
     'reservas',
+    'logentry',
     #3RD
-    'logentry_admin',
+    
 ]
 
 MIDDLEWARE = [
