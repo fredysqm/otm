@@ -40,7 +40,7 @@ class TipoDocProveedor(models.Model):
 
 class Proveedor(models.Model):
     razon_social = models.CharField (
-        max_length=60,
+        max_length=100,
         verbose_name='Razón social',
         help_text='Nombre o razón social de la persona o empresa',
         validators=[

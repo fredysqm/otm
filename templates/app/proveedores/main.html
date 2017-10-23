@@ -1,0 +1,67 @@
+{% extends 'base.html' %}{% load staticfiles %}{% load crispy_forms_tags %}
+
+{% block title %}Proveedores{% endblock %}
+
+{% block menu %}
+    {% include 'menu.html' with active_tab='app_mantenimiento' %}
+{% endblock %}
+
+{% block content %}
+
+<ul class="nav nav-tabs">
+    <li class="active"><a href="#home" data-toggle="tab" aria-expanded="true">Proveedores</a></li>
+    <li class=""><a href="#profile" data-toggle="tab" aria-expanded="false">Profile</a></li>
+    <li class="disabled"><a>Disabled</a></li>
+</ul>
+
+<table class="table table-striped table-hover ">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Razón social</th>
+            <th>Tipo documento</th>
+            <th>Nro documento</th>
+            <th>Dirección</th>
+        </tr>
+    </thead>
+    <tbody>
+    {% for proveedor in object_list %}
+        <tr>
+            <td>{{ proveedor.id }}</td>
+            <td>{{ proveedor.razon_social }}</td>
+            <td>{{ proveedor.tipo_documento }}</td>
+            <td>{{ proveedor.nro_documento }}</td>
+            <td>{{ proveedor.direccion }}</td>
+        </tr>
+    {% empty %}
+        <tr>
+            <td>No hay proveedores.</td>
+        </tr>
+    {% endfor %}
+    </tbody>
+</table> 
+
+{% if is_paginated %}
+<ul class="pagination">
+    {% if page_obj.has_previous %}
+        <li><a href="?page={{ page_obj.previous_page_number }}">&laquo;</a></li>
+    {% endif %}
+        <li class="">Página {{ page_obj.number }} de {{ page_obj.paginator.num_pages }}.</li>
+    {% if page_obj.has_next %}
+        <li><a href="?page={{ page_obj.next_page_number }}">&raquo;</a></li>
+    {% endif %}
+</ul>
+{% endif %}
+
+{% endblock %}
+
+
+<ul class="pagination pagination-sm">
+        <li class="disabled"><a href="#">&laquo;</a></li>
+        <li class="active"><a href="#">1</a></li>
+        <li><a href="#">2</a></li>
+        <li><a href="#">3</a></li>
+        <li><a href="#">4</a></li>
+        <li><a href="#">5</a></li>
+        <li><a href="#">&raquo;</a></li>
+      </ul>

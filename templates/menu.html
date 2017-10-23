@@ -2,15 +2,29 @@
     <div>
         <h6>CONTENIDO</h6>
     </div>
-    <li class="{% if active_tab == 'sig_data_main' %} active{% endif %}">
-        <a href="{% url 'sig_data_main' %}"> <span class="fa-stack fa-lg pull-left"><i class="glyphicon glyphicon-home fa-stack-1x "></i></span>Principal</a>
+
+    <li class="{% if active_tab == 'app_main' %} active{% endif %}">
+        <a href="{% url 'app_main' %}"> <span class="fa-stack fa-lg pull-left"><i class="glyphicon glyphicon-home fa-stack-1x "></i></span>Inicio</a>
     </li>
+
+    <li class="{% if active_tab == 'app_mantenimiento' %} active{% endif %}">
+        <a href="{% url 'app_mantenimiento_proveedores' %}"> <span class="fa-stack fa-lg pull-left"><i class="fa fa-database fa-stack-1x "></i></span>Mantenimiento</a>
+    </li>
+
     <div>
         <h6>{{ user.username }}</h6>
     </div>
+
+    {% if user.is_staff %}
+        <li>
+            <a href="{% url 'admin:index' %}"> <span class="fa-stack fa-lg pull-left"><i class="fa fa-user-secret fa-stack-1x "></i></span>Administración</a>
+        </li>
+    {% endif %}
+
     <li class="{% if active_tab == 'autenticacion_password_change' %} active{% endif %}">
         <a href="{% url 'autenticacion_password_change' %}"> <span class="fa-stack fa-lg pull-left"><i class="fa fa-key fa-stack-1x "></i></span>Cambiar contraseña</a>
     </li>
+
     <li>
         <a href="{% url 'autenticacion_logout' %}"><span class="fa-stack fa-lg pull-left"><i class="glyphicon glyphicon-log-out fa-stack-1x "></i></span>Cerrar sesión</a>
     </li>

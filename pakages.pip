@@ -1,5 +1,6 @@
 Django
 mysqlclient
+python-memcached
 django_compressor
 djangorestframework
 django-crispy-forms
