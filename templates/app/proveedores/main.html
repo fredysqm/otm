@@ -42,26 +42,19 @@
 </table> 
 
 {% if is_paginated %}
-<ul class="pagination">
+<ul class="pager">
     {% if page_obj.has_previous %}
-        <li><a href="?page={{ page_obj.previous_page_number }}">&laquo;</a></li>
+        <li class="previous"><a href="?page={{ page_obj.previous_page_number }}">&larr; Anterior</a></li>
+    {% else %}
+        <li class="previous disabled"><a href="#">&larr; Anterior</a></li>
     {% endif %}
-        <li class="">Página {{ page_obj.number }} de {{ page_obj.paginator.num_pages }}.</li>
+
     {% if page_obj.has_next %}
-        <li><a href="?page={{ page_obj.next_page_number }}">&raquo;</a></li>
+        <li class="next"><a href="?page={{ page_obj.next_page_number }}">Siguiente &rarr;</a></li>
+    {% else %}
+        <li class="next disabled"><a href="#">Siguiente &rarr;</a></li>
     {% endif %}
 </ul>
 {% endif %}
 
 {% endblock %}
-
-
-<ul class="pagination pagination-sm">
-        <li class="disabled"><a href="#">&laquo;</a></li>
-        <li class="active"><a href="#">1</a></li>
-        <li><a href="#">2</a></li>
-        <li><a href="#">3</a></li>
-        <li><a href="#">4</a></li>
-        <li><a href="#">5</a></li>
-        <li><a href="#">&raquo;</a></li>
-      </ul>
