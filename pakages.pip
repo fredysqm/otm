@@ -1,0 +1,6 @@
+Django
+mysqlclient
+django_compressor
+djangorestframework
+django-crispy-forms
+django-debug-toolbar
