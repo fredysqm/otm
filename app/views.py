@@ -12,4 +12,4 @@ class app_mantenimiento_proveedores(LoginRequiredMixin, ListView):
     template_name = 'app/proveedores/main.html'
     model = Proveedor
     queryset = Proveedor.objects.select_related().order_by('-id')
-    paginate_by = 10
+    paginate_by = 50
