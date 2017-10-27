@@ -19,6 +19,7 @@ INSTALLED_APPS = [
     'mantenimiento',
     'reservas',
     'logentry',
+    'api',
 ]
 
 MIDDLEWARE = [

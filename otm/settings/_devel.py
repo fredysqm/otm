@@ -21,6 +21,7 @@ INSTALLED_APPS = [
     'mantenimiento',
     'reservas',
     'logentry',
+    'api',
     'debug_toolbar',
 ]
 
