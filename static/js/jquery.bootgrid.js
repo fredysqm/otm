@@ -41,22 +41,31 @@
         return $.merge(footer, header);
     }
 
-    function getParams(context)
-    {
+    function getParams(context) {
         return (context) ? $.extend({}, this.cachedParams, { ctx: context }) :
             this.cachedParams;
+    }
+
+    function getOrderString(dict) {
+        var out = '';
+        for (var key in dict) {
+            if(dict[key] == 'desc') out += '-';
+            out += key + ',';
+        }
+        return out;
     }
 
     function getRequest()
     {
         var request = {
-                current: this.current,
-                rowCount: this.rowCount,
-                sort: this.sortDictionary,
+                page: this.current,
+                page_size: this.rowCount,
+                //sort: this.sortDictionary,
+                ordering: getOrderString(this.sortDictionary),
                 searchPhrase: this.searchPhrase
             },
             post = this.options.post;
-
+        
         post = ($.isFunction(post)) ? post() : post;
         return this.options.requestHandler($.extend(true, request, post));
     }
@@ -231,11 +240,10 @@
                     {
                         response = $.parseJSON(response);
                     }
-
+                    
                     response = that.options.responseHandler(response);
-
-                    that.current = response.current;
-                    update(response.rows, response.total);
+                    //that.current = response.page;
+                    update(response.results, response.count);
                 },
                 error: function (jqXHR, textStatus, errorThrown)
                 {
@@ -467,17 +475,17 @@
                     maxCount = this.options.padding * 2 + 1,
                     count = (totalPages >= maxCount) ? maxCount : totalPages;
 
-                renderPaginationItem.call(this, pagination, "first", "&laquo;", "first")
-                    ._bgEnableAria(current > 1);
+                /*renderPaginationItem.call(this, pagination, "first", "&laquo;", "first")
+                    ._bgEnableAria(current > 1);*/
                 renderPaginationItem.call(this, pagination, "prev", "&lt;", "prev")
                     ._bgEnableAria(current > 1);
 
-                for (var i = 0; i < count; i++)
+                /*for (var i = 0; i < count; i++)
                 {
                     var pos = i + startWith;
                     renderPaginationItem.call(this, pagination, pos, pos, "page-" + pos)
                         ._bgEnableAria()._bgSelectAria(pos === current);
-                }
+                }*/
 
                 if (count === 0)
                 {
@@ -487,8 +495,8 @@
 
                 renderPaginationItem.call(this, pagination, "next", "&gt;", "next")
                     ._bgEnableAria(totalPages > current);
-                renderPaginationItem.call(this, pagination, "last", "&raquo;", "last")
-                    ._bgEnableAria(totalPages > current);
+                /*renderPaginationItem.call(this, pagination, "last", "&raquo;", "last")
+                    ._bgEnableAria(totalPages > current);*/
 
                 replacePlaceHolder.call(this, paginationItems, pagination);
             }
@@ -1018,7 +1026,7 @@
         navigation: 3, // it's a flag: 0 = none, 1 = top, 2 = bottom, 3 = both (top and bottom)
         padding: 2, // page padding (pagination)
         columnSelection: true,
-        rowCount: [10, 25, 50, -1], // rows per page int or array of int (-1 represents "All")
+        rowCount: [10, 25, 50, 100], // rows per page int or array of int (-1 represents "All")
 
         /**
          * Enables row selection (to enable multi selection see also `multiSelect`). Default value is `false`.
@@ -1130,7 +1138,7 @@
              * @default "POST"
              * @for ajaxSettings
              **/
-            method: "POST"
+            method: "GET"
         },
 
         /**
