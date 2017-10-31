@@ -1093,7 +1093,7 @@
              * @default 1
              * @for searchSettings
              **/
-            characters: 1
+            characters: 2
         },
 
         /**
@@ -1104,7 +1104,7 @@
          * @default false
          * @for defaults
          **/
-        ajax: false,
+        ajax: true,
 
         /**
          * Ajax request settings that shall be used for server-side communication.
@@ -1124,10 +1124,11 @@
              *
              * @property method
              * @type String
-             * @default "POST"
+             * @default "GET"
              * @for ajaxSettings
              **/
-            method: "GET"
+            method: "GET",
+            cache: false
         },
 
         /**
@@ -1162,7 +1163,7 @@
          * @for defaults
          * @since 1.1.0
          **/
-        caseSensitive: true,
+        caseSensitive: false,
 
         // note: The following properties should not be used via data-api attributes
 
