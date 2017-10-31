@@ -475,17 +475,8 @@
                     maxCount = this.options.padding * 2 + 1,
                     count = (totalPages >= maxCount) ? maxCount : totalPages;
 
-                /*renderPaginationItem.call(this, pagination, "first", "&laquo;", "first")
-                    ._bgEnableAria(current > 1);*/
-                renderPaginationItem.call(this, pagination, "prev", "&lt;", "prev")
+                renderPaginationItem.call(this, pagination, "prev", "&larr; Anterior", "previous")
                     ._bgEnableAria(current > 1);
-
-                /*for (var i = 0; i < count; i++)
-                {
-                    var pos = i + startWith;
-                    renderPaginationItem.call(this, pagination, pos, pos, "page-" + pos)
-                        ._bgEnableAria()._bgSelectAria(pos === current);
-                }*/
 
                 if (count === 0)
                 {
@@ -493,10 +484,8 @@
                         ._bgEnableAria(false)._bgSelectAria();
                 }
 
-                renderPaginationItem.call(this, pagination, "next", "&gt;", "next")
+                renderPaginationItem.call(this, pagination, "next", "Siguiente &rarr;", "next")
                     ._bgEnableAria(totalPages > current);
-                /*renderPaginationItem.call(this, pagination, "last", "&raquo;", "last")
-                    ._bgEnableAria(totalPages > current);*/
 
                 replacePlaceHolder.call(this, paginationItems, pagination);
             }
@@ -1247,7 +1236,7 @@
             iconUp: "glyphicon-chevron-up",
             infos: "infos", // must be a unique class name or constellation of class names within the header and footer,
             left: "text-left",
-            pagination: "pagination", // must be a unique class name or constellation of class names within the header and footer
+            pagination: "pager", // must be a unique class name or constellation of class names within the header and footer
             paginationButton: "button", // must be a unique class name or constellation of class names within the pagination
 
             /**
@@ -1300,12 +1289,12 @@
          * @for defaults
          **/
         labels: {
-            all: "All",
-            infos: "Showing {{ctx.start}} to {{ctx.end}} of {{ctx.total}} entries",
-            loading: "Loading...",
-            noResults: "No results found!",
-            refresh: "Refresh",
-            search: "Search"
+            all: "Todos",
+            infos: "Mostrando del {{ctx.start}} al {{ctx.end}} de {{ctx.total}} registros",
+            loading: "Cargando...",
+            noResults: "¡No se han encontrado resultados!",
+            refresh: "Actualizar",
+            search: "Buscar"
         },
 
         /**
