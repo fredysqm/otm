@@ -62,7 +62,7 @@
                 page_size: this.rowCount,
                 //sort: this.sortDictionary,
                 ordering: getOrderString(this.sortDictionary),
-                searchPhrase: this.searchPhrase
+                search: this.searchPhrase
             },
             post = this.options.post;
         
@@ -478,11 +478,11 @@
                 renderPaginationItem.call(this, pagination, "prev", "&larr; Anterior", "previous")
                     ._bgEnableAria(current > 1);
 
-                if (count === 0)
+                /*if (count === 0)
                 {
                     renderPaginationItem.call(this, pagination, 1, 1, "page-" + 1)
                         ._bgEnableAria(false)._bgSelectAria();
-                }
+                }*/
 
                 renderPaginationItem.call(this, pagination, "next", "Siguiente &rarr;", "next")
                     ._bgEnableAria(totalPages > current);
@@ -1226,15 +1226,15 @@
             dropDownMenu: "dropdown btn-group", // must be a unique class name or constellation of class names within the actionDropDown
             dropDownMenuItems: "dropdown-menu pull-right", // must be a unique class name or constellation of class names within the actionDropDown
             dropDownMenuText: "dropdown-text", // must be a unique class name or constellation of class names within the actionDropDown
-            footer: "bootgrid-footer container-fluid",
-            header: "bootgrid-header container-fluid",
+            footer: "bootgrid-footer",
+            header: "bootgrid-header",
             icon: "icon glyphicon",
             iconColumns: "glyphicon-th-list",
             iconDown: "glyphicon-chevron-down",
             iconRefresh: "glyphicon-refresh",
             iconSearch: "glyphicon-search",
             iconUp: "glyphicon-chevron-up",
-            infos: "infos", // must be a unique class name or constellation of class names within the header and footer,
+            infos: "text-right text-info infos", // must be a unique class name or constellation of class names within the header and footer,
             left: "text-left",
             pagination: "pager", // must be a unique class name or constellation of class names within the header and footer
             paginationButton: "button", // must be a unique class name or constellation of class names within the pagination
@@ -1358,16 +1358,16 @@
             actions: "<div class=\"{{css.actions}}\"></div>",
             body: "<tbody></tbody>",
             cell: "<td class=\"{{ctx.css}}\" style=\"{{ctx.style}}\">{{ctx.content}}</td>",
-            //footer: "<div id=\"{{ctx.id}}\" class=\"{{css.footer}}\"><div class=\"row\"><div class=\"col-sm-6\"><p class=\"{{css.pagination}}\"></p></div><div class=\"col-sm-6 infoBar\"><p class=\"{{css.infos}}\"></p></div></div></div>",
-            footer: "<div id=\"{{ctx.id}}\" class=\"{{css.footer}}\"><p class=\"{{css.pagination}}\"></p><p class=\"{{css.infos}}\"></p></div>",
+            //footer: "<div id=\"{{ctx.id}}\" class=\"{{css.footer}}\"><div class=\"{{css.infos}}\"></div><div class=\"{{css.pagination}}\"></div></div>",
+            footer: "<div id=\"{{ctx.id}}\" class=\"{{css.footer}}\"><div class=\"{{css.pagination}}\"></div></div>",
             header: "<div id=\"{{ctx.id}}\" class=\"{{css.header}}\"><div class=\"row\"><div class=\"col-sm-12 actionBar\"><p class=\"{{css.search}}\"></p><p class=\"{{css.actions}}\"></p></div></div></div>",
             headerCell: "<th data-column-id=\"{{ctx.column.id}}\" class=\"{{ctx.css}}\" style=\"{{ctx.style}}\"><a href=\"javascript:void(0);\" class=\"{{css.columnHeaderAnchor}} {{ctx.sortable}}\"><span class=\"{{css.columnHeaderText}}\">{{ctx.column.text}}</span>{{ctx.icon}}</a></th>",
             icon: "<span class=\"{{css.icon}} {{ctx.iconCss}}\"></span>",
-            infos: "<div class=\"{{css.infos}}\">{{lbl.infos}}</div>",
+            infos: "<div class=\"{{css.infos}}\"><span class=\"glyphicon glyphicon-info-sign\"></span> {{lbl.infos}}</div>",
             loading: "<tr><td colspan=\"{{ctx.columns}}\" class=\"loading\">{{lbl.loading}}</td></tr>",
             noResults: "<tr><td colspan=\"{{ctx.columns}}\" class=\"no-results\">{{lbl.noResults}}</td></tr>",
             pagination: "<ul class=\"{{css.pagination}}\"></ul>",
-            paginationItem: "<li class=\"{{ctx.css}}\"><a data-page=\"{{ctx.page}}\" class=\"{{css.paginationButton}}\">{{ctx.text}}</a></li>",
+            paginationItem: "<li style=\"cursor: pointer;\" class=\"{{ctx.css}}\"><a data-page=\"{{ctx.page}}\" class=\"{{css.paginationButton}}\">{{ctx.text}}</a></li>",
             rawHeaderCell: "<th class=\"{{ctx.css}}\">{{ctx.content}}</th>", // Used for the multi select box
             row: "<tr{{ctx.attr}}>{{ctx.cells}}</tr>",
             search: "<div class=\"{{css.search}}\"><div class=\"input-group\"><span class=\"{{css.icon}} input-group-addon {{css.iconSearch}}\"></span> <input type=\"text\" class=\"{{css.searchField}}\" placeholder=\"{{lbl.search}}\" /></div></div>",

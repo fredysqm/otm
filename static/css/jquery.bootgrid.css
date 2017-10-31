@@ -71,6 +71,9 @@
 .bootgrid-footer .infoBar .btn-group > .btn-group .dropdown-menu .dropdown-item.disabled {
   cursor: not-allowed;
 }
+.bootgrid-footer .infos {
+  font-size: small;
+}
 .bootgrid-table {
   table-layout: fixed;
 }
