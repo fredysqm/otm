@@ -15,6 +15,6 @@ class ProveedorViewSet(mixins.RetrieveModelMixin, mixins.ListModelMixin, viewset
     queryset = Proveedor.objects.all()
     serializer_class = ProveedorSerializer
     pagination_class = DefaultPagination
-    filter_backends = (filters.OrderingFilter, filters.SearchFilter)
-    search_fields = ('razon_social', 'nro_documento', 'direccion',)
+    filter_backends = (filters.SearchFilter, filters.OrderingFilter,)
+    search_fields = ('@razon_social', '@nro_documento', '@direccion',)
     #ordering_fields = ('username', 'email')
