@@ -15,11 +15,13 @@
 <table id="grid-data" class="table table-striped table-hover">
     <thead>
         <tr>
-            <th data-column-id="id" data-width="50px">ID</th>
+            <th data-column-id="id" data-width="60px">ID</th>
             <th data-column-id="razon_social">Razón social</th>
             <th data-column-id="tipo_documento">Tipo documento</th>
-            <th data-column-id="nro_documento"  data-width="100px">Nro documento</th>
+            <th data-column-id="nro_documento" data-width="100px">Nro documento</th>
             <th data-column-id="direccion">Dirección</th>
+            <th data-column-id="_creado" data-converter="datetime">Creado</th>
+            <th data-column-id="_modificado" data-converter="datetime">Modificado</th>
         </tr>
     </thead>
 </table> 
@@ -32,6 +34,12 @@ $("#grid-data").bootgrid({
     url: "/api/proveedor/",
     searchSettings: {
         fulltext: true,
+    },
+    converters: {
+        datetime: {
+            from: function (value) { return moment(value); },
+            to: function (value) { return moment(value).format("L hh:mm A"); }
+        }
     }
 });
 </script>

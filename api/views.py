@@ -2,7 +2,7 @@ from rest_framework import viewsets
 from rest_framework import mixins
 from rest_framework import pagination
 from rest_framework import filters
-from mantenimiento.models import Proveedor
+from mantenimiento.models import Proveedor, TipoDocProveedor
 from api.serializers import ProveedorSerializer
 
 
@@ -12,7 +12,8 @@ class DefaultPagination(pagination.PageNumberPagination):
     max_page_size = 100
 
 class ProveedorViewSet(mixins.RetrieveModelMixin, mixins.ListModelMixin, viewsets.GenericViewSet):
-    queryset = Proveedor.objects.all()
+    #queryset = Proveedor.objects.all()
+    queryset = Proveedor.objects.prefetch_related('tipo_documento').all()
     serializer_class = ProveedorSerializer
     pagination_class = DefaultPagination
     filter_backends = (filters.SearchFilter, filters.OrderingFilter,)
