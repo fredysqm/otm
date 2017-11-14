@@ -30,6 +30,9 @@
 <script>
 $("#grid-data").bootgrid({
     url: "/api/proveedor/",
+    searchSettings: {
+        fulltext: true,
+    }
 });
 </script>
 {% endblock %}

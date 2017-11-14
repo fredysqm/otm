@@ -55,14 +55,22 @@
         return out;
     }
 
+    function getSearchPhrase(ctx, phrase) {
+        phrase = phrase.replace(/\s+/g, ' ').trim();
+        if(phrase.length >= ctx.options.searchSettings.characters && ctx.options.searchSettings.fulltext) {
+            return phrase.split(' ').map(i => i + '*').join(' ');
+        } else {
+            return phrase;
+        }
+    }
+
     function getRequest()
     {
         var request = {
                 page: this.current,
                 page_size: this.rowCount,
-                //sort: this.sortDictionary,
                 ordering: getOrderString(this.sortDictionary),
-                search: this.searchPhrase
+                search: getSearchPhrase(this, this.searchPhrase)
             },
             post = this.options.post;
         
@@ -1017,8 +1025,6 @@
         columnSelection: true,
         rowCount: [10, 25, 50, 100], // rows per page int or array of int (-1 represents "All")
 
-        fulltext: false, /* full text search api*/
-
         /**
          * Enables row selection (to enable multi selection see also `multiSelect`). Default value is `false`.
          *
@@ -1092,10 +1098,12 @@
              *
              * @property characters
              * @type Number
-             * @default 1
+             * @default 2
              * @for searchSettings
              **/
-            characters: 2
+            characters: 2,
+
+            fulltext: false, /* full text search api*/
         },
 
         /**
