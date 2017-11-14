@@ -16,5 +16,5 @@ class ProveedorViewSet(mixins.RetrieveModelMixin, mixins.ListModelMixin, viewset
     serializer_class = ProveedorSerializer
     pagination_class = DefaultPagination
     filter_backends = (filters.SearchFilter, filters.OrderingFilter,)
-    search_fields = ('@razon_social', '@nro_documento', '@direccion',)
+    search_fields = ('@_searchtext',)
     #ordering_fields = ('username', 'email')

@@ -1017,6 +1017,8 @@
         columnSelection: true,
         rowCount: [10, 25, 50, 100], // rows per page int or array of int (-1 represents "All")
 
+        fulltext: false, /* full text search api*/
+
         /**
          * Enables row selection (to enable multi selection see also `multiSelect`). Default value is `false`.
          *

@@ -4,6 +4,7 @@ from mantenimiento.models import Proveedor, TipoDocProveedor
 
 class ProveedorAdmin(admin.ModelAdmin):
     list_display = ('id', 'razon_social', 'tipo_documento', 'nro_documento', 'direccion',)
+    exclude = ('_searchtext','_creado','_modificado',)
     search_fields = ('id', 'descripcion', 'nro_documento', 'direccion',)
     #list_filter = ('creado','acceso', 'estado')
     #ordering = ['-id']
