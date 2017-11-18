@@ -82,12 +82,6 @@ class Proveedor(models.Model):
     _modificado = models.DateTimeField(auto_now=True,)
 
     def clean(self, *args, **kwargs):
-        print("CLEAN-CLEAN")
-        pass
-
-    def save(self, *args, **kwargs):
-        self.razon_social = ' '.join(self.razon_social.upper().split())
-        self.direccion = ' '.join(self.direccion.upper().split())
         if self.tipo_documento.pk == 1: #RUC
             if len(self.nro_documento) != 11:
                 raise validators.ValidationError('Número de documento RUC debe tener 11 dígitos.')
@@ -97,10 +91,13 @@ class Proveedor(models.Model):
         elif self.tipo_documento.pk == 3: #NIT
             if len(self.nro_documento) != 10:
                 raise validators.ValidationError("Número de documento NIT debe tener 10 dígitos.")
-        
+        super(Proveedor, self).clean(*args, **kwargs)
+
+    def save(self, *args, **kwargs):
+        self.razon_social = ' '.join(self.razon_social.upper().split())
+        self.direccion = ' '.join(self.direccion.upper().split())
         self._searchtext = '%s %s %s' % (self.razon_social, self.tipo_documento, self.nro_documento)
         super(Proveedor, self).save(*args, **kwargs)
-
 
     def __str__(self):
         return ('%s (%s %s)' % (self.razon_social, self.tipo_documento, self.nro_documento))
