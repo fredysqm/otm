@@ -81,7 +81,11 @@ class Proveedor(models.Model):
     _creado = models.DateTimeField(auto_now_add=True,)
     _modificado = models.DateTimeField(auto_now=True,)
 
-    def clean(self):
+    def clean(self, *args, **kwargs):
+        print("CLEAN-CLEAN")
+        pass
+
+    def save(self, *args, **kwargs):
         self.razon_social = ' '.join(self.razon_social.upper().split())
         self.direccion = ' '.join(self.direccion.upper().split())
         if self.tipo_documento.pk == 1: #RUC
@@ -95,6 +99,8 @@ class Proveedor(models.Model):
                 raise validators.ValidationError("Número de documento NIT debe tener 10 dígitos.")
         
         self._searchtext = '%s %s %s' % (self.razon_social, self.tipo_documento, self.nro_documento)
+        super(Proveedor, self).save(*args, **kwargs)
+
 
     def __str__(self):
         return ('%s (%s %s)' % (self.razon_social, self.tipo_documento, self.nro_documento))
