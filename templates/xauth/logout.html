@@ -2,6 +2,10 @@
 
 {% block title %}Cerrar sesión{% endblock %}
 
+{% block menu %}
+    {% include 'menu.html' with active_tab='app_guest' %}
+{% endblock %}
+
 {% block content %}
 <div class="col-md-12 padding-auth-msg">
     <div class="well bs-component">

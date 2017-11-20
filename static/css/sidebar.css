@@ -3,25 +3,21 @@
 
  #wrapper {
     padding-left: 0;
-    /*-webkit-transition: all 0.5s ease;
-    -moz-transition: all 0.5s ease;
-    -o-transition: all 0.5s ease;
-    transition: all 0.5s ease;*/
     overflow: hidden;
 }
 
 #wrapper.toggled {
-    padding-left: 250px;
+    padding-left: 90px;
     overflow: scroll;
 }
 
 #sidebar-wrapper {
     z-index: 1000;
     position: fixed;
-    left: 250px;
+    left: 90px;
     width: 0;
     height: 100%;
-    margin-left: -250px;
+    margin-left: -90px;
     overflow-y: auto;
     background: #000;
     /*-webkit-transition: all 0.5s ease;
@@ -30,7 +26,7 @@
     transition: all 0.5s ease;*/
 }
 #wrapper.toggled #sidebar-wrapper {
-    width: 250px;
+    width: 90px;
 }
 
 #page-content-wrapper {
@@ -40,7 +36,7 @@
     /*overflow-x: hidden;*/
 }
 .xyz{
-    min-width: 360px;
+    min-width: 90px;
 }
 #wrapper.toggled #page-content-wrapper {
     position: relative;
@@ -56,7 +52,7 @@
 .sidebar-nav {
     position: absolute;
     top: 0;
-    width: 250px;
+    width: 90px;
     margin: 0;
     padding: 0;
     list-style: none;
@@ -64,40 +60,26 @@
 }
 
 .sidebar-nav li {
-    text-indent: 30px;
-    line-height: 40px;
-}
-
-.sidebar-nav div {
-    padding-left: 15px;
-}
-
-.sidebar-nav div a {
-    color: #FFFFFF;
-}
-
-.sidebar-nav div a:hover {
-    color: #18bc9c;
-    text-decoration: none;
-}
-
-
-.sidebar-nav div h6 {
+    font-size: 0.7em;
+    text-align: center;
     font-weight: bold;
-    text-transform: uppercase;
-    color: #18bc9c;
+    display: block;
+    height: 80px;
 }
 
 .sidebar-nav li a {
     display: block;
     text-decoration: none;
     color: #999999;
+    height: 80px;
+    padding-top: 20px;
 }
 
 .sidebar-nav li a:hover {
     text-decoration: none;
     color: #fff;
     background: rgba(255,255,255,0.2);
+    height: 80px;
     /*border-left: #18bc9c 4px solid;*/
 }
 
@@ -124,29 +106,23 @@
     margin:0;
 }
 
-@media(min-width:768px) {
+
     #wrapper {
-        padding-left: 250px;
+        padding-left: 90px;
     }
     .fixed-brand{
-        width: 250px;
+        width: 90px;
     }
     #wrapper.toggled {
         padding-left: 0;
     }
 
     #sidebar-wrapper {
-        width: 250px;
+        width: 90px;
     }
 
     #wrapper.toggled #sidebar-wrapper {
-        width: 250px;
-    }
-    #wrapper.toggled-2 #sidebar-wrapper {
-        width: 50px;
-    }
-    #wrapper.toggled-2 #sidebar-wrapper:hover {
-        width: 250px;
+        width: 90px;
     }
 
     #page-content-wrapper {
@@ -161,17 +137,6 @@
     #wrapper.toggled #page-content-wrapper {
         position: relative;
         margin-right: 0;
-        padding-left: 250px;
+        padding-left: 90px;
     }
-    #wrapper.toggled-2 #page-content-wrapper {
-        position: relative;
-        margin-right: 0;
-        margin-left: -200px;
-        /*-webkit-transition: all 0.5s ease;
-        -moz-transition: all 0.5s ease;
-        -o-transition: all 0.5s ease;
-        transition: all 0.5s ease;*/
-        width: auto;
 
-    }
-}
