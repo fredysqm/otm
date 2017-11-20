@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from mantenimiento.models import Proveedor, TipoDocProveedor
+from core.models import Proveedor, TipoDocProveedor
 
 
 class ProveedorSerializer(serializers.ModelSerializer):

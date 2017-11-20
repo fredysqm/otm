@@ -21,7 +21,7 @@ from django.conf import settings
 urlpatterns = [
     url(r'^', include('app.urls')),
     url(r'^api/', include('api.urls')),
-    url(r'^auth/', include('autenticacion.urls')),
+    url(r'^auth/', include('xauth.urls')),
     url(r'^admin/', admin.site.urls),
 ]
 

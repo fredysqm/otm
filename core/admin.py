@@ -1,8 +1,9 @@
 from django.contrib import admin
-from mantenimiento.models import Proveedor, TipoDocProveedor
+from core.models import Proveedor, TipoDocProveedor
+from reversion.admin import VersionAdmin
 
 
-class ProveedorAdmin(admin.ModelAdmin):
+class ProveedorAdmin(VersionAdmin):
     list_display = ('id', 'razon_social', 'tipo_documento', 'nro_documento', 'direccion',)
     exclude = ('_searchtext','_creado','_modificado',)
     search_fields = ('id', 'descripcion', 'nro_documento', 'direccion',)
@@ -11,7 +12,7 @@ class ProveedorAdmin(admin.ModelAdmin):
     #actions = (slink_activar_action, slink_deshabilitar_action,)
 
 
-class TipoDocProveedorAdmin(admin.ModelAdmin):
+class TipoDocProveedorAdmin(VersionAdmin):
     list_display = ('id', 'siglas', 'nombre',)
     search_fields = ('id', 'siglas', 'nombre',)
     ordering = ['id']

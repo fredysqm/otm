@@ -77,7 +77,7 @@ class Proveedor(models.Model):
         ]
     )
 
-    _searchtext = models.CharField (max_length=255,)
+    _fts = models.CharField (max_length=255,)
     _creado = models.DateTimeField(auto_now_add=True,)
     _modificado = models.DateTimeField(auto_now=True,)
 
@@ -96,7 +96,7 @@ class Proveedor(models.Model):
     def save(self, *args, **kwargs):
         self.razon_social = ' '.join(self.razon_social.upper().split())
         self.direccion = ' '.join(self.direccion.upper().split())
-        self._searchtext = '%s %s %s' % (self.razon_social, self.tipo_documento, self.nro_documento)
+        self._fts = '%s %s %s' % (self.razon_social, self.tipo_documento, self.nro_documento)
         super(Proveedor, self).save(*args, **kwargs)
 
     def __str__(self):

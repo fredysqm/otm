@@ -14,11 +14,10 @@ INSTALLED_APPS = [
     'compressor',
     'rest_framework',
     'crispy_forms',
+    'reversion',
     #ME
-    'autenticacion',
-    'mantenimiento',
-    'reservas',
-    'logentry',
+    'xauth',
+    'core',
     'api',
 ]
 

@@ -1,6 +1,6 @@
 from django.views.generic import TemplateView, ListView
 from django.contrib.auth.mixins import LoginRequiredMixin
-from mantenimiento.models import Proveedor
+from core.models import Proveedor
 
 
 #ROOT
