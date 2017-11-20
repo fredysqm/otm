@@ -1,5 +1,6 @@
 from django.db import models
 from django.core import validators
+from django.core.exceptions import ObjectDoesNotExist
 
 
 class TipoDocProveedor(models.Model):
@@ -26,8 +27,12 @@ class TipoDocProveedor(models.Model):
     )
 
     def clean(self):
+        super(TipoDocProveedor, self).clean(*args, **kwargs)
+
+    def save(self, *args, **kwargs):
         self.siglas = ' '.join(self.siglas.upper().split())
         self.nombre = ' '.join(self.nombre.upper().split())
+        super(TipoDocProveedor, self).save(*args, **kwargs)
 
     def __str__(self):
         return ('%s' % (self.siglas,))
@@ -77,20 +82,24 @@ class Proveedor(models.Model):
         ]
     )
 
-    _fts = models.CharField (max_length=255,)
+    _fts = models.CharField(max_length=255,)
     _creado = models.DateTimeField(auto_now_add=True,)
     _modificado = models.DateTimeField(auto_now=True,)
 
     def clean(self, *args, **kwargs):
-        if self.tipo_documento.pk == 1: #RUC
-            if len(self.nro_documento) != 11:
-                raise validators.ValidationError('Número de documento RUC debe tener 11 dígitos.')
-        elif self.tipo_documento.pk == 2: #DNI
-            if len(self.nro_documento) != 8:
-                raise validators.ValidationError('Número de documento DNI debe tener 8 dígitos.')
-        elif self.tipo_documento.pk == 3: #NIT
-            if len(self.nro_documento) != 10:
-                raise validators.ValidationError("Número de documento NIT debe tener 10 dígitos.")
+        try:
+            if self.tipo_documento.pk == 1: #RUC
+                if len(self.nro_documento) != 11:
+                    raise validators.ValidationError('Número de documento RUC debe tener 11 dígitos.')
+            elif self.tipo_documento.pk == 2: #DNI
+                if len(self.nro_documento) != 8:
+                    raise validators.ValidationError('Número de documento DNI debe tener 8 dígitos.')
+            elif self.tipo_documento.pk == 3: #NIT
+                if len(self.nro_documento) != 10:
+                    raise validators.ValidationError("Número de documento NIT debe tener 10 dígitos.")
+        except ObjectDoesNotExist:
+            pass
+        
         super(Proveedor, self).clean(*args, **kwargs)
 
     def save(self, *args, **kwargs):

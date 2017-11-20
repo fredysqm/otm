@@ -18,4 +18,4 @@ class ProveedorViewSet(viewsets.ModelViewSet):
     pagination_class = DefaultPagination
     permission_classes = (permissions.DjangoModelPermissions,)
     filter_backends = (filters.SearchFilter, filters.OrderingFilter,)
-    search_fields = ('@_fts',)
+    search_fields = ('id', '@_fts',)
