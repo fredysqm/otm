@@ -29,6 +29,8 @@
 
 {% block js %}
 <script>
+moment.locale('es');
+
 $("#grid-data").bootgrid({
     url: "/api/proveedor/",
     searchSettings: {
@@ -37,7 +39,7 @@ $("#grid-data").bootgrid({
     converters: {
         datetime: {
             from: function (value) { return moment(value); },
-            to: function (value) { return moment(value).format("L hh:mm A"); }
+            to: function (value) { return moment(value).format("DD/MMM/YYYY hh:mm A"); }
         }
     }
 });
