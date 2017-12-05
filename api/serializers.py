@@ -11,4 +11,3 @@ class ProveedorSerializer(serializers.ModelSerializer):
         model = Proveedor
         fields = ('id', 'razon_social','tipo_documento','nro_documento','direccion', '_creado', '_modificado')
         #depth = 2
-
