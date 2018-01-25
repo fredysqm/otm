@@ -22,7 +22,7 @@ urlpatterns = [
     url(r'^', include('app.urls')),
     url(r'^api/', include('api.urls')),
     url(r'^auth/', include('xauth.urls')),
-    url(r'^admin/', admin.site.urls),
+    url(r'^adminplus/', admin.site.urls),
 ]
 
 if settings.DEBUG:

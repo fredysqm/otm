@@ -31,6 +31,8 @@ TEMPLATES = [
     },
 ]
 
+CRISPY_TEMPLATE_PACK = 'bootstrap3'
+
 STATICFILES_FINDERS = (
     'django.contrib.staticfiles.finders.FileSystemFinder',
     'django.contrib.staticfiles.finders.AppDirectoriesFinder',
@@ -45,8 +47,6 @@ COMPRESS_CSS_FILTERS = (
 )
 
 COMPRESS_OUTPUT_DIR = ''
-
-CRISPY_TEMPLATE_PACK = 'bootstrap3'
 
 LOGIN_URL = '/auth/login'
 LOGIN_REDIRECT_URL = '/'
