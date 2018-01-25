@@ -51,11 +51,11 @@ CRISPY_TEMPLATE_PACK = 'bootstrap3'
 LOGIN_URL = '/auth/login'
 LOGIN_REDIRECT_URL = '/'
 
-#SESSION_ENGINE = 'django.contrib.sessions.backends.cache'
+SESSION_ENGINE = 'django.contrib.sessions.backends.cache'
 
-#CACHES = {
-#    'default': {
-#        'BACKEND': 'django.core.cache.backends.memcached.MemcachedCache',
-#        'LOCATION': 'localhost:11211',
-#    }
-#}
+CACHES = {
+    'default': {
+        'BACKEND': 'django.core.cache.backends.memcached.MemcachedCache',
+        'LOCATION': 'localhost:11211',
+    }
+}

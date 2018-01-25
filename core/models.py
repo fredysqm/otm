@@ -4,53 +4,57 @@ from django.core.exceptions import ObjectDoesNotExist
 
 
 class TipoDocProveedor(models.Model):
-    siglas = models.CharField (
+    id = models.CharField (
+        primary_key=True,
         max_length=3,
         verbose_name='Siglas',
         help_text='Siglas del tipo de documento de proveedor',
         validators=[
-            validators.RegexValidator('^[a-zA-Z0-9]{3}$',
+            validators.RegexValidator(
+                '^[a-zA-Z0-9]{3}$',
                 message='Ingrese siglas válidas.'
             ),
         ]
     )
 
     nombre = models.CharField (
-        max_length=50,
+        max_length=100,
         verbose_name='Nombre',
         help_text='Nombre del documento de proveedor',
         validators=[
-            validators.RegexValidator('^[a-zA-Z0-9áéíóúñÁÉÍÓÚÑ., \-]+$',
+            validators.RegexValidator(
+                '^[a-zA-Z0-9áéíóúñÁÉÍÓÚÑ., \-]+$',
                 message='Ingrese un nombre válido.'
             ),
         ]
     )
 
-    def clean(self):
+    def clean(self, *args, **kwargs):
         super(TipoDocProveedor, self).clean(*args, **kwargs)
 
     def save(self, *args, **kwargs):
-        self.siglas = ' '.join(self.siglas.upper().split())
+        self.id = ' '.join(self.id.upper().split())
         self.nombre = ' '.join(self.nombre.upper().split())
         super(TipoDocProveedor, self).save(*args, **kwargs)
 
     def __str__(self):
-        return ('%s' % (self.siglas,))
+        return ('%s' % (self.id,))
 
     class Meta:
-        unique_together = ( ('siglas',), ('nombre',) )
+        unique_together = ( ('nombre',), )
         verbose_name = ('tipo de documento proveedor')
         verbose_name_plural = ('tipos de documento proveedor')
 
 
 class Proveedor(models.Model):
-    razon_social = models.CharField (
-        max_length=100,
-        verbose_name='Razón social',
-        help_text='Nombre o razón social de la persona o empresa',
+    id = models.CharField(
+        primary_key=True,
+        max_length=11,
+        verbose_name='Número de documento',
         validators=[
-            validators.RegexValidator('^[a-zA-Z0-9áéíóúñÁÉÍÓÚÑ., \-]+$',
-                message='Ingrese una razón social válida.'
+            validators.RegexValidator(
+                '^[0-9]{8,11}$',
+                message='Ingrese un número de documento válido.'
             ),
         ]
     )
@@ -58,14 +62,17 @@ class Proveedor(models.Model):
     tipo_documento = models.ForeignKey(
         TipoDocProveedor,
         verbose_name='Tipo de documento',
+        on_delete=models.PROTECT,
     )
 
-    nro_documento = models.CharField(
-        max_length=11,
-        verbose_name='Número de documento',
+    razon_social = models.CharField (
+        max_length=100,
+        verbose_name='Razón social',
+        help_text='Nombre o razón social de la persona o empresa',
         validators=[
-            validators.RegexValidator('^[0-9]{8,11}$',
-                message='Ingrese un número de documento válido.'
+            validators.RegexValidator(
+                '^[a-zA-Z0-9áéíóúñÁÉÍÓÚÑ., \-]+$',
+                message='Ingrese una razón social válida.'
             ),
         ]
     )
@@ -76,7 +83,8 @@ class Proveedor(models.Model):
         verbose_name='Dirección',
         help_text='Dirección de la persona o empresa',
         validators=[
-            validators.RegexValidator('^[a-zA-Z0-9áéíóúñÁÉÍÓÚÑ., \-]+$',
+            validators.RegexValidator(
+                '^[a-zA-Z0-9áéíóúñÁÉÍÓÚÑ., \-]+$',
                 message='Ingrese una dirección válida.'
             ),
         ]
@@ -88,14 +96,14 @@ class Proveedor(models.Model):
 
     def clean(self, *args, **kwargs):
         try:
-            if self.tipo_documento.pk == 1: #RUC
-                if len(self.nro_documento) != 11:
+            if self.tipo_documento.pk == 'RUC':
+                if len(self.id) != 11:
                     raise validators.ValidationError('Número de documento RUC debe tener 11 dígitos.')
-            elif self.tipo_documento.pk == 2: #DNI
-                if len(self.nro_documento) != 8:
+            elif self.tipo_documento.pk == 'DNI':
+                if len(self.id) != 8:
                     raise validators.ValidationError('Número de documento DNI debe tener 8 dígitos.')
-            elif self.tipo_documento.pk == 3: #NIT
-                if len(self.nro_documento) != 10:
+            elif self.tipo_documento.pk == 'NIT': #NIT
+                if len(self.id) != 10:
                     raise validators.ValidationError("Número de documento NIT debe tener 10 dígitos.")
         except ObjectDoesNotExist:
             pass
@@ -105,13 +113,13 @@ class Proveedor(models.Model):
     def save(self, *args, **kwargs):
         self.razon_social = ' '.join(self.razon_social.upper().split())
         self.direccion = ' '.join(self.direccion.upper().split())
-        self._fts = '%s %s %s' % (self.razon_social, self.tipo_documento, self.nro_documento)
+        self._fts = '%s %s %s' % (self.id, self.razon_social, self.tipo_documento)
         super(Proveedor, self).save(*args, **kwargs)
 
     def __str__(self):
-        return ('%s (%s %s)' % (self.razon_social, self.tipo_documento, self.nro_documento))
+        return ('%s (%s %s)' % (self.razon_social, self.tipo_documento, self.id))
 
     class Meta:
-        unique_together = ( ('razon_social',), ('nro_documento',) )
+        unique_together = ( ('razon_social',), )
         verbose_name = ('proveedor')
         verbose_name_plural = ('proveedores')

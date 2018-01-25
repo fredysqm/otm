@@ -1,13 +1,15 @@
 from rest_framework import serializers
-from core.models import Proveedor, TipoDocProveedor
+from core.models import Proveedor
 
 
 class ProveedorSerializer(serializers.ModelSerializer):
+
     def validate(self, attrs):
         instance = Proveedor(**attrs)
         instance.clean()
         return attrs
+
     class Meta:
         model = Proveedor
-        fields = ('id', 'razon_social','tipo_documento','nro_documento','direccion', '_creado', '_modificado')
+        fields = ('id', 'tipo_documento', 'razon_social', 'direccion', '_creado', '_modificado')
         #depth = 2

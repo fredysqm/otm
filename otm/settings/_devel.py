@@ -16,7 +16,6 @@ INSTALLED_APPS = [
     'compressor',
     'rest_framework',
     'crispy_forms',
-    'reversion',
     #ME
     'xauth',
     'core',

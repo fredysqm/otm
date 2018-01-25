@@ -3,7 +3,7 @@ from rest_framework import mixins
 from rest_framework import pagination
 from rest_framework import filters
 from rest_framework import permissions
-from core.models import Proveedor, TipoDocProveedor
+from core.models import Proveedor
 from api.serializers import ProveedorSerializer
 
 
@@ -18,4 +18,4 @@ class ProveedorViewSet(viewsets.ModelViewSet):
     pagination_class = DefaultPagination
     permission_classes = (permissions.DjangoModelPermissions,)
     filter_backends = (filters.SearchFilter, filters.OrderingFilter,)
-    search_fields = ('id', '@_fts',)
+    search_fields = ('@_fts',)
