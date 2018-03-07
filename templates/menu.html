@@ -1,0 +1,23 @@
+{% if user.is_authenticated %}
+    <li class="{% if active_tab == 'app_main' %} active{% endif %}">
+        <a href="{% url 'app_main' %}"><span class="fa-stack fa-lg"><i class="glyphicon glyphicon-home fa-stack-2x "></i></span><br/>Inicio</a>
+    </li>
+
+    <li class="{% if active_tab == 'app_mantenimiento' %} active{% endif %}">
+        <a href="{% url 'app_mantenimiento_proveedores' %}"><span class="fa-stack fa-lg"><i class="fa fa-database fa-stack-2x "></i></span><br/>Configuración</a>
+    </li>
+
+    <br />
+
+    <li class="{% if active_tab == 'app_user' %} active{% endif %}">
+        <a href="#"><span class="fa-stack fa-lg"><i class="fa fa-user fa-stack-2x "></i></span><br/>{{ user.username }}</a>
+    </li>
+
+    <li>
+        <a href="{% url 'xauth_logout' %}"><span class="fa-stack fa-lg"><i class="glyphicon glyphicon-log-out fa-stack-2x "></i></span><br/>Cerrar sesión</a>
+    </li>
+{% else %}
+    <li class="{% if active_tab == 'app_guest' %} active{% endif %}">
+        <a href="#"><span class="fa-stack fa-lg"><i class="fa fa-user-secret fa-stack-2x "></i></span><br/>Invitado</a>
+    </li>
+{% endif %}
