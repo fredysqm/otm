@@ -4,4 +4,5 @@ python-memcached
 django_compressor
 djangorestframework
 django-crispy-forms
+django-reversion
 django-debug-toolbar

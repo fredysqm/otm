@@ -18,13 +18,14 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     #3RD
+    'reversion',
     'compressor',
     'rest_framework',
     'crispy_forms',
     #ME
-    #'xauth',
-    #'core',
-    #'api',
+    'xauth',
+    'core',
+    'api',
 ]
 
 MIDDLEWARE = [
