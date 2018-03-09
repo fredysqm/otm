@@ -18,7 +18,7 @@ class Pais(models.Model):
     )
 
     nombre = models.CharField (
-        max_length=100,
+        max_length=60,
         verbose_name='Nombre',
         help_text='Nombre del país',
         validators=[
@@ -41,6 +41,11 @@ class Pais(models.Model):
 
     def __str__(self):
         return ('%s' % (self.id,))
+
+    class Meta:
+        unique_together = ( ('nombre',), )
+        verbose_name = ('país')
+        verbose_name_plural = ('paises')
 
 
 # class TipoDocProveedor(models.Model):

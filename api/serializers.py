@@ -1,5 +1,11 @@
 from rest_framework import serializers
-#from core.models import Proveedor
+from core.models import Pais
+
+
+class PaisSerializder(serializers.ModelSerializer):
+    class Meta:
+        model = Pais
+        fields = ('id', 'nombre', '_creado', '_modificado')
 
 
 # class ProveedorSerializer(serializers.ModelSerializer):

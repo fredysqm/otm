@@ -1,5 +1,16 @@
 from django.contrib import admin
-#from core.models import Proveedor, TipoDocProveedor
+from reversion.admin import VersionAdmin
+from core.models import Pais
+
+
+@admin.register(Pais)
+class PaisAdmin(VersionAdmin):
+    list_display = ('id', 'nombre', '_creado','_modificado',)
+    exclude = ()
+    search_fields = ('id', 'nombre',)
+    #list_filter = ('creado','acceso', 'estado')
+    ordering = ['-id']
+    #actions = (slink_activar_action, slink_deshabilitar_action,)
 
 
 # class ProveedorAdmin(admin.ModelAdmin):
