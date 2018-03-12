@@ -62,6 +62,10 @@ TEMPLATES = [
 
 CRISPY_TEMPLATE_PACK = 'bootstrap3'
 
+FIXTURE_DIRS = (
+    os.path.join(BASE_DIR, 'fixtures'),
+)
+
 STATICFILES_DIRS = (
     os.path.join(BASE_DIR, "static"),
 )

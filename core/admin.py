@@ -9,7 +9,7 @@ class PaisAdmin(VersionAdmin):
     exclude = ()
     search_fields = ('id', 'nombre',)
     #list_filter = ('creado','acceso', 'estado')
-    ordering = ['-id']
+    ordering = ['id']
     #actions = (slink_activar_action, slink_deshabilitar_action,)
 
 
