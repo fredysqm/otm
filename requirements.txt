@@ -1,7 +1,8 @@
-Django==1.11.11
+Django==2.0.3
+django-admin-view-permission==1.5
 django-appconf==1.0.2
 django-compressor==2.2
-django-crispy-forms==1.7.1
+django-crispy-forms==1.7.2
 django-debug-toolbar==1.9.1
 django-reversion==2.0.13
 djangorestframework==3.7.7

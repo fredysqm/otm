@@ -1,6 +1,7 @@
-Django
 mysqlclient
 python-memcached
+Django
+django-admin-view-permission
 django_compressor
 djangorestframework
 django-crispy-forms

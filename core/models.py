@@ -43,7 +43,6 @@ class Pais(models.Model):
         return ('%s' % (self.id,))
 
     class Meta:
-        default_permissions = ('add', 'change', 'delete', 'view')
         unique_together = ( ('nombre',), )
         verbose_name = ('país')
         verbose_name_plural = ('paises')
