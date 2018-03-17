@@ -2,8 +2,13 @@
     padding-top: 50px;
 }
 
+.padding-auth-form .login-panel {
+    margin: 0 auto;
+    max-width: 370px;
+}
+
 .padding-auth-msg {
     padding-top: 10px;
 }
 
-/*SIG*/
+/**/
