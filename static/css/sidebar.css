@@ -33,7 +33,10 @@
 }
 .xyz{
     min-width: 90px;
+    padding-left: 0px;
+    padding-right: 0px;
 }
+
 #wrapper.toggled #page-content-wrapper {
     position: relative;
     margin-right: 0px;
@@ -101,7 +104,7 @@
     margin:0;
 }
 
-@media(min-width:768px) {
+@media(min-width:992px) {
     #wrapper {
         padding-left: 90px;
     }
