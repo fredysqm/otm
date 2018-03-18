@@ -15,21 +15,22 @@
 {% endblock %}
 
 {% block content %}
-    <div class="login-panel panel panel-default padding-auth-form">
-        <div class="panel-heading">
-            <h3 class="panel-title">
-                <span class="glyphicon glyphicon-lock"></span> ¡Bienvenido!
-            </h3>
-        </div>
-        <div class="panel-body">
-            <form method="post">{% csrf_token %}
-                <fieldset>
-                    {{ form|crispy }}
-                </fieldset>
-                <button type="submit" class="btn btn-lg btn-success btn-block"><span class="glyphicon glyphicon-log-in"></span> Iniciar sesión</button>
-            </form>
-        </div>
+<div style="padding-top: 40px;"></div>
+<div class="login-panel panel panel-default padding-auth-form">
+    <div class="panel-heading">
+        <h3 class="panel-title">
+            <span class="glyphicon glyphicon-lock"></span> ¡Bienvenido!
+        </h3>
     </div>
+    <div class="panel-body">
+        <form method="post">{% csrf_token %}
+            <fieldset>
+                {{ form|crispy }}
+            </fieldset>
+            <button type="submit" class="btn btn-lg btn-success btn-block"><span class="glyphicon glyphicon-log-in"></span> Iniciar sesión</button>
+        </form>
+    </div>
+</div>
 {% endblock %}
 
 {% block js %}

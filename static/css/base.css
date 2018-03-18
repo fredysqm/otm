@@ -1,8 +1,12 @@
-
+/**/
 .padding-auth-form {
-    margin-top: 40px;
     margin: 0 auto;
     max-width: 370px;
 }
+
+.nopadding {
+    padding: 0 !important;
+    margin: 0 !important;
+ }
 
 /**/
