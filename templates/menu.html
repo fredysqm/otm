@@ -3,8 +3,8 @@
         <a href="{% url 'app_main' %}"><span class="fa-stack fa-lg"><i class="glyphicon glyphicon-home fa-stack-2x "></i></span><br/>Inicio</a>
     </li>
 
-    <li class="{% if active_item_menu == 'amantenimiento' %} active{% endif %}">
-        <a href=""><span class="fa-stack fa-lg"><i class="fa fa-database fa-stack-2x "></i></span><br/>Configuración</a>
+    <li class="{% if active_item_menu == 'mantenimiento' %} active{% endif %}">
+        <a href="{% url 'app_mantenimiento_pais' %}"><span class="fa-stack fa-lg"><i class="fa fa-database fa-stack-2x "></i></span><br/>Configuración</a>
     </li>
 
     <br />
