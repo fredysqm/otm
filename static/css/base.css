@@ -4,6 +4,10 @@
     max-width: 370px;
 }
 
+.sub_menu {
+    margin-bottom: 10px;
+}
+
 .nopadding {
     padding: 0 !important;
     margin: 0 !important;
