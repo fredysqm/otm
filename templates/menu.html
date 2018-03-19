@@ -10,7 +10,7 @@
     <br />
 
     <li class="{% if active_tab == 'app_user' %} active{% endif %}">
-        <a href="#"><span class="fa-stack fa-lg"><i class="fa fa-user fa-stack-2x "></i></span><br/>{{ user.username }}</a>
+        <a href="{% url 'xauth_password_change' %}"><span class="fa-stack fa-lg"><i class="fa fa-user fa-stack-2x "></i></span><br/>{{ user.first_name }}</a>
     </li>
 
     <li>
