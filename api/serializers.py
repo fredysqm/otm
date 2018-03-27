@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from core.models import Pais, Ciudad
+from core.models import Pais, Ciudad, Idioma, Moneda
 
 
 class PaisSerializer(serializers.ModelSerializer):
@@ -12,6 +12,16 @@ class CiudadSerializer(serializers.ModelSerializer):
         model = Ciudad
         fields = ('id', 'pais', 'nombre', '_creado', '_modificado')
         depth = 2
+
+class IdiomaSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Idioma
+        fields = ('id', 'nombre', '_creado', '_modificado')
+
+class MonedaSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Moneda
+        fields = ('id', 'nombre', 'simbolo', '_creado', '_modificado')
 
 # class ProveedorSerializer(serializers.ModelSerializer):
 
