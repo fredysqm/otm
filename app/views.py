@@ -9,3 +9,18 @@ class app_main(LoginRequiredMixin, TemplateView):
 #Mantenimiento
 class app_mantenimiento_pais(LoginRequiredMixin, TemplateView):
     template_name = 'app/mantenimiento/pais.html'
+
+class app_mantenimiento_ciudad(LoginRequiredMixin, TemplateView):
+    template_name = 'app/mantenimiento/ciudad.html'
+
+class app_mantenimiento_idioma(LoginRequiredMixin, TemplateView):
+    template_name = 'app/mantenimiento/idioma.html'
+
+class app_mantenimiento_moneda(LoginRequiredMixin, TemplateView):
+    template_name = 'app/mantenimiento/moneda.html'
+
+class app_mantenimiento_banco(LoginRequiredMixin, TemplateView):
+    template_name = 'app/mantenimiento/banco.html'
+
+class app_mantenimiento_operador(LoginRequiredMixin, TemplateView):
+    template_name = 'app/mantenimiento/operador.html'

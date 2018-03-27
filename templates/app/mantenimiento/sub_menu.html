@@ -1,3 +1,8 @@
 <ul class="nav nav-tabs sub_menu">
-    <li class="{% if active_item_sub_menu == 'pais' %} active{% endif %}"><a href="">Pais</a></li>
+    <li class="{% if active_item_sub_menu == 'pais' %} active{% endif %}"><a href="{% url 'app_mantenimiento_pais' %}">Pais</a></li>
+    <li class="{% if active_item_sub_menu == 'ciudad' %} active{% endif %}"><a href="{% url 'app_mantenimiento_ciudad' %}">Ciudad</a></li>
+    <li class="{% if active_item_sub_menu == 'idioma' %} active{% endif %}"><a href="{% url 'app_mantenimiento_idioma' %}">Idioma</a></li>
+    <li class="{% if active_item_sub_menu == 'moneda' %} active{% endif %}"><a href="{% url 'app_mantenimiento_moneda' %}">Moneda</a></li>
+    <li class="{% if active_item_sub_menu == 'banco' %} active{% endif %}"><a href="{% url 'app_mantenimiento_banco' %}">Banco</a></li>
+    <li class="{% if active_item_sub_menu == 'operador' %} active{% endif %}"><a href="{% url 'app_mantenimiento_operador' %}">Operador</a></li>
 </ul>
