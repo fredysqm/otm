@@ -3,8 +3,8 @@ from rest_framework import mixins
 from rest_framework import pagination
 from rest_framework import filters
 from rest_framework import permissions
-from core.models import Pais, Ciudad, Idioma, Moneda
-from api.serializers import PaisSerializer, CiudadSerializer, IdiomaSerializer, MonedaSerializer
+from core.models import Pais, Ciudad, Idioma, Moneda, Banco
+from api.serializers import PaisSerializer, CiudadSerializer, IdiomaSerializer, MonedaSerializer, BancoSerializer
 
 
 class DefaultPagination(pagination.PageNumberPagination):
@@ -56,10 +56,10 @@ class MonedaViewSet(mixins.RetrieveModelMixin, mixins.ListModelMixin, viewsets.G
     filter_backends = (filters.SearchFilter, filters.OrderingFilter,)
     search_fields = ('id', 'nombre',)
 
-# class ProveedorViewSet(viewsets.ModelViewSet):
-#     queryset = Proveedor.objects.all()
-#     serializer_class = ProveedorSerializer
-#     pagination_class = DefaultPagination
-#     permission_classes = (permissions.DjangoModelPermissions,)
-#     filter_backends = (filters.SearchFilter, filters.OrderingFilter,)
-#     search_fields = ('@_fts',)
+class BancoViewSet(mixins.RetrieveModelMixin, mixins.ListModelMixin, viewsets.GenericViewSet):
+    serializer_class = BancoSerializer
+    queryset = Banco.objects.all()
+    pagination_class = DefaultPagination
+    permission_classes = (DefaultPermissions,)
+    filter_backends = (filters.SearchFilter, filters.OrderingFilter,)
+    search_fields = ('id', 'nombre',)

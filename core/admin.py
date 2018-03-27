@@ -1,6 +1,6 @@
 from django.contrib import admin
 from reversion.admin import VersionAdmin
-from core.models import Pais, Ciudad, Idioma, Moneda
+from core.models import Pais, Ciudad, Idioma, Moneda, Banco
 
 
 @admin.register(Pais)
@@ -27,5 +27,11 @@ class IdiomaAdmin(VersionAdmin):
 @admin.register(Moneda)
 class MonedaAdmin(VersionAdmin):
     list_display = ('id', 'nombre', 'simbolo', '_creado','_modificado',)
+    search_fields = ('id', 'nombre',)
+    ordering = ['id']
+
+@admin.register(Banco)
+class BancoaAdmin(VersionAdmin):
+    list_display = ('id', 'nombre', '_creado','_modificado',)
     search_fields = ('id', 'nombre',)
     ordering = ['id']
