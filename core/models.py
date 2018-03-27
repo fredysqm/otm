@@ -41,19 +41,20 @@ class Pais(models.Model):
         super(Pais, self).save(*args, **kwargs)
 
     def __str__(self):
-        return ('%s' % (self.id,))
+        return ('%s (%s)' % (self.nombre, self.id,))
 
     class Meta:
         unique_together = ( ('nombre',), )
         verbose_name = ('país')
         verbose_name_plural = ('paises')
+        ordering = ('nombre',)
 
 
 class Ciudad(models.Model):
     id = models.CharField (
         primary_key=True,
         max_length=3,
-        verbose_name='Ciudad',
+        verbose_name='Siglas',
         help_text='Siglas de la ciudad',
         validators=[
             validators.RegexValidator(
