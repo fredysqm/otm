@@ -17,3 +17,7 @@ DATABASES = {
 
 STATIC_URL = '/static/'
 STATIC_ROOT = '/path/to/gen/static/'
+
+SERVICES64_AUTHORIZATION_TOKEN='value'
+SERVICES64_BASE_URL='value'
+SERVICES64_SUNAT_RUC='value'

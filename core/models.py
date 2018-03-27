@@ -28,6 +28,7 @@ class Pais(models.Model):
             ),
         ]
     )
+
     _creado = models.DateTimeField(auto_now_add=True,)
     _modificado = models.DateTimeField(auto_now=True,)
 
@@ -47,6 +48,56 @@ class Pais(models.Model):
         verbose_name = ('país')
         verbose_name_plural = ('paises')
 
+
+class Ciudad(models.Model):
+    id = models.CharField (
+        primary_key=True,
+        max_length=3,
+        verbose_name='Ciudad',
+        help_text='Siglas de la ciudad',
+        validators=[
+            validators.RegexValidator(
+                '^[a-zA-Z0-9]{3}$',
+                message='Ingrese siglas válidas.'
+            ),
+        ]
+    )
+
+    pais = models.ForeignKey (
+        Pais,
+        on_delete=models.CASCADE,
+    )
+
+    nombre = models.CharField (
+        max_length=60,
+        verbose_name='Nombre',
+        help_text='Nombre de la ciudad',
+        validators=[
+            validators.RegexValidator(
+                '^[a-zA-Z0-9áéíóúñÁÉÍÓÚÑ., \-]+$',
+                message='Ingrese un nombre válido.'
+            ),
+        ]
+    )
+
+    _creado = models.DateTimeField(auto_now_add=True,)
+    _modificado = models.DateTimeField(auto_now=True,)
+
+    def clean(self, *args, **kwargs):
+        super(Ciudad, self).clean(*args, **kwargs)
+
+    def save(self, *args, **kwargs):
+        self.id = ' '.join(self.id.upper().split())
+        self.nombre = ' '.join(self.nombre.upper().split())
+        super(Ciudad, self).save(*args, **kwargs)
+
+    def __str__(self):
+        return ('%s' % (self.id,))
+
+    class Meta:
+        unique_together = ( ('pais','nombre',), )
+        verbose_name = ('ciudad')
+        verbose_name_plural = ('ciudades')
 
 # class TipoDocProveedor(models.Model):
 #     id = models.CharField (
