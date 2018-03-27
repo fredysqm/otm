@@ -229,9 +229,9 @@ class Operador(models.Model):
         help_text='Siglas del operador',
         validators=[
             validators.RegexValidator(
-                '^[a-zA-Z0-9]{2}$',
+                '^[a-zA-Z0-9]+$',
                 message='Ingrese siglas válidas.'
-            )
+            ),
             validators.MinLengthValidator(
                 2
             ),
@@ -257,6 +257,7 @@ class Operador(models.Model):
         super(Operador, self).clean(*args, **kwargs)
 
     def save(self, *args, **kwargs):
+        self.id = ' '.join(self.id.upper().split())
         self.nombre = ' '.join(self.nombre.upper().split())
         super(Operador, self).save(*args, **kwargs)
 
