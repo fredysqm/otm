@@ -165,12 +165,6 @@ class Moneda(models.Model):
         max_length=3,
         verbose_name='Símbolo',
         help_text='Símbolo de la moneda',
-        validators=[
-            validators.MinLengthValidator(
-                1,
-                message='Ingrese un símbolo válido.'
-            ),
-        ]
     )
 
     _creado = models.DateTimeField(auto_now_add=True,)
@@ -224,4 +218,53 @@ class Banco(models.Model):
         unique_together = ( ('nombre',), )
         verbose_name = ('banco')
         verbose_name_plural = ('bancos')
+        ordering = ('nombre',)
+
+
+class Operador(models.Model):
+    id = models.CharField (
+        primary_key=True,
+        max_length=6,
+        verbose_name='Siglas',
+        help_text='Siglas del operador',
+        validators=[
+            validators.RegexValidator(
+                '^[a-zA-Z0-9]{2}$',
+                message='Ingrese siglas válidas.'
+            )
+            validators.MinLengthValidator(
+                2
+            ),
+        ]
+    )
+
+    nombre = models.CharField (
+        max_length=60,
+        verbose_name='Nombre',
+        help_text='Nombre del operador',
+        validators=[
+            validators.RegexValidator(
+                '^[a-zA-Z0-9áéíóúñÁÉÍÓÚÑ., \-]+$',
+                message='Ingrese un nombre válido.'
+            ),
+        ]
+    )
+
+    _creado = models.DateTimeField(auto_now_add=True,)
+    _modificado = models.DateTimeField(auto_now=True,)
+
+    def clean(self, *args, **kwargs):
+        super(Operador, self).clean(*args, **kwargs)
+
+    def save(self, *args, **kwargs):
+        self.nombre = ' '.join(self.nombre.upper().split())
+        super(Operador, self).save(*args, **kwargs)
+
+    def __str__(self):
+        return ('%s' % (self.nombre,))
+
+    class Meta:
+        unique_together = ( ('nombre',), )
+        verbose_name = ('operador')
+        verbose_name_plural = ('operadores')
         ordering = ('nombre',)
