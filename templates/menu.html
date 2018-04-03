@@ -7,8 +7,6 @@
         <a href="{% url 'app_mantenimiento_pais' %}"><span class="fa-stack fa-lg"><i class="fa fa-database fa-stack-2x "></i></span><br/>Configuración</a>
     </li>
 
-    <br />
-
     <li class="{% if active_item_menu == 'user' %} active{% endif %}">
         <a href="{% url 'xauth_password_change' %}"><span class="fa-stack fa-lg"><i class="fa fa-user fa-stack-2x "></i></span><br/>{{ user.first_name }}</a>
     </li>
