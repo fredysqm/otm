@@ -3,6 +3,12 @@ from django.core import validators
 from django.core.exceptions import ObjectDoesNotExist
 
 
+_ESTADO_OBJ = (
+    ('A', 'Activo'),
+    ('S', 'Suspendido'),
+)
+
+
 class Pais(models.Model):
     id = models.CharField (
         primary_key=True,
@@ -29,6 +35,7 @@ class Pais(models.Model):
         ]
     )
 
+    _estado_obj = models.CharField(max_length=1, choices=_ESTADO_OBJ, default='A')
     _creado = models.DateTimeField(auto_now_add=True,)
     _modificado = models.DateTimeField(auto_now=True,)
 
@@ -81,6 +88,7 @@ class Ciudad(models.Model):
         ]
     )
 
+    _estado_obj = models.CharField(max_length=1, choices=_ESTADO_OBJ, default='A')
     _creado = models.DateTimeField(auto_now_add=True,)
     _modificado = models.DateTimeField(auto_now=True,)
 
@@ -127,6 +135,7 @@ class Idioma(models.Model):
         ]
     )
 
+    _estado_obj = models.CharField(max_length=1, choices=_ESTADO_OBJ, default='A')
     _creado = models.DateTimeField(auto_now_add=True,)
     _modificado = models.DateTimeField(auto_now=True,)
 
@@ -167,6 +176,7 @@ class Moneda(models.Model):
         help_text='Símbolo de la moneda',
     )
 
+    _estado_obj = models.CharField(max_length=1, choices=_ESTADO_OBJ, default='A')
     _creado = models.DateTimeField(auto_now_add=True,)
     _modificado = models.DateTimeField(auto_now=True,)
 
@@ -201,6 +211,7 @@ class Banco(models.Model):
         ]
     )
 
+    _estado_obj = models.CharField(max_length=1, choices=_ESTADO_OBJ, default='A')
     _creado = models.DateTimeField(auto_now_add=True,)
     _modificado = models.DateTimeField(auto_now=True,)
 
@@ -250,6 +261,7 @@ class Operador(models.Model):
         ]
     )
 
+    _estado_obj = models.CharField(max_length=1, choices=_ESTADO_OBJ, default='A')
     _creado = models.DateTimeField(auto_now_add=True,)
     _modificado = models.DateTimeField(auto_now=True,)
 

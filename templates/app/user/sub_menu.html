@@ -1,4 +1,4 @@
-<ul class="nav nav-tabs sub_menu">
+<ul class="nav nav-pills sub_menu">
     <li class="{% if active_item_sub_menu == 'change_password' %} active{% endif %}"><a href="">Cambiar contraseña</a></li>
     {% if user.is_staff %}
         <li><a href="{% url 'admin:index' %}">Sitio administrativo</a></li>
