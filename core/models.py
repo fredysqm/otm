@@ -375,7 +375,6 @@ class Proveedor(models.Model):
         ]
     )
 
-    _fts = models.CharField(max_length=150,)
     _estado_obj = models.CharField(max_length=1, choices=_ESTADO_OBJ, default='A')
     _creado = models.DateTimeField(auto_now_add=True,)
     _modificado = models.DateTimeField(auto_now=True,)
@@ -398,7 +397,6 @@ class Proveedor(models.Model):
     def save(self, *args, **kwargs):
         self.razon_social = ' '.join(self.razon_social.upper().split())
         self.direccion = ' '.join(self.direccion.upper().split())
-        self._fts = '%s %s %s' % (self.id, self.razon_social, self.tipo_documento)
         super(Proveedor, self).save(*args, **kwargs)
 
     def __str__(self):
