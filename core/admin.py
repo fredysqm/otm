@@ -57,7 +57,8 @@ class TipoDocProveedorAdmin(VersionAdmin):
 @admin.register(Proveedor)
 class ProveedorAdmin(admin.ModelAdmin):
     list_display = ('tipo_documento', 'id', 'razon_social', '_creado','_modificado',)
-    exclude = ('_fts',)
+    list_display_links = ('id',)
+    #exclude = ('_fts',)
     search_fields = ('razon_social',)
     list_filter = ( ('tipo_documento', admin.RelatedOnlyFieldListFilter), '_estado_obj', '_creado', '_modificado' )
     ordering = ['id']
