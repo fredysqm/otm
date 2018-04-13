@@ -1,6 +1,6 @@
 from django.contrib import admin
 from reversion.admin import VersionAdmin
-from core.models import Pais, Ciudad, Idioma, Moneda, Banco, Operador, TipoDocProveedor, Proveedor
+from core.models import Pais, Ciudad, Idioma, Moneda, Banco, Operador
 
 
 @admin.register(Pais)
@@ -47,18 +47,3 @@ class OperadorAdmin(VersionAdmin):
     list_filter = ( '_estado_obj', '_creado', '_modificado' )
     ordering = ['id']
 
-@admin.register(TipoDocProveedor)
-class TipoDocProveedorAdmin(VersionAdmin):
-    list_display = ('id', 'nombre', '_creado','_modificado',)
-    search_fields = ('id', 'nombre',)
-    list_filter = ( '_estado_obj', '_creado', '_modificado' )
-    ordering = ['id']
-
-@admin.register(Proveedor)
-class ProveedorAdmin(admin.ModelAdmin):
-    list_display = ('tipo_documento', 'id', 'razon_social', '_creado','_modificado',)
-    list_display_links = ('id',)
-    #exclude = ('_fts',)
-    search_fields = ('razon_social',)
-    list_filter = ( ('tipo_documento', admin.RelatedOnlyFieldListFilter), '_estado_obj', '_creado', '_modificado' )
-    ordering = ['id']
