@@ -402,6 +402,7 @@ class Proveedor(models.Model):
     def save(self, *args, **kwargs):
         self.razon_social = ' '.join(self.razon_social.upper().split())
         self.direccion = ' '.join(self.direccion.upper().split())
+        self._verificacion_obj = 'N'
         super(Proveedor, self).save(*args, **kwargs)
 
     def __str__(self):
