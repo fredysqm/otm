@@ -3,8 +3,8 @@ from rest_framework import mixins
 from rest_framework import pagination
 from rest_framework import filters
 from rest_framework import permissions
-from core.models import Pais, Ciudad, Idioma, Moneda, Banco, Operador
-from api.serializers import PaisSerializer, CiudadSerializer, IdiomaSerializer, MonedaSerializer, BancoSerializer, OperadorSerializer
+from core.models import *
+from api.serializers import *
 
 
 class DefaultPagination(pagination.PageNumberPagination):
@@ -26,7 +26,7 @@ class DefaultPermissions(permissions.DjangoModelPermissions):
 
 class PaisViewSet(mixins.RetrieveModelMixin, mixins.ListModelMixin, viewsets.GenericViewSet):
     serializer_class = PaisSerializer
-    queryset = Pais.objects.all()
+    queryset = Pais.objects.filter(_estado_obj='A')
     pagination_class = DefaultPagination
     permission_classes = (DefaultPermissions,)
     filter_backends = (filters.SearchFilter, filters.OrderingFilter,)
@@ -34,7 +34,7 @@ class PaisViewSet(mixins.RetrieveModelMixin, mixins.ListModelMixin, viewsets.Gen
 
 class CiudadViewSet(mixins.RetrieveModelMixin, mixins.ListModelMixin, viewsets.GenericViewSet):
     serializer_class = CiudadSerializer
-    queryset = Ciudad.objects.all()
+    queryset = Ciudad.objects.filter(_estado_obj='A')
     pagination_class = DefaultPagination
     permission_classes = (DefaultPermissions,)
     filter_backends = (filters.SearchFilter, filters.OrderingFilter,)
@@ -42,7 +42,7 @@ class CiudadViewSet(mixins.RetrieveModelMixin, mixins.ListModelMixin, viewsets.G
 
 class IdiomaViewSet(mixins.RetrieveModelMixin, mixins.ListModelMixin, viewsets.GenericViewSet):
     serializer_class = IdiomaSerializer
-    queryset = Idioma.objects.all()
+    queryset = Idioma.objects.filter(_estado_obj='A')
     pagination_class = DefaultPagination
     permission_classes = (DefaultPermissions,)
     filter_backends = (filters.SearchFilter, filters.OrderingFilter,)
@@ -50,7 +50,7 @@ class IdiomaViewSet(mixins.RetrieveModelMixin, mixins.ListModelMixin, viewsets.G
 
 class MonedaViewSet(mixins.RetrieveModelMixin, mixins.ListModelMixin, viewsets.GenericViewSet):
     serializer_class = MonedaSerializer
-    queryset = Moneda.objects.all()
+    queryset = Moneda.objects.filter(_estado_obj='A')
     pagination_class = DefaultPagination
     permission_classes = (DefaultPermissions,)
     filter_backends = (filters.SearchFilter, filters.OrderingFilter,)
@@ -58,7 +58,7 @@ class MonedaViewSet(mixins.RetrieveModelMixin, mixins.ListModelMixin, viewsets.G
 
 class BancoViewSet(mixins.RetrieveModelMixin, mixins.ListModelMixin, viewsets.GenericViewSet):
     serializer_class = BancoSerializer
-    queryset = Banco.objects.all()
+    queryset = Banco.objects.filter(_estado_obj='A')
     pagination_class = DefaultPagination
     permission_classes = (DefaultPermissions,)
     filter_backends = (filters.SearchFilter, filters.OrderingFilter,)
@@ -66,7 +66,23 @@ class BancoViewSet(mixins.RetrieveModelMixin, mixins.ListModelMixin, viewsets.Ge
 
 class OperadorViewSet(mixins.RetrieveModelMixin, mixins.ListModelMixin, viewsets.GenericViewSet):
     serializer_class = OperadorSerializer
-    queryset = Operador.objects.all()
+    queryset = Operador.objects.filter(_estado_obj='A')
+    pagination_class = DefaultPagination
+    permission_classes = (DefaultPermissions,)
+    filter_backends = (filters.SearchFilter, filters.OrderingFilter,)
+    search_fields = ('id', 'nombre',)
+
+class TipoDocProveedorViewSet(mixins.RetrieveModelMixin, mixins.ListModelMixin, viewsets.GenericViewSet):
+    serializer_class = TipoDocProveedorSerializer
+    queryset = TipoDocProveedor.objects.filter(_estado_obj='A')
+    pagination_class = DefaultPagination
+    permission_classes = (DefaultPermissions,)
+    filter_backends = (filters.SearchFilter, filters.OrderingFilter,)
+    search_fields = ('id', 'nombre',)
+
+class ProveedorViewSet(mixins.RetrieveModelMixin, mixins.ListModelMixin, viewsets.GenericViewSet):
+    serializer_class = ProveedorSerializer
+    queryset = Proveedor.objects.filter(_estado_obj='A')
     pagination_class = DefaultPagination
     permission_classes = (DefaultPermissions,)
     filter_backends = (filters.SearchFilter, filters.OrderingFilter,)

@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from core.models import Pais, Ciudad, Idioma, Moneda, Banco, Operador
+from core.models import *
 
 
 class PaisSerializer(serializers.ModelSerializer):
@@ -33,14 +33,18 @@ class OperadorSerializer(serializers.ModelSerializer):
         model = Operador
         fields = ('id', 'nombre', '_creado', '_modificado')
 
-# class ProveedorSerializer(serializers.ModelSerializer):
+class TipoDocProveedorSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = TipoDocProveedor
+        fields = ('id', 'nombre', '_creado', '_modificado')
 
-#     def validate(self, attrs):
-#         instance = Proveedor(**attrs)
-#         instance.clean()
-#         return attrs
+class ProveedorSerializer(serializers.ModelSerializer):
+    def validate(self, attrs):
+        instance = Proveedor(**attrs)
+        instance.clean()
+        return attrs
 
-#     class Meta:
-#         model = Proveedor
-#         fields = ('id', 'tipo_documento', 'razon_social', 'direccion', '_creado', '_modificado')
-#         #depth = 2
+    class Meta:
+        model = Proveedor
+        fields = ('id', 'tipo_documento', 'razon_social', 'direccion', '_creado', '_modificado')
+        depth = 2
