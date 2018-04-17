@@ -162,6 +162,19 @@ class Idioma(models.Model):
 
 
 class Moneda(models.Model):
+    id = models.CharField (
+        primary_key=True,
+        max_length=3,
+        verbose_name='Siglas',
+        help_text='Siglas de la moneda',
+        validators=[
+            validators.RegexValidator(
+                '^[a-zA-Z0-9]{3}$',
+                message='Ingrese siglas válidas.'
+            ),
+        ]
+    )
+    
     nombre = models.CharField (
         max_length=60,
         verbose_name='Nombre',
@@ -188,6 +201,7 @@ class Moneda(models.Model):
         super(Moneda, self).clean(*args, **kwargs)
 
     def save(self, *args, **kwargs):
+        self.id = ' '.join(self.id.upper().split())
         self.nombre = ' '.join(self.nombre.upper().split())
         self.simbolo = ' '.join(self.simbolo.upper().split())
         super(Moneda, self).save(*args, **kwargs)
