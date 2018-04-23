@@ -11,6 +11,8 @@ router.register(r'moneda', MonedaViewSet)
 router.register(r'banco', BancoViewSet)
 router.register(r'operador', OperadorViewSet)
 router.register(r'tipo_doc_proveedor', TipoDocProveedorViewSet)
+router.register(r'modalidad_pago', ModalidadPagoViewSet)
+router.register(r'tipo_servicio', TipoDocProveedorViewSet)
 router.register(r'proveedor', ProveedorViewSet)
 
 

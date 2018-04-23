@@ -38,6 +38,16 @@ class TipoDocProveedorSerializer(serializers.ModelSerializer):
         model = TipoDocProveedor
         fields = ('id', 'nombre', '_creado', '_modificado')
 
+class ModalidadPagoSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = ModalidadPago
+        fields = ('id', 'nombre', '_creado', '_modificado')
+
+class TipoServicioSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = TipoServicio
+        fields = ('id', 'nombre', '_creado', '_modificado')
+
 class ProveedorSerializer(serializers.ModelSerializer):
     def validate(self, attrs):
         instance = Proveedor(**attrs)
@@ -46,5 +56,5 @@ class ProveedorSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Proveedor
-        fields = ('id', 'tipo_documento', 'razon_social', 'direccion', '_creado', '_modificado')
-        depth = 2
+        fields = ('id', 'tipo_documento+* ', 'razon_social', 'direccion', '_creado', '_modificado')
+        #depth = 2

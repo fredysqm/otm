@@ -349,6 +349,98 @@ class TipoDocProveedor(models.Model):
         ordering = ('nombre',)
 
 
+class ModalidadPago(models.Model):
+    id = models.CharField (
+        primary_key=True,
+        max_length=3,
+        verbose_name='Siglas',
+        help_text='Siglas de la modalidad de pago',
+        validators=[
+            validators.RegexValidator(
+                '^[a-zA-Z0-9]{3}$',
+                message='Ingrese siglas válidas.'
+            ),
+        ]
+    )
+
+    nombre = models.CharField (
+        max_length=50,
+        verbose_name='Nombre',
+        help_text='Nombre de la modalidad de pago',
+        validators=[
+            validators.RegexValidator(
+                '^[a-zA-Z0-9áéíóúñÁÉÍÓÚÑ., \-]+$',
+                message='Ingrese un nombre válido.'
+            ),
+        ]
+    )
+
+    _estado_obj = models.CharField(max_length=1, choices=_ESTADO_OBJ, default='A')
+    _creado = models.DateTimeField(auto_now_add=True,)
+    _modificado = models.DateTimeField(auto_now=True,)
+
+    def clean(self, *args, **kwargs):
+        super(ModalidadPago, self).clean(*args, **kwargs)
+
+    def save(self, *args, **kwargs):
+        self.id = ' '.join(self.id.upper().split())
+        self.nombre = ' '.join(self.nombre.upper().split())
+        super(ModalidadPago, self).save(*args, **kwargs)
+
+    def __str__(self):
+        return ('%s' % (self.id,))
+
+    class Meta:
+        verbose_name = ('modalidad de pago')
+        verbose_name_plural = ('modalidades de pago')
+
+
+class TipoServicio(models.Model):
+    id = models.CharField (
+        primary_key=True,
+        max_length=3,
+        verbose_name='Siglas',
+        help_text='Siglas del tipo de servicio',
+        validators=[
+            validators.RegexValidator(
+                '^[a-zA-Z0-9]{3}$',
+                message='Ingrese siglas válidas.'
+            ),
+        ]
+    )
+
+    nombre = models.CharField (
+        max_length=50,
+        verbose_name='Nombre',
+        help_text='Nombre del tipo de servicio',
+        validators=[
+            validators.RegexValidator(
+                '^[a-zA-Z0-9áéíóúñÁÉÍÓÚÑ., \-]+$',
+                message='Ingrese un nombre válido.'
+            ),
+        ]
+    )
+
+    _estado_obj = models.CharField(max_length=1, choices=_ESTADO_OBJ, default='A')
+    _creado = models.DateTimeField(auto_now_add=True,)
+    _modificado = models.DateTimeField(auto_now=True,)
+
+    def clean(self, *args, **kwargs):
+        super(TipoServicio, self).clean(*args, **kwargs)
+
+    def save(self, *args, **kwargs):
+        self.id = ' '.join(self.id.upper().split())
+        self.nombre = ' '.join(self.nombre.upper().split())
+        super(TipoServicio, self).save(*args, **kwargs)
+
+    def __str__(self):
+        return ('%s' % (self.id,))
+
+    class Meta:
+        verbose_name = ('tipo de servicio')
+        verbose_name_plural = ('tipos de servicio')
+
+
 class Proveedor(models.Model):
     id = models.CharField(
         primary_key=True,
@@ -426,3 +518,47 @@ class Proveedor(models.Model):
         unique_together = ( ('razon_social',), )
         verbose_name = ('proveedor')
         verbose_name_plural = ('proveedores')
+
+
+class Localidad(models.Model):
+    nombre = models.CharField (
+        max_length=100,
+        verbose_name='Nombre',
+        help_text='Nombre de la localidad',
+        validators=[
+            validators.RegexValidator(
+                '^[a-zA-Z0-9áéíóúñÁÉÍÓÚÑ., \-]+$',
+                message='Ingrese un nombre válido.'
+            ),
+        ]
+    )
+
+    ciudad = models.ForeignKey (
+        Ciudad,
+        on_delete=models.PROTECT,
+    )
+
+    altitud = models.PositiveIntegerField(
+        default=0,
+        verbose_name='Altitud',
+        help_text='Altitud de la localidad m.s.n.m.',
+    )
+
+    _estado_obj = models.CharField(max_length=1, choices=_ESTADO_OBJ, default='A')
+    _creado = models.DateTimeField(auto_now_add=True,)
+    _modificado = models.DateTimeField(auto_now=True,)
+
+    def clean(self, *args, **kwargs):
+        super(Localidad, self).clean(*args, **kwargs)
+
+    def save(self, *args, **kwargs):
+        self.nombre = ' '.join(self.nombre.upper().split())
+        super(Localidad, self).save(*args, **kwargs)
+
+    def __str__(self):
+        return ('%s (%s)' % (self.nombre, self.ciudad.pk))
+
+    class Meta:
+        unique_together = ( ('nombre', 'ciudad'), )
+        verbose_name = ('localidad')
+        verbose_name_plural = ('localidades')

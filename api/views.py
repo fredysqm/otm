@@ -80,7 +80,23 @@ class TipoDocProveedorViewSet(mixins.RetrieveModelMixin, mixins.ListModelMixin, 
     filter_backends = (filters.SearchFilter, filters.OrderingFilter,)
     search_fields = ('id', 'nombre',)
 
-class ProveedorViewSet(mixins.RetrieveModelMixin, mixins.ListModelMixin, viewsets.GenericViewSet):
+class ModalidadPagoViewSet(mixins.RetrieveModelMixin, mixins.ListModelMixin, viewsets.GenericViewSet):
+    serializer_class = ModalidadPagoSerializer
+    queryset = ModalidadPago.objects.filter(_estado_obj='A')
+    pagination_class = DefaultPagination
+    permission_classes = (DefaultPermissions,)
+    filter_backends = (filters.SearchFilter, filters.OrderingFilter,)
+    search_fields = ('id', 'nombre',)
+
+class TipoServicioViewSet(mixins.RetrieveModelMixin, mixins.ListModelMixin, viewsets.GenericViewSet):
+    serializer_class = TipoServicioSerializer
+    queryset = TipoServicio.objects.filter(_estado_obj='A')
+    pagination_class = DefaultPagination
+    permission_classes = (DefaultPermissions,)
+    filter_backends = (filters.SearchFilter, filters.OrderingFilter,)
+    search_fields = ('id', 'nombre',)
+
+class ProveedorViewSet(viewsets.ModelViewSet):
     serializer_class = ProveedorSerializer
     queryset = Proveedor.objects.filter(_estado_obj='A')
     pagination_class = DefaultPagination
