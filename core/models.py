@@ -562,3 +562,57 @@ class Localidad(models.Model):
         unique_together = ( ('nombre', 'ciudad'), )
         verbose_name = ('localidad')
         verbose_name_plural = ('localidades')
+
+
+class MarcaComercial(models.Model):
+    nombre = models.CharField (
+        max_length=100,
+        verbose_name='Nombre',
+        help_text='Nombre de la marca comercial',
+        validators=[
+            validators.RegexValidator(
+                '^[a-zA-Z0-9áéíóúñÁÉÍÓÚÑ., \-]+$',
+                message='Ingrese un nombre válido.'
+            ),
+        ]
+    )
+
+    proveedor = models.ForeignKey (
+        Proveedor,
+        on_delete=models.PROTECT,
+    )
+
+    tipo_servicio = models.ForeignKey (
+        TipoServicio,
+        on_delete=models.PROTECT,
+    )
+
+    localidad = models.ForeignKey (
+        Localidad,
+        on_delete=models.PROTECT,
+    )
+
+    modalidad_pago = models.ForeignKey (
+        ModalidadPago,
+        on_delete=models.PROTECT,
+    )
+
+    _verificacion_obj = models.CharField(max_length=1, choices=_VERIFICACION_OBJ, default='N')
+    _estado_obj = models.CharField(max_length=1, choices=_ESTADO_OBJ, default='A')
+    _creado = models.DateTimeField(auto_now_add=True,)
+    _modificado = models.DateTimeField(auto_now=True,)
+
+    def clean(self, *args, **kwargs):
+        super(MarcaComercial, self).clean(*args, **kwargs)
+
+    def save(self, *args, **kwargs):
+        self.nombre = ' '.join(self.nombre.upper().split())
+        super(MarcaComercial, self).save(*args, **kwargs)
+
+    def __str__(self):
+        return ('%s (%s)' % (self.nombre, self.proveedor.pk))
+
+    class Meta:
+        unique_together = ( ('nombre', 'proveedor'), )
+        verbose_name = ('marca comecial')
+        verbose_name_plural = ('marcas comerciales')
