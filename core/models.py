@@ -597,6 +597,63 @@ class MarcaComercial(models.Model):
         on_delete=models.PROTECT,
     )
 
+    direccion = models.CharField(
+        max_length=170,
+        blank=True,
+        verbose_name='Dirección',
+        help_text='Dirección de la marca comercial',
+        validators=[
+            validators.RegexValidator(
+                '^[a-zA-Z0-9áéíóúñÁÉÍÓÚÑ., \-]+$',
+                message='Ingrese una dirección válida.'
+            ),
+        ]
+    )
+
+    telefono_fijo = models.CharField(
+        max_length=12,
+        blank=True,
+        verbose_name='Teléfono fijo',
+        help_text='Ingrese solo números',
+        validators=[
+            validators.RegexValidator(
+                '^[0-9]{6,}$',
+                message='Ingrese un número de teléfono válido.'
+            ),
+        ]
+    )
+
+    telefono_movil = models.CharField(
+        max_length=12,
+        blank=True,
+        verbose_name='Teléfono móvil',
+        help_text='Ingrese solo números',
+        validators=[
+            validators.RegexValidator(
+                '^[0-9]{9,}$',
+                message='Ingrese un número de teléfono válido.'
+            ),
+        ]
+    )
+
+    email = models.EmailField(
+        max_length=128,
+        blank=True,
+        verbose_name='Email',
+    )
+
+    sitio_web = models.URLField(
+        max_length=128,
+        blank=True,
+        verbose_name='Sitio Web',
+    )
+
+    observaciones = models.CharField(
+        max_length=512,
+        blank=True,
+        verbose_name='Observaciones',
+    )
+
     _verificacion_obj = models.CharField(max_length=1, choices=_VERIFICACION_OBJ, default='N')
     _estado_obj = models.CharField(max_length=1, choices=_ESTADO_OBJ, default='A')
     _creado = models.DateTimeField(auto_now_add=True,)
@@ -607,6 +664,12 @@ class MarcaComercial(models.Model):
 
     def save(self, *args, **kwargs):
         self.nombre = ' '.join(self.nombre.upper().split())
+        self.direccion = ' '.join(self.direccion.upper().split())
+        self.telefono_fijo = ' '.join(self.telefono_fijo.upper().split())
+        self.telefono_movil = ' '.join(self.telefono_movil.upper().split())
+        self.email = ' '.join(self.email.lower().split())
+        self.sitio_web = ' '.join(self.sitio_web.lower().split())
+        self.observaciones = self.observaciones.strip()
         super(MarcaComercial, self).save(*args, **kwargs)
 
     def __str__(self):
