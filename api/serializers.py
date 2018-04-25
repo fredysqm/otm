@@ -43,9 +43,9 @@ class ModalidadPagoSerializer(serializers.ModelSerializer):
         model = ModalidadPago
         fields = ('id', 'nombre', '_creado', '_modificado')
 
-class TipoServicioSerializer(serializers.ModelSerializer):
+class CategoriaServicioSerializer(serializers.ModelSerializer):
     class Meta:
-        model = TipoServicio
+        model = CategoriaServicio
         fields = ('id', 'nombre', '_creado', '_modificado')
 
 class ProveedorSerializer(serializers.ModelSerializer):

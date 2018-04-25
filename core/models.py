@@ -350,7 +350,7 @@ class TipoDocProveedor(models.Model):
         super(TipoDocProveedor, self).save(*args, **kwargs)
 
     def __str__(self):
-        return ('%s' % (self.id,))
+        return ('%s (%s)' % (self.nombre, self.id))
 
     class Meta:
         unique_together = ( ('nombre',), )
@@ -690,3 +690,129 @@ class MarcaComercial(models.Model):
         unique_together = ( ('nombre', 'proveedor'), )
         verbose_name = ('marca comecial')
         verbose_name_plural = ('marcas comerciales')
+
+
+class TipoCuentaBanco(models.Model):
+    id = models.CharField (
+        primary_key=True,
+        max_length=3,
+        verbose_name='Siglas',
+        help_text='Siglas del tipo de cuenta de banco',
+        validators=[
+            validators.RegexValidator(
+                '^[a-zA-Z0-9]{3}$',
+                message='Ingrese siglas válidas.'
+            ),
+        ]
+    )
+
+    nombre = models.CharField (
+        max_length=100,
+        verbose_name='Nombre',
+        help_text='Nombre del tipo de cuenta de banco',
+        validators=[
+            validators.RegexValidator(
+                '^[a-zA-Z0-9áéíóúñÁÉÍÓÚÑ., \-]+$',
+                message='Ingrese un nombre válido.'
+            ),
+        ]
+    )
+
+    _estado_obj = models.CharField(max_length=1, choices=_ESTADO_OBJ, default='A')
+    _creado = models.DateTimeField(auto_now_add=True,)
+    _modificado = models.DateTimeField(auto_now=True,)
+
+    def clean(self, *args, **kwargs):
+        super(TipoCuentaBanco, self).clean(*args, **kwargs)
+
+    def save(self, *args, **kwargs):
+        self.id = ' '.join(self.id.upper().split())
+        self.nombre = ' '.join(self.nombre.upper().split())
+        super(TipoCuentaBanco, self).save(*args, **kwargs)
+
+    def __str__(self):
+        return ('%s (%s)' % (self.nombre, self.id))
+
+    class Meta:
+        unique_together = ( ('nombre',), )
+        verbose_name = ('tipo de cuenta banco')
+        verbose_name_plural = ('tipos de cuenta banco')
+
+
+class MarcaComercialCuenta(models.Model):
+    marca_comercial = models.ForeignKey (
+        MarcaComercial,
+        on_delete=models.PROTECT,
+    )
+
+    banco = models.ForeignKey (
+        Banco,
+        on_delete=models.PROTECT,
+    )
+
+    moneda = models.ForeignKey (
+        Moneda,
+        on_delete=models.PROTECT,
+    )
+
+    tipo_cuenta = models.ForeignKey (
+        TipoCuentaBanco,
+        on_delete=models.PROTECT,
+    )
+
+    titular = models.CharField (
+        max_length=128,
+        verbose_name='Razón social',
+        help_text='Nombre del titular de la cuenta',
+        validators=[
+            validators.RegexValidator(
+                '^[a-zA-Z0-9áéíóúñÁÉÍÓÚÑ., \-]+$',
+                message='Ingrese un nombre válida.'
+            ),
+        ]
+    )
+
+    cta = models.CharField(
+        max_length=30,
+        verbose_name='Número de cuenta',
+        validators=[
+            validators.RegexValidator(
+                '^[0-9]$',
+                message='Ingrese un número de cuenta válido.'
+            ),
+        ]
+    )
+
+    cci = models.CharField(
+        max_length=40,
+        blank=True,
+        verbose_name='Número de cci',
+        validators=[
+            validators.RegexValidator(
+                '^[0-9]$',
+                message='Ingrese un número de cci válido.'
+            ),
+        ]
+    )
+
+    _verificacion_obj = models.CharField(max_length=1, choices=_VERIFICACION_OBJ, default='N')
+    _estado_obj = models.CharField(max_length=1, choices=_ESTADO_OBJ, default='A')
+    _creado = models.DateTimeField(auto_now_add=True,)
+    _modificado = models.DateTimeField(auto_now=True,)
+
+    def clean(self, *args, **kwargs):
+        super(MarcaComercialCuenta, self).clean(*args, **kwargs)
+
+    def save(self, *args, **kwargs):
+        self.titular = ' '.join(self.titular.upper().split())
+        self.cta = ' '.join(self.cta.upper().split())
+        self.cci = ' '.join(self.cci.upper().split())
+        super(MarcaComercialCuenta, self).save(*args, **kwargs)
+
+    def __str__(self):
+        return ('%s (%s)' % (self.titular, self.cta))
+
+    class Meta:
+        unique_together = ( ('marca_comercial', 'cta'), ('marca_comercial', 'moneda'), )
+        verbose_name = ('marca comecial cuenta')
+        verbose_name_plural = ('marcas comerciales cuentas')

@@ -88,9 +88,9 @@ class ModalidadPagoViewSet(mixins.RetrieveModelMixin, mixins.ListModelMixin, vie
     filter_backends = (filters.SearchFilter, filters.OrderingFilter,)
     search_fields = ('id', 'nombre',)
 
-class TipoServicioViewSet(mixins.RetrieveModelMixin, mixins.ListModelMixin, viewsets.GenericViewSet):
-    serializer_class = TipoServicioSerializer
-    queryset = TipoServicio.objects.filter(_estado_obj='A')
+class CategoriaServicioViewSet(mixins.RetrieveModelMixin, mixins.ListModelMixin, viewsets.GenericViewSet):
+    serializer_class = CategoriaServicioSerializer
+    queryset = CategoriaServicio.objects.filter(_estado_obj='A')
     pagination_class = DefaultPagination
     permission_classes = (DefaultPermissions,)
     filter_backends = (filters.SearchFilter, filters.OrderingFilter,)

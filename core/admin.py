@@ -123,8 +123,8 @@ class ModalidadPagoAdmin(VersionAdmin):
         return obj._estado_obj == 'A'
     _activo.boolean = True
 
-@admin.register(TipoServicio)
-class TipoServicioAdmin(VersionAdmin):
+@admin.register(CategoriaServicio)
+class CategoriaServicioAdmin(VersionAdmin):
     list_display = ('id', 'nombre', '_activo', '_creado','_modificado',)
     search_fields = ('id', 'nombre',)
     list_filter = ( '_estado_obj', '_creado', '_modificado' )
