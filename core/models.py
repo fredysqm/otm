@@ -13,6 +13,7 @@ _VERIFICACION_OBJ = (
     ('N', 'No'),
 )
 
+
 class Pais(models.Model):
     id = models.CharField (
         primary_key=True,
@@ -58,7 +59,6 @@ class Pais(models.Model):
         unique_together = ( ('nombre',), )
         verbose_name = ('país')
         verbose_name_plural = ('paises')
-        ordering = ('nombre',)
 
 
 class Ciudad(models.Model):
@@ -105,7 +105,7 @@ class Ciudad(models.Model):
         super(Ciudad, self).save(*args, **kwargs)
 
     def __str__(self):
-        return ('%s' % (self.id,))
+        return ('%s (%s)' % (self.nombre, self.id))
 
     class Meta:
         unique_together = ( ('pais','nombre',), )
@@ -152,13 +152,12 @@ class Idioma(models.Model):
         super(Idioma, self).save(*args, **kwargs)
 
     def __str__(self):
-        return ('%s (%s)' % (self.nombre, self.id,))
+        return ('%s (%s)' % (self.nombre, self.id))
 
     class Meta:
         unique_together = ( ('nombre',), )
         verbose_name = ('idioma')
         verbose_name_plural = ('idiomas')
-        ordering = ('nombre',)
 
 
 class Moneda(models.Model):
@@ -207,16 +206,28 @@ class Moneda(models.Model):
         super(Moneda, self).save(*args, **kwargs)
 
     def __str__(self):
-        return ('%s (%s)' % (self.nombre, self.simbolo,))
+        return ('%s (%s)' % (self.nombre, self.simbolo))
 
     class Meta:
         unique_together = ( ('nombre',), )
         verbose_name = ('moneda')
         verbose_name_plural = ('monedas')
-        ordering = ('nombre',)
 
 
 class Banco(models.Model):
+    id = models.CharField (
+        primary_key=True,
+        max_length=3,
+        verbose_name='Siglas',
+        help_text='Siglas del banco',
+        validators=[
+            validators.RegexValidator(
+                '^[a-zA-Z0-9]{3}$',
+                message='Ingrese siglas válidas.'
+            ),
+        ]
+    )
+
     nombre = models.CharField (
         max_length=60,
         verbose_name='Nombre',
@@ -237,24 +248,24 @@ class Banco(models.Model):
         super(Banco, self).clean(*args, **kwargs)
 
     def save(self, *args, **kwargs):
+        self.id = ' '.join(self.id.upper().split())
         self.nombre = ' '.join(self.nombre.upper().split())
         super(Banco, self).save(*args, **kwargs)
 
     def __str__(self):
-        return ('%s' % (self.nombre,))
+        return ('%s (%s)' % (self.nombre, self.id))
 
     class Meta:
         unique_together = ( ('nombre',), )
         verbose_name = ('banco')
         verbose_name_plural = ('bancos')
-        ordering = ('nombre',)
 
 
 class Operador(models.Model):
     id = models.CharField (
         primary_key=True,
-        max_length=6,
         verbose_name='Siglas',
+        max_length=6,
         help_text='Siglas del operador',
         validators=[
             validators.RegexValidator(
@@ -292,13 +303,12 @@ class Operador(models.Model):
         super(Operador, self).save(*args, **kwargs)
 
     def __str__(self):
-        return ('%s' % (self.nombre,))
+        return ('%s (%s)' % (self.nombre, self.id))
 
     class Meta:
         unique_together = ( ('nombre',), )
         verbose_name = ('operador')
         verbose_name_plural = ('operadores')
-        ordering = ('nombre',)
 
 
 class TipoDocProveedor(models.Model):
@@ -346,7 +356,6 @@ class TipoDocProveedor(models.Model):
         unique_together = ( ('nombre',), )
         verbose_name = ('tipo de documento proveedor')
         verbose_name_plural = ('tipos de documento proveedor')
-        ordering = ('nombre',)
 
 
 class ModalidadPago(models.Model):
@@ -391,16 +400,17 @@ class ModalidadPago(models.Model):
         return ('%s' % (self.id,))
 
     class Meta:
+        unique_together = ( ('nombre',), )
         verbose_name = ('modalidad de pago')
         verbose_name_plural = ('modalidades de pago')
 
 
-class TipoServicio(models.Model):
+class CategoriaServicio(models.Model):
     id = models.CharField (
         primary_key=True,
         max_length=3,
         verbose_name='Siglas',
-        help_text='Siglas del tipo de servicio',
+        help_text='Siglas de la categoría de servicio',
         validators=[
             validators.RegexValidator(
                 '^[a-zA-Z0-9]{3}$',
@@ -412,7 +422,7 @@ class TipoServicio(models.Model):
     nombre = models.CharField (
         max_length=50,
         verbose_name='Nombre',
-        help_text='Nombre del tipo de servicio',
+        help_text='Nombre de la categoría de servicio',
         validators=[
             validators.RegexValidator(
                 '^[a-zA-Z0-9áéíóúñÁÉÍÓÚÑ., \-]+$',
@@ -426,19 +436,20 @@ class TipoServicio(models.Model):
     _modificado = models.DateTimeField(auto_now=True,)
 
     def clean(self, *args, **kwargs):
-        super(TipoServicio, self).clean(*args, **kwargs)
+        super(CategoriaServicio, self).clean(*args, **kwargs)
 
     def save(self, *args, **kwargs):
         self.id = ' '.join(self.id.upper().split())
         self.nombre = ' '.join(self.nombre.upper().split())
-        super(TipoServicio, self).save(*args, **kwargs)
+        super(CategoriaServicio, self).save(*args, **kwargs)
 
     def __str__(self):
-        return ('%s' % (self.id,))
+        return ('%s (%s)' % (self.nombre, self.id))
 
     class Meta:
-        verbose_name = ('tipo de servicio')
-        verbose_name_plural = ('tipos de servicio')
+        unique_together = ( ('nombre',), )
+        verbose_name = ('categoría de servicio')
+        verbose_name_plural = ('categorías de servicio')
 
 
 class Proveedor(models.Model):
@@ -449,7 +460,7 @@ class Proveedor(models.Model):
         validators=[
             validators.RegexValidator(
                 #'^[0-9]{8,11}$',
-                '^[0-9]{11}$',
+                '^[1-2]{1}[0-9]{10}$', #Solo para RUC
                 message='Ingrese un número de documento válido.'
             ),
         ]
@@ -473,14 +484,14 @@ class Proveedor(models.Model):
         ]
     )
 
-    direccion = models.CharField(
+    domicilio = models.CharField(
         max_length=170,
-        verbose_name='Dirección',
-        help_text='Dirección de la persona o empresa',
+        verbose_name='Domicilio',
+        help_text='Domicilio de la persona o empresa',
         validators=[
             validators.RegexValidator(
                 '^[a-zA-Z0-9áéíóúñÁÉÍÓÚÑ., \-]+$',
-                message='Ingrese una dirección válida.'
+                message='Ingrese un domicilio válido.'
             ),
         ]
     )
@@ -507,7 +518,7 @@ class Proveedor(models.Model):
 
     def save(self, *args, **kwargs):
         self.razon_social = ' '.join(self.razon_social.upper().split())
-        self.direccion = ' '.join(self.direccion.upper().split())
+        self.domicilio = ' '.join(self.domicilio.upper().split())
         self._verificacion_obj = 'N'
         super(Proveedor, self).save(*args, **kwargs)
 
@@ -582,8 +593,8 @@ class MarcaComercial(models.Model):
         on_delete=models.PROTECT,
     )
 
-    tipo_servicio = models.ForeignKey (
-        TipoServicio,
+    categoria_servicio = models.ForeignKey (
+        CategoriaServicio,
         on_delete=models.PROTECT,
     )
 
@@ -618,7 +629,7 @@ class MarcaComercial(models.Model):
         validators=[
             validators.RegexValidator(
                 '^[0-9]{6,}$',
-                message='Ingrese un número de teléfono válido.'
+                message='Ingrese un número de teléfono fijo válido.'
             ),
         ]
     )
@@ -631,7 +642,7 @@ class MarcaComercial(models.Model):
         validators=[
             validators.RegexValidator(
                 '^[0-9]{9,}$',
-                message='Ingrese un número de teléfono válido.'
+                message='Ingrese un número de teléfono móvil válido.'
             ),
         ]
     )
