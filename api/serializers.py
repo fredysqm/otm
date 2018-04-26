@@ -56,5 +56,5 @@ class ProveedorSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Proveedor
-        fields = ('id', 'tipo_documento+* ', 'razon_social', 'direccion', '_creado', '_modificado')
+        fields = ('id', 'tipo_documento', 'razon_social', 'direccion', '_creado', '_modificado')
         #depth = 2

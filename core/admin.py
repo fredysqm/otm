@@ -155,3 +155,25 @@ class MarcaComercialAdmin(VersionAdmin):
     def _activo(self, obj):
         return obj._estado_obj == 'A'
     _activo.boolean = True
+
+@admin.register(TipoCuentaBanco)
+class TipoCuentaBancoAdmin(VersionAdmin):
+    list_display = ('id', 'nombre',  '_activo', '_creado','_modificado',)
+    search_fields = ('id', 'nombre',)
+    list_filter = ( '_estado_obj', '_creado', '_modificado' )
+    ordering = ['id']
+    actions = (generic_activar_estado_obj_action, generic_suspender_estado_obj_action,)
+    def _activo(self, obj):
+        return obj._estado_obj == 'A'
+    _activo.boolean = True
+
+@admin.register(MarcaComercialCuenta)
+class MarcaComercialCuentaAdmin(VersionAdmin):
+    list_display = ('id', 'titular', 'cta', '_activo', '_creado','_modificado',)
+    search_fields = ('id', 'nombre',)
+    list_filter = ( '_estado_obj', '_creado', '_modificado' )
+    ordering = ['id']
+    actions = (generic_activar_estado_obj_action, generic_suspender_estado_obj_action,)
+    def _activo(self, obj):
+        return obj._estado_obj == 'A'
+    _activo.boolean = True
