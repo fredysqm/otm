@@ -96,22 +96,6 @@ class TipoDocProveedorAdmin(VersionAdmin):
         return obj._estado_obj == 'A'
     _activo.boolean = True
 
-@admin.register(Proveedor)
-class ProveedorAdmin(VersionAdmin):
-    list_display = ('tipo_documento', 'id', 'razon_social', '_verificado', '_activo', '_creado','_modificado',)
-    list_display_links = ('id',)
-    #exclude = ('_fts',)
-    search_fields = ('razon_social',)
-    list_filter = ( '_verificacion_obj',  '_estado_obj', '_creado', '_modificado' )
-    ordering = ['id']
-    actions = (generic_activar_estado_obj_action, generic_suspender_estado_obj_action, generic_verificar_obj_action)
-    def _activo(self, obj):
-        return obj._estado_obj == 'A'
-    _activo.boolean = True
-    def _verificado(self, obj):
-        return obj._verificacion_obj == 'S'
-    _verificado.boolean = True
-
 @admin.register(ModalidadPago)
 class ModalidadPagoAdmin(VersionAdmin):
     list_display = ('id', 'nombre', '_activo', '_creado','_modificado',)
@@ -129,10 +113,26 @@ class CategoriaServicioAdmin(VersionAdmin):
     search_fields = ('id', 'nombre',)
     list_filter = ( '_estado_obj', '_creado', '_modificado' )
     ordering = ['id']
-    actions = (generic_activar_estado_obj_action, generic_suspender_estado_obj_action,)
+    actions = (generic_activar_estado_obj_action, generic_suspender_estado_obj_action,) 
     def _activo(self, obj):
         return obj._estado_obj == 'A'
     _activo.boolean = True
+
+@admin.register(Proveedor)
+class ProveedorAdmin(VersionAdmin):
+    list_display = ('tipo_documento', 'id', 'razon_social', '_verificado', '_activo', '_creado','_modificado',)
+    list_display_links = ('id',)
+    #exclude = ('_fts',)
+    search_fields = ('razon_social',)
+    list_filter = ( '_verificacion_obj',  '_estado_obj', '_creado', '_modificado' )
+    ordering = ['id']
+    actions = (generic_activar_estado_obj_action, generic_suspender_estado_obj_action, generic_verificar_obj_action)
+    def _activo(self, obj):
+        return obj._estado_obj == 'A'
+    _activo.boolean = True
+    def _verificado(self, obj):
+        return obj._verificacion_obj == 'S'
+    _verificado.boolean = True
 
 @admin.register(Localidad)
 class LocalidadAdmin(VersionAdmin):

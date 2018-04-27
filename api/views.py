@@ -103,3 +103,35 @@ class ProveedorViewSet(viewsets.ModelViewSet):
     permission_classes = (DefaultPermissions,)
     filter_backends = (filters.SearchFilter, filters.OrderingFilter,)
     search_fields = ('id', 'nombre',)
+
+class LocalidadViewSet(viewsets.ModelViewSet):
+    serializer_class = LocalidadSerializer
+    queryset = Localidad.objects.filter(_estado_obj='A')
+    pagination_class = DefaultPagination
+    permission_classes = (DefaultPermissions,)
+    filter_backends = (filters.SearchFilter, filters.OrderingFilter,)
+    search_fields = ('id', 'nombre',)
+
+class MarcaComercialViewSet(viewsets.ModelViewSet):
+    serializer_class = MarcaComercialSerializer
+    queryset = MarcaComercial.objects.filter(_estado_obj='A')
+    pagination_class = DefaultPagination
+    permission_classes = (DefaultPermissions,)
+    filter_backends = (filters.SearchFilter, filters.OrderingFilter,)
+    search_fields = ('id', 'nombre',)
+
+class TipoCuentaBancoViewSet(viewsets.ModelViewSet):
+    serializer_class = TipoCuentaBancoSerializer
+    queryset = TipoCuentaBanco.objects.filter(_estado_obj='A')
+    pagination_class = DefaultPagination
+    permission_classes = (DefaultPermissions,)
+    filter_backends = (filters.SearchFilter, filters.OrderingFilter,)
+    search_fields = ('id', 'nombre',)
+
+class MarcaComercialCuentaViewSet(viewsets.ModelViewSet):
+    serializer_class = MarcaComercialCuentaSerializer
+    queryset = MarcaComercialCuenta.objects.filter(_estado_obj='A')
+    pagination_class = DefaultPagination
+    permission_classes = (DefaultPermissions,)
+    filter_backends = (filters.SearchFilter, filters.OrderingFilter,)
+    search_fields = ('id', 'nombre',)

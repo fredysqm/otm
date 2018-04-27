@@ -397,7 +397,7 @@ class ModalidadPago(models.Model):
         super(ModalidadPago, self).save(*args, **kwargs)
 
     def __str__(self):
-        return ('%s' % (self.id,))
+        return ('%s (%s)' % (self.nombre, self.id,))
 
     class Meta:
         unique_together = ( ('nombre',), )
@@ -762,7 +762,7 @@ class MarcaComercialCuenta(models.Model):
 
     titular = models.CharField (
         max_length=128,
-        verbose_name='Razón social',
+        verbose_name='Titular',
         help_text='Nombre del titular de la cuenta',
         validators=[
             validators.RegexValidator(
@@ -777,7 +777,7 @@ class MarcaComercialCuenta(models.Model):
         verbose_name='Número de cuenta',
         validators=[
             validators.RegexValidator(
-                '^[0-9]$',
+                '^[0-9]+$',
                 message='Ingrese un número de cuenta válido.'
             ),
         ]
@@ -789,7 +789,7 @@ class MarcaComercialCuenta(models.Model):
         verbose_name='Número de cci',
         validators=[
             validators.RegexValidator(
-                '^[0-9]$',
+                '^[0-9]+$',
                 message='Ingrese un número de cci válido.'
             ),
         ]

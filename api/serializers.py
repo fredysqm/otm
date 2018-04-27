@@ -56,5 +56,28 @@ class ProveedorSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Proveedor
-        fields = ('id', 'tipo_documento', 'razon_social', 'direccion', '_creado', '_modificado')
+        fields = ('id', 'tipo_documento', 'razon_social', 'domicilio', '_creado', '_modificado')
         #depth = 2
+
+class LocalidadSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Localidad
+        fields = ('id', 'nombre', 'ciudad', 'altitud', '_creado', '_modificado')
+        #depth = 2
+
+class MarcaComercialSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = MarcaComercial
+        fields = ('id', 'nombre', 'proveedor', 'categoria_servicio', 'localidad', 'modalidad_pago', 'direccion', 'telefono_fijo', 'telefono_movil',
+                    'email', 'sitio_web', 'observaciones', '_creado', '_modificado')
+        #depth = 2
+
+class TipoCuentaBancoSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = TipoCuentaBanco
+        fields = ('id', 'nombre', '_creado', '_modificado')
+
+class MarcaComercialCuentaSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = MarcaComercialCuenta
+        fields = ('id', 'marca_comercial', 'banco', 'moneda', 'tipo_cuenta', 'titular', 'cta', 'cci', '_creado', '_modificado')
