@@ -10,7 +10,7 @@ urlpatterns = [
     url(r'^moneda/$', app_mantenimiento_moneda.as_view(), name='app_mantenimiento_moneda'),
     url(r'^banco/$', app_mantenimiento_banco.as_view(), name='app_mantenimiento_banco'),
     url(r'^operador/$', app_mantenimiento_operador.as_view(), name='app_mantenimiento_operador'),
-    #url(r'^proveedor/$', app_mantenimiento_proveedores.as_view(), name='app_mantenimiento_proveedores'),
+    url(r'^proveedor/$', app_mantenimiento_proveedor.as_view(), name='app_mantenimiento_proveedor'),
 
     #url(r'^error404/$', error404.as_view()),
     #url(r'^error500/$', error500.as_view()),

@@ -24,3 +24,6 @@ class app_mantenimiento_banco(LoginRequiredMixin, TemplateView):
 
 class app_mantenimiento_operador(LoginRequiredMixin, TemplateView):
     template_name = 'app/mantenimiento/operador.html'
+
+class app_mantenimiento_proveedor(LoginRequiredMixin, TemplateView):
+    template_name = 'app/mantenimiento/proveedor.html'
