@@ -6,30 +6,19 @@
     {% include 'menu.html' with active_item_menu='guest' %}
 {% endblock %}
 
-{% block css %}
-    <style type="text/css">
-        .asteriskField {
-            display: none;
-        }
-    </style>
-{% endblock %}
-
 {% block content %}
-<div style="padding-top: 40px;"></div>
-<div class="login-panel panel panel-default padding-auth-form">
-    <div class="panel-heading">
-        <h3 class="panel-title">
-            <span class="glyphicon glyphicon-lock"></span> ¡Bienvenido!
-        </h3>
-    </div>
-    <div class="panel-body">
-        <form method="post">{% csrf_token %}
-            <fieldset>
-                {{ form|crispy }}
-            </fieldset>
-            <button type="submit" class="btn btn-lg btn-success btn-block"><span class="glyphicon glyphicon-log-in"></span> Iniciar sesión</button>
-        </form>
-    </div>
+<div style="padding-top: 2rem;"></div>
+<div class="card border-dark py-0 mx-auto" style="max-width: 25rem;">
+        <div class="card-body">
+            <h5><i class="fas fa-lock"></i> ¡Bienvenido!</h5>
+            <hr />
+            <form method="post">{% csrf_token %}
+                <fieldset>
+                    {{ form|crispy }}
+                </fieldset>
+                <button type="submit" class="btn btn-lg btn-success btn-block"><i class="fas fa-sign-in-alt"></i> Iniciar sesión</button>
+            </form>
+      </div>
 </div>
 {% endblock %}
 

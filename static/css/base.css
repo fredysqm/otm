@@ -1,16 +1,11 @@
-/**/
-.padding-auth-form {
-    margin: 0 auto;
-    max-width: 370px;
+#main-container {
+    margin-top: 3.5rem;
 }
 
-.sub_menu {
-    margin-bottom: 10px;
+.asteriskField {
+    display: none;
 }
 
-.nopadding {
-    padding: 0 !important;
-    margin: 0 !important;
- }
-
-/**/
+.col-form-label {
+    font-weight: 500;
+}

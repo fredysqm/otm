@@ -1,21 +1,22 @@
 {% if user.is_authenticated %}
-    <li class="{% if active_item_menu == 'main' %} active{% endif %}">
-        <a href="{% url 'app_main' %}"><span class="fa-stack fa-lg"><i class="glyphicon glyphicon-home fa-stack-2x "></i></span><br/>Inicio</a>
-    </li>
-
-    <li class="{% if active_item_menu == 'mantenimiento' %} active{% endif %}">
-        <a href="{% url 'app_mantenimiento_pais' %}"><span class="fa-stack fa-lg"><i class="fa fa-database fa-stack-2x "></i></span><br/>Configuración</a>
-    </li>
-
-    <li class="{% if active_item_menu == 'user' %} active{% endif %}">
-        <a href="{% url 'xauth_password_change' %}"><span class="fa-stack fa-lg"><i class="fa fa-user fa-stack-2x "></i></span><br/>{{ user.first_name }}</a>
-    </li>
-
-    <li>
-        <a href="{% url 'xauth_logout' %}"><span class="fa-stack fa-lg"><i class="glyphicon glyphicon-log-out fa-stack-2x "></i></span><br/>Cerrar sesión</a>
-    </li>
+    <ul class="navbar-nav mr-auto">
+        <li class="nav-item {% if active_item_menu == 'main' %} active{% endif %}">
+            <a class="nav-link" href="{% url 'app_main' %}"><i class="fas fa-home"></i> Inicio</a>
+        </li>
+        <li class="nav-item {% if active_item_menu == 'mantenimiento' %} active{% endif %}">
+            <a class="nav-link" href="{% url 'app_mantenimiento_pais' %}"><i class="fas fa-database"></i> Configuración</a>
+        </li>
+    </ul>
+    <ul class="navbar-nav ml-auto">
+        <li class="nav-item {% if active_item_menu == 'user' %} active{% endif %}">
+            <a class="nav-link" href="{% url 'xauth_password_change' %}"><i class="fas fa-user"></i> {{ user.first_name }}</a>
+        </li>
+    </ul>
+    <a href="{% url 'xauth_logout' %}" class="btn btn-danger btn-sm" role="button" aria-disabled="true"><i class="fas fa-sign-out-alt"></i> Cerrar sesión</a>
 {% else %}
-    <li class="{% if active_item_menu == 'guest' %} active{% endif %}">
-        <a href="#"><span class="fa-stack fa-lg"><i class="fa fa-user-secret fa-stack-2x "></i></span><br/>Invitado</a>
-    </li>
+    <ul class="navbar-nav ml-auto">
+        <li class="nav-item {% if active_item_menu == 'guest' %} active{% endif %}">
+            <a class="nav-link" href="#"><i class="fas fa-user-secret"></i> Invitado</a>
+        </li>
+    </ul>
 {% endif %}

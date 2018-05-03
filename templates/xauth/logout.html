@@ -7,11 +7,11 @@
 {% endblock %}
 
 {% block content %}
-<div class="well bs-component">
-    <legend><span class="glyphicon glyphicon-lock"></span> ¡Sesión cerrada!</legend>
+<div class="jumbotron py-3">
+    <legend><i class="fas fa-lock"></i> ¡Sesión cerrada!</legend>
     <p>
         Ha cerrado correctamente su sesión.
-        <h5>Volver a <a href="{% url 'app_main' %}"><span class="glyphicon glyphicon-log-in"></span> Iniciar sesión</a></h5>
+        <h6>Volver a <a href="{% url 'app_main' %}"><i class="fas fa-sign-in-alt"></i> Iniciar sesión</a></h6>
     </p>
 </div>
 {% endblock %}
