@@ -1,49 +1,154 @@
 {% extends 'base.html' %}{% load staticfiles %}
 
-{% block title %}Paises{% endblock %}
+{% block title %}Proveedores{% endblock %}
 
 {% block menu %}
     {% include 'menu.html' with active_item_menu='proveedor' %}
 {% endblock %}
 
 {% block content %}
-<table id="grid-data" class="table table-striped table-hover">
-    <thead>
-        <tr>
-            <th data-column-id="id" data-width="60px">ID</th>
-            <th data-column-id="nombre">Nombre</th>
-            <th data-column-id="proveedor">RUC Proveedor</th>
-            <th data-column-id="categoria_servicio">Categoría</th>
-            <th data-column-id="localidad">Localidad</th>
-            <th data-column-id="modalidad_pago">Modalidad</th>
-            <th data-column-id="direccion">Direccion</th>
-            <th data-column-id="telefono_fijo">Fijo</th>
-            <th data-column-id="telefono_movil">Movil</th>
-            <th data-column-id="email">Email</th>
-            <th data-column-id="sitio_web">SitioWeb</th>
-            <th data-column-id="_creado" data-converter="datetime">Creado</th>
-            <th data-column-id="_modificado" data-converter="datetime">Modificado</th>
-        </tr>
-    </thead>
-</table> 
+<table class="table table-striped table-hover table-sm">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Nombre</th>
+                <th>Ruc</th>
+                <th>Categoria</th>
+                <th>Localidad</th>
+                <th>Modalidad</th>
+                <th>Direccion</th>
+                <th>Fijo</th>
+                <th>Movil</th>
+                <th>Email</th>
+                <th>Web</th>
+                <th>Creado</th>
+                <th>Modificado</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>1</td>
+                <td>prueb</td>
+                <td>fdsf</td>
+                <td>fdsfds</td>
+                <td>1</td>
+                <td>prueb</td>
+                <td>fdsf</td>
+                <td>fdsfds</td>
+                <td>fdsfds</td>
+                <td>1</td>
+                <td>prueb</td>
+                <td>fdsf</td>
+                <td>fdsfds</td>
+            </tr>
+            <tr>
+                <td>1</td>
+                <td>prueb</td>
+                <td>fdsf</td>
+                <td>fdsfds</td>
+                <td>1</td>
+                <td>prueb</td>
+                <td>fdsf</td>
+                <td>fdsfds</td>
+                <td>fdsfds</td>
+                <td>1</td>
+                <td>prueb</td>
+                <td>fdsf</td>
+                <td>fdsfds</td>
+            </tr>
+            <tr>
+                    <td>1</td>
+                    <td>prueb</td>
+                    <td>fdsf</td>
+                    <td>fdsfds</td>
+                    <td>1</td>
+                    <td>prueb</td>
+                    <td>fdsf</td>
+                    <td>fdsfds</td>
+                    <td>fdsfds</td>
+                    <td>1</td>
+                    <td>prueb</td>
+                    <td>fdsf</td>
+                    <td>fdsfds</td>
+                </tr>
+                <tr>
+                    <td>1</td>
+                    <td>prueb</td>
+                    <td>fdsf</td>
+                    <td>fdsfds</td>
+                    <td>1</td>
+                    <td>prueb</td>
+                    <td>fdsf</td>
+                    <td>fdsfds</td>
+                    <td>fdsfds</td>
+                    <td>1</td>
+                    <td>prueb</td>
+                    <td>fdsf</td>
+                    <td>fdsfds</td>
+                </tr>
+                <tr>
+                        <td>1</td>
+                        <td>prueb</td>
+                        <td>fdsf</td>
+                        <td>fdsfds</td>
+                        <td>1</td>
+                        <td>prueb</td>
+                        <td>fdsf</td>
+                        <td>fdsfds</td>
+                        <td>fdsfds</td>
+                        <td>1</td>
+                        <td>prueb</td>
+                        <td>fdsf</td>
+                        <td>fdsfds</td>
+                    </tr>
+                    <tr>
+                        <td>1</td>
+                        <td>prueb</td>
+                        <td>fdsf</td>
+                        <td>fdsfds</td>
+                        <td>1</td>
+                        <td>prueb</td>
+                        <td>fdsf</td>
+                        <td>fdsfds</td>
+                        <td>fdsfds</td>
+                        <td>1</td>
+                        <td>prueb</td>
+                        <td>fdsf</td>
+                        <td>fdsfds</td>
+                    </tr>
+                    <tr>
+                            <td>1</td>
+                            <td>prueb</td>
+                            <td>fdsf</td>
+                            <td>fdsfds</td>
+                            <td>1</td>
+                            <td>prueb</td>
+                            <td>fdsf</td>
+                            <td>fdsfds</td>
+                            <td>fdsfds</td>
+                            <td>1</td>
+                            <td>prueb</td>
+                            <td>fdsf</td>
+                            <td>fdsfds</td>
+                        </tr>
+                        <tr>
+                            <td>1</td>
+                            <td>prueb</td>
+                            <td>fdsf</td>
+                            <td>fdsfds</td>
+                            <td>1</td>
+                            <td>prueb</td>
+                            <td>fdsf</td>
+                            <td>fdsfds</td>
+                            <td>fdsfds</td>
+                            <td>1</td>
+                            <td>prueb</td>
+                            <td>fdsf</td>
+                            <td>fdsfds</td>
+                        </tr>
+        </tbody>
+        </table>
 {% endblock %}
 
-
 {% block js %}
-<script>
-moment.locale('es');
-
-$("#grid-data").bootgrid({
-    url: "/api/v1/marca_comercial/",
-    searchSettings: {
-        fulltext: false,
-    },
-    converters: {
-        datetime: {
-            from: function (value) { return moment(value); },
-            to: function (value) { return moment(value).format("DD/MMM/YYYY hh:mm A"); }
-        }
-    }
-});
-</script>
 {% endblock %}

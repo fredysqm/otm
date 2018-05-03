@@ -1,4 +1,4 @@
-Django==2.0.4
+Django==2.0.5
 django-admin-view-permission==1.6
 django-appconf==1.0.2
 django-compressor==2.2
