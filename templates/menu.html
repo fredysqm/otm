@@ -1,10 +1,7 @@
 {% if user.is_authenticated %}
     <ul class="navbar-nav mr-auto">
-        <li class="nav-item {% if active_item_menu == 'main' %} active{% endif %}">
-            <a class="nav-link" href="{% url 'app_main' %}"><i class="fas fa-home"></i> Inicio</a>
-        </li>
-        <li class="nav-item {% if active_item_menu == 'mantenimiento' %} active{% endif %}">
-            <a class="nav-link" href="{% url 'app_mantenimiento_pais' %}"><i class="fas fa-database"></i> Configuración</a>
+        <li class="nav-item {% if active_item_menu == 'proveedor' %} active{% endif %}">
+            <a class="nav-link" href="{% url 'app_proveedor' %}"><i class="fas fa-database"></i> Proveedores</a>
         </li>
     </ul>
     <div class="btn-group">
@@ -25,7 +22,7 @@
     </div>
 {% else %}
     <ul class="navbar-nav ml-auto">
-        <li class="nav-item {% if active_item_menu == 'guest' %} active{% endif %}">
+        <li class="nav-item">
             <a class="nav-link" href="#"><i class="fas fa-user-secret"></i> Invitado</a>
         </li>
     </ul>

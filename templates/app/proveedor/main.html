@@ -3,11 +3,7 @@
 {% block title %}Paises{% endblock %}
 
 {% block menu %}
-    {% include 'menu.html' with active_item_menu='mantenimiento' %}
-{% endblock %}
-
-{% block sub_menu %}
-    {% include 'app/mantenimiento/sub_menu.html' with active_item_sub_menu='operador' %}
+    {% include 'menu.html' with active_item_menu='proveedor' %}
 {% endblock %}
 
 {% block content %}
@@ -16,6 +12,15 @@
         <tr>
             <th data-column-id="id" data-width="60px">ID</th>
             <th data-column-id="nombre">Nombre</th>
+            <th data-column-id="proveedor">RUC Proveedor</th>
+            <th data-column-id="categoria_servicio">Categoría</th>
+            <th data-column-id="localidad">Localidad</th>
+            <th data-column-id="modalidad_pago">Modalidad</th>
+            <th data-column-id="direccion">Direccion</th>
+            <th data-column-id="telefono_fijo">Fijo</th>
+            <th data-column-id="telefono_movil">Movil</th>
+            <th data-column-id="email">Email</th>
+            <th data-column-id="sitio_web">SitioWeb</th>
             <th data-column-id="_creado" data-converter="datetime">Creado</th>
             <th data-column-id="_modificado" data-converter="datetime">Modificado</th>
         </tr>
@@ -29,7 +34,7 @@
 moment.locale('es');
 
 $("#grid-data").bootgrid({
-    url: "/api/v1/operador/",
+    url: "/api/v1/marca_comercial/",
     searchSettings: {
         fulltext: false,
     },
