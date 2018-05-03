@@ -7,12 +7,22 @@
             <a class="nav-link" href="{% url 'app_mantenimiento_pais' %}"><i class="fas fa-database"></i> Configuración</a>
         </li>
     </ul>
-    <ul class="navbar-nav ml-auto">
-        <li class="nav-item {% if active_item_menu == 'user' %} active{% endif %}">
-            <a class="nav-link" href="{% url 'xauth_password_change' %}"><i class="fas fa-user"></i> {{ user.first_name }}</a>
-        </li>
-    </ul>
-    <a href="{% url 'xauth_logout' %}" class="btn btn-danger btn-sm" role="button" aria-disabled="true"><i class="fas fa-sign-out-alt"></i> Cerrar sesión</a>
+    <div class="btn-group">
+        <button type="button" class="btn btn-info dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <i class="fas fa-user"></i> {{ user.first_name }}
+        </button>
+        <div class="dropdown-menu dropdown-menu-right">
+            <a href="{% url 'xauth_password_change' %}" class="dropdown-item" type="button"><i class="fas fa-exchange-alt"></i> Cambiar contraseña</a>
+            {% if user.is_staff %}
+                <a href="{% url 'admin:index' %}" class="dropdown-item" type="button"><i class="fas fa-user-cog"></i> Sitio administrativo</a>
+            {% endif %}
+            {% if user.is_superuser %}
+                <a href="/api/v1/" class="dropdown-item" type="button"><i class="fas fa-server "></i> API Rest v1</a>
+            {% endif %}
+            <div class="dropdown-divider"></div>
+            <a href="{% url 'xauth_logout' %}" class="dropdown-item" type="button"><i class="fas fa-sign-out-alt"></i> Cerrar sesión</a>
+        </div>
+    </div>
 {% else %}
     <ul class="navbar-nav ml-auto">
         <li class="nav-item {% if active_item_menu == 'guest' %} active{% endif %}">
