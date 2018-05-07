@@ -3,12 +3,12 @@ from django.core import validators
 from django.core.exceptions import ObjectDoesNotExist
 
 
-_ESTADO_OBJ = (
+ESTADO_OBJ = (
     ('A', 'Activo'),
     ('S', 'Suspendido'),
 )
 
-_VERIFICACION_OBJ = (
+VERIFICACION_OBJ = (
     ('S', 'Si'),
     ('N', 'No'),
 )
@@ -40,9 +40,9 @@ class Pais(models.Model):
         ]
     )
 
-    _estado_obj = models.CharField(max_length=1, choices=_ESTADO_OBJ, default='A')
-    _creado = models.DateTimeField(auto_now_add=True,)
-    _modificado = models.DateTimeField(auto_now=True,)
+    estado_obj = models.CharField(max_length=1, choices=ESTADO_OBJ, default='A')
+    creado = models.DateTimeField(auto_now_add=True,)
+    modificado = models.DateTimeField(auto_now=True,)
 
     def clean(self, *args, **kwargs):
         super(Pais, self).clean(*args, **kwargs)
@@ -92,9 +92,9 @@ class Ciudad(models.Model):
         ]
     )
 
-    _estado_obj = models.CharField(max_length=1, choices=_ESTADO_OBJ, default='A')
-    _creado = models.DateTimeField(auto_now_add=True,)
-    _modificado = models.DateTimeField(auto_now=True,)
+    estado_obj = models.CharField(max_length=1, choices=ESTADO_OBJ, default='A')
+    creado = models.DateTimeField(auto_now_add=True,)
+    modificado = models.DateTimeField(auto_now=True,)
 
     def clean(self, *args, **kwargs):
         super(Ciudad, self).clean(*args, **kwargs)
@@ -139,9 +139,9 @@ class Idioma(models.Model):
         ]
     )
 
-    _estado_obj = models.CharField(max_length=1, choices=_ESTADO_OBJ, default='A')
-    _creado = models.DateTimeField(auto_now_add=True,)
-    _modificado = models.DateTimeField(auto_now=True,)
+    estado_obj = models.CharField(max_length=1, choices=ESTADO_OBJ, default='A')
+    creado = models.DateTimeField(auto_now_add=True,)
+    modificado = models.DateTimeField(auto_now=True,)
 
     def clean(self, *args, **kwargs):
         super(Idioma, self).clean(*args, **kwargs)
@@ -192,9 +192,9 @@ class Moneda(models.Model):
         help_text='Símbolo de la moneda',
     )
 
-    _estado_obj = models.CharField(max_length=1, choices=_ESTADO_OBJ, default='A')
-    _creado = models.DateTimeField(auto_now_add=True,)
-    _modificado = models.DateTimeField(auto_now=True,)
+    estado_obj = models.CharField(max_length=1, choices=ESTADO_OBJ, default='A')
+    creado = models.DateTimeField(auto_now_add=True,)
+    modificado = models.DateTimeField(auto_now=True,)
 
     def clean(self, *args, **kwargs):
         super(Moneda, self).clean(*args, **kwargs)
@@ -240,9 +240,9 @@ class Banco(models.Model):
         ]
     )
 
-    _estado_obj = models.CharField(max_length=1, choices=_ESTADO_OBJ, default='A')
-    _creado = models.DateTimeField(auto_now_add=True,)
-    _modificado = models.DateTimeField(auto_now=True,)
+    estado_obj = models.CharField(max_length=1, choices=ESTADO_OBJ, default='A')
+    creado = models.DateTimeField(auto_now_add=True,)
+    modificado = models.DateTimeField(auto_now=True,)
 
     def clean(self, *args, **kwargs):
         super(Banco, self).clean(*args, **kwargs)
@@ -290,9 +290,9 @@ class Operador(models.Model):
         ]
     )
 
-    _estado_obj = models.CharField(max_length=1, choices=_ESTADO_OBJ, default='A')
-    _creado = models.DateTimeField(auto_now_add=True,)
-    _modificado = models.DateTimeField(auto_now=True,)
+    estado_obj = models.CharField(max_length=1, choices=ESTADO_OBJ, default='A')
+    creado = models.DateTimeField(auto_now_add=True,)
+    modificado = models.DateTimeField(auto_now=True,)
 
     def clean(self, *args, **kwargs):
         super(Operador, self).clean(*args, **kwargs)
@@ -337,9 +337,9 @@ class TipoDocProveedor(models.Model):
         ]
     )
 
-    _estado_obj = models.CharField(max_length=1, choices=_ESTADO_OBJ, default='A')
-    _creado = models.DateTimeField(auto_now_add=True,)
-    _modificado = models.DateTimeField(auto_now=True,)
+    estado_obj = models.CharField(max_length=1, choices=ESTADO_OBJ, default='A')
+    creado = models.DateTimeField(auto_now_add=True,)
+    modificado = models.DateTimeField(auto_now=True,)
 
     def clean(self, *args, **kwargs):
         super(TipoDocProveedor, self).clean(*args, **kwargs)
@@ -384,9 +384,9 @@ class ModalidadPago(models.Model):
         ]
     )
 
-    _estado_obj = models.CharField(max_length=1, choices=_ESTADO_OBJ, default='A')
-    _creado = models.DateTimeField(auto_now_add=True,)
-    _modificado = models.DateTimeField(auto_now=True,)
+    estado_obj = models.CharField(max_length=1, choices=ESTADO_OBJ, default='A')
+    creado = models.DateTimeField(auto_now_add=True,)
+    modificado = models.DateTimeField(auto_now=True,)
 
     def clean(self, *args, **kwargs):
         super(ModalidadPago, self).clean(*args, **kwargs)
@@ -431,9 +431,9 @@ class CategoriaServicio(models.Model):
         ]
     )
 
-    _estado_obj = models.CharField(max_length=1, choices=_ESTADO_OBJ, default='A')
-    _creado = models.DateTimeField(auto_now_add=True,)
-    _modificado = models.DateTimeField(auto_now=True,)
+    estado_obj = models.CharField(max_length=1, choices=ESTADO_OBJ, default='A')
+    creado = models.DateTimeField(auto_now_add=True,)
+    modificado = models.DateTimeField(auto_now=True,)
 
     def clean(self, *args, **kwargs):
         super(CategoriaServicio, self).clean(*args, **kwargs)
@@ -484,10 +484,10 @@ class Proveedor(models.Model):
         ]
     )
 
-    _verificacion_obj = models.CharField(max_length=1, choices=_VERIFICACION_OBJ, default='N')
-    _estado_obj = models.CharField(max_length=1, choices=_ESTADO_OBJ, default='A')
-    _creado = models.DateTimeField(auto_now_add=True,)
-    _modificado = models.DateTimeField(auto_now=True,)
+    verificacion_obj = models.CharField(max_length=1, choices=VERIFICACION_OBJ, default='N')
+    estado_obj = models.CharField(max_length=1, choices=ESTADO_OBJ, default='A')
+    creado = models.DateTimeField(auto_now_add=True,)
+    modificado = models.DateTimeField(auto_now=True,)
 
     def clean(self, *args, **kwargs):
         # try:
@@ -506,7 +506,7 @@ class Proveedor(models.Model):
 
     def save(self, *args, **kwargs):
         self.razon_social = ' '.join(self.razon_social.upper().split())
-        self._verificacion_obj = 'N'
+        self.verificacion_obj = 'N'
         super(Proveedor, self).save(*args, **kwargs)
 
     def __str__(self):
@@ -542,9 +542,9 @@ class Localidad(models.Model):
         help_text='Altitud de la localidad m.s.n.m.',
     )
 
-    _estado_obj = models.CharField(max_length=1, choices=_ESTADO_OBJ, default='A')
-    _creado = models.DateTimeField(auto_now_add=True,)
-    _modificado = models.DateTimeField(auto_now=True,)
+    estado_obj = models.CharField(max_length=1, choices=ESTADO_OBJ, default='A')
+    creado = models.DateTimeField(auto_now_add=True,)
+    modificado = models.DateTimeField(auto_now=True,)
 
     def clean(self, *args, **kwargs):
         super(Localidad, self).clean(*args, **kwargs)
@@ -652,10 +652,10 @@ class MarcaComercial(models.Model):
         verbose_name='Observaciones',
     )
 
-    _verificacion_obj = models.CharField(max_length=1, choices=_VERIFICACION_OBJ, default='N')
-    _estado_obj = models.CharField(max_length=1, choices=_ESTADO_OBJ, default='A')
-    _creado = models.DateTimeField(auto_now_add=True,)
-    _modificado = models.DateTimeField(auto_now=True,)
+    verificacion_obj = models.CharField(max_length=1, choices=VERIFICACION_OBJ, default='N')
+    estado_obj = models.CharField(max_length=1, choices=ESTADO_OBJ, default='A')
+    creado = models.DateTimeField(auto_now_add=True,)
+    modificado = models.DateTimeField(auto_now=True,)
 
     def clean(self, *args, **kwargs):
         super(MarcaComercial, self).clean(*args, **kwargs)
@@ -705,9 +705,9 @@ class TipoCuentaBanco(models.Model):
         ]
     )
 
-    _estado_obj = models.CharField(max_length=1, choices=_ESTADO_OBJ, default='A')
-    _creado = models.DateTimeField(auto_now_add=True,)
-    _modificado = models.DateTimeField(auto_now=True,)
+    estado_obj = models.CharField(max_length=1, choices=ESTADO_OBJ, default='A')
+    creado = models.DateTimeField(auto_now_add=True,)
+    modificado = models.DateTimeField(auto_now=True,)
 
     def clean(self, *args, **kwargs):
         super(TipoCuentaBanco, self).clean(*args, **kwargs)
@@ -782,10 +782,10 @@ class MarcaComercialCuenta(models.Model):
         ]
     )
 
-    _verificacion_obj = models.CharField(max_length=1, choices=_VERIFICACION_OBJ, default='N')
-    _estado_obj = models.CharField(max_length=1, choices=_ESTADO_OBJ, default='A')
-    _creado = models.DateTimeField(auto_now_add=True,)
-    _modificado = models.DateTimeField(auto_now=True,)
+    verificacion_obj = models.CharField(max_length=1, choices=VERIFICACION_OBJ, default='N')
+    estado_obj = models.CharField(max_length=1, choices=ESTADO_OBJ, default='A')
+    creado = models.DateTimeField(auto_now_add=True,)
+    modificado = models.DateTimeField(auto_now=True,)
 
     def clean(self, *args, **kwargs):
         super(MarcaComercialCuenta, self).clean(*args, **kwargs)

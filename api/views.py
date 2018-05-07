@@ -26,7 +26,7 @@ class DefaultPermissions(permissions.DjangoModelPermissions):
 
 class PaisViewSet(mixins.RetrieveModelMixin, mixins.ListModelMixin, viewsets.GenericViewSet):
     serializer_class = PaisSerializer
-    queryset = Pais.objects.filter(_estado_obj='A')
+    queryset = Pais.objects.filter(estado_obj='A')
     pagination_class = DefaultPagination
     permission_classes = (DefaultPermissions,)
     filter_backends = (filters.SearchFilter, filters.OrderingFilter,)
@@ -34,7 +34,7 @@ class PaisViewSet(mixins.RetrieveModelMixin, mixins.ListModelMixin, viewsets.Gen
 
 class CiudadViewSet(mixins.RetrieveModelMixin, mixins.ListModelMixin, viewsets.GenericViewSet):
     serializer_class = CiudadSerializer
-    queryset = Ciudad.objects.filter(_estado_obj='A')
+    queryset = Ciudad.objects.filter(estado_obj='A')
     pagination_class = DefaultPagination
     permission_classes = (DefaultPermissions,)
     filter_backends = (filters.SearchFilter, filters.OrderingFilter,)
@@ -42,7 +42,7 @@ class CiudadViewSet(mixins.RetrieveModelMixin, mixins.ListModelMixin, viewsets.G
 
 class IdiomaViewSet(mixins.RetrieveModelMixin, mixins.ListModelMixin, viewsets.GenericViewSet):
     serializer_class = IdiomaSerializer
-    queryset = Idioma.objects.filter(_estado_obj='A')
+    queryset = Idioma.objects.filter(estado_obj='A')
     pagination_class = DefaultPagination
     permission_classes = (DefaultPermissions,)
     filter_backends = (filters.SearchFilter, filters.OrderingFilter,)
@@ -50,7 +50,7 @@ class IdiomaViewSet(mixins.RetrieveModelMixin, mixins.ListModelMixin, viewsets.G
 
 class MonedaViewSet(mixins.RetrieveModelMixin, mixins.ListModelMixin, viewsets.GenericViewSet):
     serializer_class = MonedaSerializer
-    queryset = Moneda.objects.filter(_estado_obj='A')
+    queryset = Moneda.objects.filter(estado_obj='A')
     pagination_class = DefaultPagination
     permission_classes = (DefaultPermissions,)
     filter_backends = (filters.SearchFilter, filters.OrderingFilter,)
@@ -58,7 +58,7 @@ class MonedaViewSet(mixins.RetrieveModelMixin, mixins.ListModelMixin, viewsets.G
 
 class BancoViewSet(mixins.RetrieveModelMixin, mixins.ListModelMixin, viewsets.GenericViewSet):
     serializer_class = BancoSerializer
-    queryset = Banco.objects.filter(_estado_obj='A')
+    queryset = Banco.objects.filter(estado_obj='A')
     pagination_class = DefaultPagination
     permission_classes = (DefaultPermissions,)
     filter_backends = (filters.SearchFilter, filters.OrderingFilter,)
@@ -66,7 +66,7 @@ class BancoViewSet(mixins.RetrieveModelMixin, mixins.ListModelMixin, viewsets.Ge
 
 class OperadorViewSet(mixins.RetrieveModelMixin, mixins.ListModelMixin, viewsets.GenericViewSet):
     serializer_class = OperadorSerializer
-    queryset = Operador.objects.filter(_estado_obj='A')
+    queryset = Operador.objects.filter(estado_obj='A')
     pagination_class = DefaultPagination
     permission_classes = (DefaultPermissions,)
     filter_backends = (filters.SearchFilter, filters.OrderingFilter,)
@@ -74,7 +74,7 @@ class OperadorViewSet(mixins.RetrieveModelMixin, mixins.ListModelMixin, viewsets
 
 class TipoDocProveedorViewSet(mixins.RetrieveModelMixin, mixins.ListModelMixin, viewsets.GenericViewSet):
     serializer_class = TipoDocProveedorSerializer
-    queryset = TipoDocProveedor.objects.filter(_estado_obj='A')
+    queryset = TipoDocProveedor.objects.filter(estado_obj='A')
     pagination_class = DefaultPagination
     permission_classes = (DefaultPermissions,)
     filter_backends = (filters.SearchFilter, filters.OrderingFilter,)
@@ -82,7 +82,7 @@ class TipoDocProveedorViewSet(mixins.RetrieveModelMixin, mixins.ListModelMixin, 
 
 class ModalidadPagoViewSet(mixins.RetrieveModelMixin, mixins.ListModelMixin, viewsets.GenericViewSet):
     serializer_class = ModalidadPagoSerializer
-    queryset = ModalidadPago.objects.filter(_estado_obj='A')
+    queryset = ModalidadPago.objects.filter(estado_obj='A')
     pagination_class = DefaultPagination
     permission_classes = (DefaultPermissions,)
     filter_backends = (filters.SearchFilter, filters.OrderingFilter,)
@@ -90,7 +90,7 @@ class ModalidadPagoViewSet(mixins.RetrieveModelMixin, mixins.ListModelMixin, vie
 
 class CategoriaServicioViewSet(mixins.RetrieveModelMixin, mixins.ListModelMixin, viewsets.GenericViewSet):
     serializer_class = CategoriaServicioSerializer
-    queryset = CategoriaServicio.objects.filter(_estado_obj='A')
+    queryset = CategoriaServicio.objects.filter(estado_obj='A')
     pagination_class = DefaultPagination
     permission_classes = (DefaultPermissions,)
     filter_backends = (filters.SearchFilter, filters.OrderingFilter,)
@@ -98,7 +98,7 @@ class CategoriaServicioViewSet(mixins.RetrieveModelMixin, mixins.ListModelMixin,
 
 class ProveedorViewSet(viewsets.ModelViewSet):
     serializer_class = ProveedorSerializer
-    queryset = Proveedor.objects.filter(_estado_obj='A')
+    queryset = Proveedor.objects.filter(estado_obj='A')
     pagination_class = DefaultPagination
     permission_classes = (DefaultPermissions,)
     filter_backends = (filters.SearchFilter, filters.OrderingFilter,)
@@ -106,7 +106,7 @@ class ProveedorViewSet(viewsets.ModelViewSet):
 
 class LocalidadViewSet(viewsets.ModelViewSet):
     serializer_class = LocalidadSerializer
-    queryset = Localidad.objects.filter(_estado_obj='A')
+    queryset = Localidad.objects.filter(estado_obj='A')
     pagination_class = DefaultPagination
     permission_classes = (DefaultPermissions,)
     filter_backends = (filters.SearchFilter, filters.OrderingFilter,)
@@ -114,7 +114,7 @@ class LocalidadViewSet(viewsets.ModelViewSet):
 
 class MarcaComercialViewSet(viewsets.ModelViewSet):
     serializer_class = MarcaComercialSerializer
-    queryset = MarcaComercial.objects.filter(_estado_obj='A')
+    queryset = MarcaComercial.objects.filter(estado_obj='A')
     pagination_class = DefaultPagination
     permission_classes = (DefaultPermissions,)
     filter_backends = (filters.SearchFilter, filters.OrderingFilter,)
@@ -122,7 +122,7 @@ class MarcaComercialViewSet(viewsets.ModelViewSet):
 
 class TipoCuentaBancoViewSet(viewsets.ModelViewSet):
     serializer_class = TipoCuentaBancoSerializer
-    queryset = TipoCuentaBanco.objects.filter(_estado_obj='A')
+    queryset = TipoCuentaBanco.objects.filter(estado_obj='A')
     pagination_class = DefaultPagination
     permission_classes = (DefaultPermissions,)
     filter_backends = (filters.SearchFilter, filters.OrderingFilter,)
@@ -130,7 +130,7 @@ class TipoCuentaBancoViewSet(viewsets.ModelViewSet):
 
 class MarcaComercialCuentaViewSet(viewsets.ModelViewSet):
     serializer_class = MarcaComercialCuentaSerializer
-    queryset = MarcaComercialCuenta.objects.filter(_estado_obj='A')
+    queryset = MarcaComercialCuenta.objects.filter(estado_obj='A')
     pagination_class = DefaultPagination
     permission_classes = (DefaultPermissions,)
     filter_backends = (filters.SearchFilter, filters.OrderingFilter,)
