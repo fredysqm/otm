@@ -484,18 +484,6 @@ class Proveedor(models.Model):
         ]
     )
 
-    domicilio = models.CharField(
-        max_length=170,
-        verbose_name='Domicilio',
-        help_text='Domicilio de la persona o empresa',
-        validators=[
-            validators.RegexValidator(
-                '^[a-zA-Z0-9áéíóúñÁÉÍÓÚÑ., \-]+$',
-                message='Ingrese un domicilio válido.'
-            ),
-        ]
-    )
-
     _verificacion_obj = models.CharField(max_length=1, choices=_VERIFICACION_OBJ, default='N')
     _estado_obj = models.CharField(max_length=1, choices=_ESTADO_OBJ, default='A')
     _creado = models.DateTimeField(auto_now_add=True,)
@@ -518,7 +506,6 @@ class Proveedor(models.Model):
 
     def save(self, *args, **kwargs):
         self.razon_social = ' '.join(self.razon_social.upper().split())
-        self.domicilio = ' '.join(self.domicilio.upper().split())
         self._verificacion_obj = 'N'
         super(Proveedor, self).save(*args, **kwargs)
 
