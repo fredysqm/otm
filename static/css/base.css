@@ -9,3 +9,7 @@
 .col-form-label {
     font-weight: 500;
 }
+
+table tbody tr {
+    font-size: 0.8rem;
+}
