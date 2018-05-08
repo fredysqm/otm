@@ -1,9 +1,14 @@
-{% extends 'base.html' %}{% load staticfiles %}{% load crispy_forms_tags %}
+{% extends 'base.html' %}{% load staticfiles %}{% load crispy_forms_tags %}{% load django_bootstrap_breadcrumbs %}
 
 {% block title %}Inicio{% endblock %}
 
 {% block menu %}
     {% include 'menu.html' with active_item_menu='main' %}
+{% endblock %}
+
+{% block breadcrumbs %}
+    {% breadcrumb 'Inicio' 'app_main' %}
+    {% render_breadcrumbs "django_bootstrap_breadcrumbs/bootstrap4.html" %}
 {% endblock %}
 
 {% block content %}

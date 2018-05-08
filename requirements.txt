@@ -1,6 +1,7 @@
 Django==2.0.5
 django-admin-view-permission==1.6
 django-appconf==1.0.2
+django-bootstrap-breadcrumbs==0.9.1
 django-compressor==2.2
 django-crispy-forms==1.7.2
 django-debug-toolbar==1.9.1

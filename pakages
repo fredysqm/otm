@@ -6,4 +6,5 @@ django_compressor
 djangorestframework
 django-crispy-forms
 django-reversion
+django-bootstrap-breadcrumbs
 django-debug-toolbar
