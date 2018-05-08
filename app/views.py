@@ -1,4 +1,4 @@
-from django.views.generic import TemplateView, ListView
+from django.views.generic import TemplateView, ListView, UpdateView
 from django.contrib.auth.mixins import LoginRequiredMixin
 from core.models import MarcaComercial
 
@@ -10,4 +10,9 @@ class app_main(LoginRequiredMixin, TemplateView):
 #Mantenimiento
 class app_proveedor(LoginRequiredMixin, ListView):
     model = MarcaComercial
-    template_name = 'app/proveedor/main.html'
+    template_name = 'app/proveedor/view.html'
+
+class app_proveedor_update(LoginRequiredMixin, UpdateView):
+    model = MarcaComercial
+    fields = ('nombre', 'proveedor', 'categoria_servicio', 'localidad', 'modalidad_pago', 'direccion', 'telefono_fijo', 'telefono_movil', 'email', 'sitio_web', 'observaciones')
+    template_name = 'app/proveedor/update.html'
