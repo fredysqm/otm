@@ -9,14 +9,14 @@
 {% block breadcrumbs %}
     {% breadcrumb 'Inicio' 'app_main' %}
     {% breadcrumb 'Proveedores' 'app_proveedor' %}
-    {% breadcrumb 'Modificar' 'app_proveedor_update' %}
+    {% breadcrumb 'Crear' 'app_proveedor_create' %}
     {% render_breadcrumbs "django_bootstrap_breadcrumbs/bootstrap4.html" %}
 {% endblock %}
 
 {% block content %}
 <div class="card border-dark mx-auto" style="max-width: 40rem;">
         <div class="card-body">
-            <h5><i class="fas fa-file"></i> Modificar proveedor</h5>
+            <h5><i class="fas fa-edit"></i> Nuevo proveedor</h5>
             <hr />
             <form method="post">{% csrf_token %}
                 <fieldset>
