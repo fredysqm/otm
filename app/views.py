@@ -1,4 +1,4 @@
-from django.views.generic import TemplateView, ListView, UpdateView, CreateView
+from django.views.generic import TemplateView, ListView, UpdateView, CreateView, DetailView
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.urls import reverse_lazy
 from core.models import MarcaComercial
@@ -11,7 +11,11 @@ class app_main(LoginRequiredMixin, TemplateView):
 #Mantenimiento
 class app_proveedor(LoginRequiredMixin, ListView):
     model = MarcaComercial
-    template_name = 'app/proveedor/view.html'
+    template_name = 'app/proveedor/list.html'
+
+class app_proveedor_detail(LoginRequiredMixin, DetailView):
+    model = MarcaComercial
+    template_name = 'app/proveedor/detail.html'
 
 class app_proveedor_create(LoginRequiredMixin, CreateView):
     model = MarcaComercial

@@ -5,6 +5,7 @@ from app.views import *
 urlpatterns = [
     url(r'^$', app_main.as_view(), name='app_main'),
     url(r'^proveedores/$', app_proveedor.as_view(), name='app_proveedor'),
+    url(r'^proveedores/detalle/(?P<pk>\d+)/$', app_proveedor_detail.as_view(), name='app_proveedor_detail'),
     url(r'^proveedores/crear/$', app_proveedor_create.as_view(), name='app_proveedor_create'),
     url(r'^proveedores/modificar/(?P<pk>\d+)/$', app_proveedor_update.as_view(), name='app_proveedor_update'),
 

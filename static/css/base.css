@@ -10,6 +10,11 @@
     font-weight: 500;
 }
 
-table tbody tr {
+.table > tbody > tr {
     font-size: 0.8rem;
+    vertical-align: middle;
+}
+
+.table > tbody > tr > td {
+    vertical-align: middle;
 }

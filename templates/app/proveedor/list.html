@@ -23,14 +23,7 @@
                 <th>Categoria</th>
                 <th>Localidad</th>
                 <th>Modalidad</th>
-                <th>Direccion</th>
-                <th>Fijo</th>
-                <th>Movil</th>
-                <th>Email</th>
-                <th>Web</th>
-                <th>Creado</th>
-                <th>Modificado</th>
-                <th>Acciones</th>
+                <th style="width: 80px; text-align: center;">Acciones</th>
             </tr>
         </thead>
         <tbody>
@@ -42,16 +35,10 @@
                     <td>{{ marca_comercial.categoria_servicio.nombre }}</td>
                     <td>{{ marca_comercial.localidad.nombre }}</td>
                     <td>{{ marca_comercial.modalidad_pago.nombre }}</td>
-                    <td>{{ marca_comercial.direccion }}</td>
-                    <td>{{ marca_comercial.fijo }}</td>
-                    <td>{{ marca_comercial.movil }}</td>
-                    <td>{{ marca_comercial.email }}</td>
-                    <td>{{ marca_comercial.web }}</td>
-                    <td>{{ marca_comercial.creado }}</td>
-                    <td>{{ marca_comercial.modificado }}</td>
                     <td>
                         <div class="btn-group" role="group" aria-label="Basic example">
-                            <a href="{% url 'app_proveedor_update' marca_comercial.id %}" class="btn btn-primary btn-sm btn-sm" role="button"><i class="fas fa-edit"></i></a>
+                            <a href="{% url 'app_proveedor_detail' marca_comercial.id %}" class="btn btn-secondary btn-sm btn-sm" role="button"><i class="fas fa-info-circle"></i></a>
+                            <a href="{% url 'app_proveedor_update' marca_comercial.id %}" class="btn btn-secondary btn-sm btn-sm" role="button"><i class="fas fa-edit"></i></a>
                             <button type="button" class="btn btn-danger btn-sm"><i class="fas fa-trash"></i></button>
                         </div>
                     </td>
@@ -91,21 +78,11 @@ $(document).ready(function() {
     var table = $('#tablita').DataTable( {
         "iDisplayLength": 100,
         "info": false,
-/*        "columnDefs": [ {
-            "targets": -1,
-            "data": null,
-            "defaultContent": ''
-        } ],*/
+        "bLengthChange": false,
         "language": {
             "url": "/static/json/dtspanish.json"
         },
     } );
-/*
-    $('#tablita tbody').on( 'click', 'button', function () {
-        var data = table.row( $(this).parents('tr') ).data();
-        alert("Editar marca comercial con id: "+ data[0] );
-    } );
-*/
 } );
 </script>
 {% endblock %}
