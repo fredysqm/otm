@@ -34,7 +34,7 @@ class PaisViewSet(mixins.RetrieveModelMixin, mixins.ListModelMixin, viewsets.Gen
 
 class CiudadViewSet(mixins.RetrieveModelMixin, mixins.ListModelMixin, viewsets.GenericViewSet):
     serializer_class = CiudadSerializer
-    queryset = Ciudad.objects.filter(estado_obj='A')
+    queryset = Ciudad.objects.select_related('pais').filter(estado_obj='A')
     pagination_class = DefaultPagination
     permission_classes = (DefaultPermissions,)
     filter_backends = (filters.SearchFilter, filters.OrderingFilter,)
@@ -106,21 +106,21 @@ class ProveedorViewSet(viewsets.ModelViewSet):
 
 class LocalidadViewSet(viewsets.ModelViewSet):
     serializer_class = LocalidadSerializer
-    queryset = Localidad.objects.filter(estado_obj='A')
+    queryset = Localidad.objects.select_related('ciudad','ciudad__pais').filter(estado_obj='A')
     pagination_class = DefaultPagination
     permission_classes = (DefaultPermissions,)
     filter_backends = (filters.SearchFilter, filters.OrderingFilter,)
-    search_fields = ('id', 'nombre',)
+    search_fields = ('id', 'nombre', 'ciudad__id', 'ciudad__nombre')
 
 class MarcaComercialViewSet(viewsets.ModelViewSet):
     serializer_class = MarcaComercialSerializer
-    queryset = MarcaComercial.objects.filter(estado_obj='A')
+    queryset = MarcaComercial.objects.select_related('proveedor','categoria_servicio','localidad','modalidad_pago').filter(estado_obj='A')
     pagination_class = DefaultPagination
     permission_classes = (DefaultPermissions,)
     filter_backends = (filters.SearchFilter, filters.OrderingFilter,)
     search_fields = ('id', 'nombre',)
 
-class TipoCuentaBancoViewSet(viewsets.ModelViewSet):
+class TipoCuentaBancoViewSet(mixins.RetrieveModelMixin, mixins.ListModelMixin, viewsets.GenericViewSet):
     serializer_class = TipoCuentaBancoSerializer
     queryset = TipoCuentaBanco.objects.filter(estado_obj='A')
     pagination_class = DefaultPagination
@@ -130,7 +130,7 @@ class TipoCuentaBancoViewSet(viewsets.ModelViewSet):
 
 class MarcaComercialCuentaViewSet(viewsets.ModelViewSet):
     serializer_class = MarcaComercialCuentaSerializer
-    queryset = MarcaComercialCuenta.objects.filter(estado_obj='A')
+    queryset = MarcaComercialCuenta.objects.select_related('marca_comercial','banco','moneda','tipo_cuenta').filter(estado_obj='A')
     pagination_class = DefaultPagination
     permission_classes = (DefaultPermissions,)
     filter_backends = (filters.SearchFilter, filters.OrderingFilter,)

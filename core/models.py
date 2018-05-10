@@ -8,11 +8,6 @@ ESTADO_OBJ = (
     ('S', 'Suspendido'),
 )
 
-VERIFICACION_OBJ = (
-    ('S', 'Si'),
-    ('N', 'No'),
-)
-
 
 class Pais(models.Model):
     id = models.CharField (
@@ -59,6 +54,7 @@ class Pais(models.Model):
         unique_together = ( ('nombre',), )
         verbose_name = ('país')
         verbose_name_plural = ('paises')
+        ordering = ('nombre',)
 
 
 class Ciudad(models.Model):
@@ -96,6 +92,8 @@ class Ciudad(models.Model):
     creado = models.DateTimeField(auto_now_add=True,)
     modificado = models.DateTimeField(auto_now=True,)
 
+    def pais__nombre(self): return self.pais.nombre
+
     def clean(self, *args, **kwargs):
         super(Ciudad, self).clean(*args, **kwargs)
 
@@ -111,6 +109,7 @@ class Ciudad(models.Model):
         unique_together = ( ('pais','nombre',), )
         verbose_name = ('ciudad')
         verbose_name_plural = ('ciudades')
+        ordering = ('nombre',)
 
 
 class Idioma(models.Model):
@@ -158,6 +157,7 @@ class Idioma(models.Model):
         unique_together = ( ('nombre',), )
         verbose_name = ('idioma')
         verbose_name_plural = ('idiomas')
+        ordering = ('nombre',)
 
 
 class Moneda(models.Model):
@@ -212,6 +212,7 @@ class Moneda(models.Model):
         unique_together = ( ('nombre',), )
         verbose_name = ('moneda')
         verbose_name_plural = ('monedas')
+        ordering = ('nombre',)
 
 
 class Banco(models.Model):
@@ -259,6 +260,7 @@ class Banco(models.Model):
         unique_together = ( ('nombre',), )
         verbose_name = ('banco')
         verbose_name_plural = ('bancos')
+        ordering = ('nombre',)
 
 
 class Operador(models.Model):
@@ -309,6 +311,7 @@ class Operador(models.Model):
         unique_together = ( ('nombre',), )
         verbose_name = ('operador')
         verbose_name_plural = ('operadores')
+        ordering = ('nombre',)
 
 
 class TipoDocProveedor(models.Model):
@@ -356,6 +359,7 @@ class TipoDocProveedor(models.Model):
         unique_together = ( ('nombre',), )
         verbose_name = ('tipo de documento proveedor')
         verbose_name_plural = ('tipos de documento proveedor')
+        ordering = ('nombre',)
 
 
 class ModalidadPago(models.Model):
@@ -403,6 +407,7 @@ class ModalidadPago(models.Model):
         unique_together = ( ('nombre',), )
         verbose_name = ('modalidad de pago')
         verbose_name_plural = ('modalidades de pago')
+        ordering = ('nombre',)
 
 
 class CategoriaServicio(models.Model):
@@ -450,6 +455,7 @@ class CategoriaServicio(models.Model):
         unique_together = ( ('nombre',), )
         verbose_name = ('categoría de servicio')
         verbose_name_plural = ('categorías de servicio')
+        ordering = ('nombre',)
 
 
 class Proveedor(models.Model):
@@ -484,7 +490,6 @@ class Proveedor(models.Model):
         ]
     )
 
-    verificacion_obj = models.CharField(max_length=1, choices=VERIFICACION_OBJ, default='N')
     estado_obj = models.CharField(max_length=1, choices=ESTADO_OBJ, default='A')
     creado = models.DateTimeField(auto_now_add=True,)
     modificado = models.DateTimeField(auto_now=True,)
@@ -510,12 +515,13 @@ class Proveedor(models.Model):
         super(Proveedor, self).save(*args, **kwargs)
 
     def __str__(self):
-        return ('%s (%s %s)' % (self.razon_social, self.tipo_documento, self.id))
+        return ('%s (%s %s)' % (self.razon_social, self.tipo_documento.pk, self.id))
 
     class Meta:
         unique_together = ( ('razon_social',), )
         verbose_name = ('proveedor')
         verbose_name_plural = ('proveedores')
+        ordering = ('razon_social',)
 
 
 class Localidad(models.Model):
@@ -546,6 +552,9 @@ class Localidad(models.Model):
     creado = models.DateTimeField(auto_now_add=True,)
     modificado = models.DateTimeField(auto_now=True,)
 
+    def ciudad__nombre(self): return self.ciudad.nombre
+    def pais__nombre(self): return self.ciudad.pais.nombre
+
     def clean(self, *args, **kwargs):
         super(Localidad, self).clean(*args, **kwargs)
 
@@ -560,6 +569,7 @@ class Localidad(models.Model):
         unique_together = ( ('nombre', 'ciudad'), )
         verbose_name = ('localidad')
         verbose_name_plural = ('localidades')
+        ordering = ('nombre',)
 
 
 class MarcaComercial(models.Model):
@@ -652,7 +662,11 @@ class MarcaComercial(models.Model):
         verbose_name='Observaciones',
     )
 
-    verificacion_obj = models.CharField(max_length=1, choices=VERIFICACION_OBJ, default='N')
+    def proveedor__razon_social(self): return self.proveedor.razon_social
+    def categoria_servicio__nombre(self): return self.categoria_servicio.nombre
+    def localidad__nombre(self): return self.localidad.nombre
+    def modalidad_pago__nombre(self): return self.modalidad_pago.nombre
+
     estado_obj = models.CharField(max_length=1, choices=ESTADO_OBJ, default='A')
     creado = models.DateTimeField(auto_now_add=True,)
     modificado = models.DateTimeField(auto_now=True,)
@@ -677,6 +691,7 @@ class MarcaComercial(models.Model):
         unique_together = ( ('nombre', 'proveedor'), )
         verbose_name = ('marca comecial')
         verbose_name_plural = ('marcas comerciales')
+        ordering = ('nombre',)
 
 
 class TipoCuentaBanco(models.Model):
@@ -724,6 +739,7 @@ class TipoCuentaBanco(models.Model):
         unique_together = ( ('nombre',), )
         verbose_name = ('tipo de cuenta banco')
         verbose_name_plural = ('tipos de cuenta banco')
+        ordering = ('nombre',)
 
 
 class MarcaComercialCuenta(models.Model):
@@ -782,7 +798,11 @@ class MarcaComercialCuenta(models.Model):
         ]
     )
 
-    verificacion_obj = models.CharField(max_length=1, choices=VERIFICACION_OBJ, default='N')
+    def marca_comercial__nombre(self): return self.marca_comercial.nombre
+    def banco__nombre(self): return self.banco.nombre
+    def moneda__nombre(self): return self.moneda.nombre
+    def tipo_cuenta__nombre(self): return self.tipo_cuenta.nombre
+
     estado_obj = models.CharField(max_length=1, choices=ESTADO_OBJ, default='A')
     creado = models.DateTimeField(auto_now_add=True,)
     modificado = models.DateTimeField(auto_now=True,)

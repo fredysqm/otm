@@ -10,7 +10,7 @@ class app_main(LoginRequiredMixin, TemplateView):
 
 #Mantenimiento
 class app_proveedor(LoginRequiredMixin, ListView):
-    model = MarcaComercial
+    queryset = MarcaComercial.objects.all().select_related('proveedor', 'modalidad_pago','categoria_servicio', 'localidad', 'modalidad_pago')
     template_name = 'app/proveedor/list.html'
 
 class app_proveedor_detail(LoginRequiredMixin, DetailView):

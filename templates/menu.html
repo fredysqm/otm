@@ -9,15 +9,8 @@
             <i class="fas fa-user"></i> {{ user.first_name }}
         </button>
         <div class="dropdown-menu dropdown-menu-right">
-            
             {% if user.is_staff %}
                 <a href="{% url 'admin:index' %}" class="dropdown-item"><i class="fas fa-user-cog"></i> Sitio administrativo</a>
-            {% endif %}
-            {% if user.is_superuser %}
-                <a href="/api/v1/" class="dropdown-item"><i class="fas fa-server "></i> API Rest v1</a>
-            {% endif %}
-            {% if user.is_staff or user.is_superuser %}
-                <div class="dropdown-divider"></div>
             {% endif %}
             <a href="{% url 'xauth_password_change' %}" class="dropdown-item"><i class="fas fa-exchange-alt"></i> Cambiar contraseña</a>
             <div class="dropdown-divider"></div>

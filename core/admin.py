@@ -11,10 +11,6 @@ def generic_suspender_estado_obj_action(modeladmin, request, queryset):
 generic_activar_estado_obj_action.short_description = "Activar item(s) seleccionado(s)"
 generic_suspender_estado_obj_action.short_description = "Suspender item(s) seleccionado(s)"
 
-def generic_verificar_obj_action(modeladmin, request, queryset):
-    queryset.update(verificacion_obj='S')
-generic_verificar_obj_action.short_description = "Verificar item(s) seleccionado(s)"
-
 
 #ModelAdmin
 @admin.register(Pais)
@@ -120,19 +116,16 @@ class CategoriaServicioAdmin(VersionAdmin):
 
 @admin.register(Proveedor)
 class ProveedorAdmin(VersionAdmin):
-    list_display = ('tipo_documento', 'id', 'razon_social', 'verificado', 'activo', 'creado','modificado',)
+    list_display = ('id', 'razon_social', 'activo', 'creado','modificado',)
     list_display_links = ('id',)
     #exclude = ('_fts',)
     search_fields = ('razon_social',)
-    list_filter = ( 'verificacion_obj',  'estado_obj', 'creado', 'modificado' )
+    list_filter = ( 'estado_obj', 'creado', 'modificado' )
     ordering = ['id']
-    actions = (generic_activar_estado_obj_action, generic_suspender_estado_obj_action, generic_verificar_obj_action)
+    actions = (generic_activar_estado_obj_action, generic_suspender_estado_obj_action)
     def activo(self, obj):
         return obj.estado_obj == 'A'
     activo.boolean = True
-    def verificado(self, obj):
-        return obj.verificacion_obj == 'S'
-    verificado.boolean = True
 
 @admin.register(Localidad)
 class LocalidadAdmin(VersionAdmin):
