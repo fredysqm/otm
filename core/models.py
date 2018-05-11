@@ -662,10 +662,10 @@ class MarcaComercial(models.Model):
         verbose_name='Observaciones',
     )
 
-    def proveedor__razon_social_ro(self): return self.proveedor.razon_social
-    def categoria_servicio__nombre_ro(self): return self.categoria_servicio.nombre
-    def localidad__nombre_ro(self): return self.localidad.nombre
-    def modalidad_pago__nombre_ro(self): return self.modalidad_pago.nombre
+    def proveedor__razon_social(self): return self.proveedor.razon_social
+    def categoria_servicio__nombre(self): return self.categoria_servicio.nombre
+    def localidad__nombre(self): return self.localidad.nombre
+    def modalidad_pago__nombre(self): return self.modalidad_pago.nombre
 
     estado_obj = models.CharField(max_length=1, choices=ESTADO_OBJ, default='A')
     creado = models.DateTimeField(auto_now_add=True,)

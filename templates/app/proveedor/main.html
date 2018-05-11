@@ -12,11 +12,11 @@
         <tr>
             <th data-column-id="id" data-identifier="true" data-width="60px">ID</th>
             <th data-column-id="proveedor" data-width="90px">RUC</th>
-            <th data-column-id="proveedor__razon_social_ro" data-visible="false">Razon social</th>
+            <th data-column-id="proveedor__razon_social" data-visible="false">Razon social</th>
             <th data-column-id="nombre">Nombre comercial</th>
-            <th data-column-id="categoria_servicio__nombre_ro" data-width="100px">Categoría</th>
-            <th data-column-id="modalidad_pago__nombre_ro" data-width="80px">Modalidad</th>
-            <th data-column-id="localidad__nombre_ro" data-width="150px">Localidad</th>
+            <th data-column-id="categoria_servicio__nombre" data-width="100px">Categoría</th>
+            <th data-column-id="modalidad_pago__nombre" data-width="80px">Modalidad</th>
+            <th data-column-id="localidad__nombre" data-width="150px">Localidad</th>
             <th data-column-id="direccion">Dirección</th>
             <th data-column-id="telefono_fijo" data-width="80px">Fijo</th>
             <th data-column-id="telefono_movil" data-width="90px">Movil</th>
@@ -24,6 +24,7 @@
             <th data-column-id="sitio_web" data-visible="false" data-formatter="link" data-sortable="false">Web</th>
             <th data-column-id="creado" data-visible="false" data-width="150px" data-converter="datetime">Creado</th>
             <th data-column-id="modificado" data-width="150px" data-converter="datetime">Modificado</th>
+            <th data-column-id="acciones" data-formatter="acciones" data-sortable="false">Acciones</th>
         </tr>
     </thead>
 </table> 
@@ -35,7 +36,7 @@
 {% block js %}
 <script>
 $(document).ready(function() {
-    $("#grid-data").bootgrid({
+    var grid = $("#grid-data").bootgrid({
         url: "/api/v1/marca_comercial/",
         searchSettings: {
             fulltext: false,
@@ -48,6 +49,10 @@ $(document).ready(function() {
             "link": function(column, row) {
                 if (row.sitio_web != "")
                     return "<a target=\"_blank\" href=\"" + row.sitio_web + "\"><i class=\"fas fa-external-link-alt\"></i> " + row.sitio_web + "</a>";
+            },
+            "acciones": function(column, row) {
+                return "<button type=\"button\" class=\"btn btn-xs btn-default command-edit\" data-row-id=\"" + row.id + "\"><span class=\"fa fa-pencil\"></span></button> " + 
+                "<button type=\"button\" class=\"btn btn-xs btn-default command-delete\" data-row-id=\"" + row.id + "\"><span class=\"fa fa-trash-o\"></span></button>";
             }
         },
         converters: {
@@ -56,6 +61,12 @@ $(document).ready(function() {
                 to: function (value) { return moment(value).format("DD/MMM/YYYY hh:mm A"); }
             },
         }
+    }).on("loaded.rs.jquery.bootgrid", function() {
+        grid.find(".command-edit").on("click", function(e){
+            alert("You pressed edit on row: " + $(this).data("row-id"));
+        }).end().find(".command-delete").on("click", function(e) {
+            alert("You pressed delete on row: " + $(this).data("row-id"));
+        });
     });
 });
 </script>
