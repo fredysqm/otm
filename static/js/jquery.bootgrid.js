@@ -41,22 +41,39 @@
         return $.merge(footer, header);
     }
 
-    function getParams(context)
-    {
+    function getParams(context) {
         return (context) ? $.extend({}, this.cachedParams, { ctx: context }) :
             this.cachedParams;
+    }
+
+    function getOrderString(dict) {
+        var out = '';
+        for (var key in dict) {
+            if(dict[key] == 'desc') out += '-';
+            out += key + ',';
+        }
+        return out;
+    }
+
+    function getSearchPhrase(ctx, phrase) {
+        phrase = phrase.replace(/\s+/g, ' ').trim();
+        if(phrase.length >= ctx.options.searchSettings.characters && ctx.options.searchSettings.fulltext) {
+            return phrase.split(' ').map(i => i + '*').join(' ');
+        } else {
+            return phrase;
+        }
     }
 
     function getRequest()
     {
         var request = {
-                current: this.current,
-                rowCount: this.rowCount,
-                sort: this.sortDictionary,
-                searchPhrase: this.searchPhrase
+                page: this.current,
+                page_size: this.rowCount,
+                ordering: getOrderString(this.sortDictionary),
+                search: getSearchPhrase(this, this.searchPhrase)
             },
             post = this.options.post;
-
+        
         post = ($.isFunction(post)) ? post() : post;
         return this.options.requestHandler($.extend(true, request, post));
     }
@@ -231,11 +248,10 @@
                     {
                         response = $.parseJSON(response);
                     }
-
+                    
                     response = that.options.responseHandler(response);
-
-                    that.current = response.current;
-                    update(response.rows, response.total);
+                    //that.current = response.page;
+                    update(response.results, response.count);
                 },
                 error: function (jqXHR, textStatus, errorThrown)
                 {
@@ -467,27 +483,16 @@
                     maxCount = this.options.padding * 2 + 1,
                     count = (totalPages >= maxCount) ? maxCount : totalPages;
 
-                renderPaginationItem.call(this, pagination, "first", "&laquo;", "first")
-                    ._bgEnableAria(current > 1);
-                renderPaginationItem.call(this, pagination, "prev", "&lt;", "prev")
+                renderPaginationItem.call(this, pagination, "prev", "&larr; Anterior", "previous")
                     ._bgEnableAria(current > 1);
 
-                for (var i = 0; i < count; i++)
-                {
-                    var pos = i + startWith;
-                    renderPaginationItem.call(this, pagination, pos, pos, "page-" + pos)
-                        ._bgEnableAria()._bgSelectAria(pos === current);
-                }
-
-                if (count === 0)
+                /*if (count === 0)
                 {
                     renderPaginationItem.call(this, pagination, 1, 1, "page-" + 1)
                         ._bgEnableAria(false)._bgSelectAria();
-                }
+                }*/
 
-                renderPaginationItem.call(this, pagination, "next", "&gt;", "next")
-                    ._bgEnableAria(totalPages > current);
-                renderPaginationItem.call(this, pagination, "last", "&raquo;", "last")
+                renderPaginationItem.call(this, pagination, "next", "Siguiente &rarr;", "next")
                     ._bgEnableAria(totalPages > current);
 
                 replacePlaceHolder.call(this, paginationItems, pagination);
@@ -1018,7 +1023,7 @@
         navigation: 3, // it's a flag: 0 = none, 1 = top, 2 = bottom, 3 = both (top and bottom)
         padding: 2, // page padding (pagination)
         columnSelection: true,
-        rowCount: [10, 25, 50, -1], // rows per page int or array of int (-1 represents "All")
+        rowCount: [25, 50, 100, 500], // rows per page int or array of int (-1 represents "All")
 
         /**
          * Enables row selection (to enable multi selection see also `multiSelect`). Default value is `false`.
@@ -1093,10 +1098,12 @@
              *
              * @property characters
              * @type Number
-             * @default 1
+             * @default 2
              * @for searchSettings
              **/
-            characters: 1
+            characters: 2,
+
+            fulltext: false, /* full text search api*/
         },
 
         /**
@@ -1107,7 +1114,7 @@
          * @default false
          * @for defaults
          **/
-        ajax: false,
+        ajax: true,
 
         /**
          * Ajax request settings that shall be used for server-side communication.
@@ -1127,10 +1134,11 @@
              *
              * @property method
              * @type String
-             * @default "POST"
+             * @default "GET"
              * @for ajaxSettings
              **/
-            method: "POST"
+            method: "GET",
+            cache: false
         },
 
         /**
@@ -1165,7 +1173,7 @@
          * @for defaults
          * @since 1.1.0
          **/
-        caseSensitive: true,
+        caseSensitive: false,
 
         // note: The following properties should not be used via data-api attributes
 
@@ -1292,12 +1300,12 @@
          * @for defaults
          **/
         labels: {
-            all: "All",
-            infos: "Showing {{ctx.start}} to {{ctx.end}} of {{ctx.total}} entries",
-            loading: "Loading...",
-            noResults: "No results found!",
-            refresh: "Refresh",
-            search: "Search"
+            all: "Todos",
+            infos: "Mostrando del {{ctx.start}} al {{ctx.end}} de {{ctx.total}} registros",
+            loading: "Cargando...",
+            noResults: "¡No se han encontrado resultados!",
+            refresh: "Actualizar",
+            search: "Buscar"
         },
 
         /**
@@ -1354,7 +1362,7 @@
          * @for defaults
          **/
         templates: {
-            actionButton: "<button class=\"btn btn-default\" type=\"button\" title=\"{{ctx.text}}\">{{ctx.content}}</button>",
+            actionButton: "<button class=\"btn btn-secondary\" type=\"button\" title=\"{{ctx.text}}\">{{ctx.content}}</button>",
             actionDropDown: "<div class=\"{{css.dropDownMenu}}\"><button class=\"btn btn-secondary dropdown-toggle\" type=\"button\" data-toggle=\"dropdown\"><span class=\"{{css.dropDownMenuText}}\">{{ctx.content}}</span> <span class=\"caret\"></span></button><ul class=\"{{css.dropDownMenuItems}}\" role=\"menu\"></ul></div>",
             actionDropDownItem: "<li><a data-action=\"{{ctx.action}}\" class=\"{{css.dropDownItem}} {{css.dropDownItemButton}}\">{{ctx.text}}</a></li>",
             actionDropDownCheckboxItem: "<li><label class=\"{{css.dropDownItem}}\"><input name=\"{{ctx.name}}\" type=\"checkbox\" value=\"1\" class=\"{{css.dropDownItemCheckbox}}\" {{ctx.checked}} /> {{ctx.label}}</label></li>",

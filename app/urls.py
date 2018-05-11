@@ -1,13 +1,10 @@
-from django.conf.urls import url
+from django.urls import path
 from app.views import *
 
 
 urlpatterns = [
-    url(r'^$', app_main.as_view(), name='app_main'),
-    url(r'^proveedores/$', app_proveedor.as_view(), name='app_proveedor'),
-    url(r'^proveedores/detalle/(?P<pk>\d+)/$', app_proveedor_detail.as_view(), name='app_proveedor_detail'),
-    url(r'^proveedores/crear/$', app_proveedor_create.as_view(), name='app_proveedor_create'),
-    url(r'^proveedores/modificar/(?P<pk>\d+)/$', app_proveedor_update.as_view(), name='app_proveedor_update'),
+    path('', app_main.as_view(), name='app_main'),
+    path('proveedores/', app_proveedor.as_view(), name='app_proveedor'),
 
     #url(r'^error404/$', error404.as_view()),
     #url(r'^error500/$', error500.as_view()),

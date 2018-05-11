@@ -1,0 +1,51 @@
+{% extends 'base.html' %}{% load staticfiles %}
+
+{% block title %}Proveedores{% endblock %}
+
+{% block menu %}
+    {% include 'menu.html' with active_item_menu='proveedor' %}
+{% endblock %}
+
+{% block content %}
+<table id="grid-data" class="table table-striped table-hover table-condensed table-sm">
+    <thead>
+        <tr>
+            <th data-column-id="id" data-width="60px">ID</th>
+            <th data-column-id="proveedor">RUC</th>
+            <th data-column-id="nombre">Nombre comercial</th>
+            <th data-column-id="categoria_servicio__nombre">Categoría</th>
+            <th data-column-id="localidad__nombre">Localidad</th>
+            <th data-column-id="modalidad_pago__nombre">Modalidad</th>
+            <th data-column-id="direccion">Dirección</th>
+            <th data-column-id="telefono_fijo">Fijo</th>
+            <th data-column-id="telefono_movil">Movil</th>
+            <th data-column-id="email">Emial</th>
+            <th data-column-id="sitio_web">Web</th>
+            <th data-column-id="creado" data-converter="datetime">Creado</th>
+            <th data-column-id="modificado" data-converter="datetime">Modificado</th>
+        </tr>
+    </thead>
+</table> 
+{% endblock %}
+
+{% block modals %}
+{% endblock %}
+
+{% block js %}
+<script>
+$(document).ready(function() {
+    $("#grid-data").bootgrid({
+        url: "/api/v1/marca_comercial/",
+        searchSettings: {
+            fulltext: false,
+        },
+        converters: {
+            datetime: {
+                from: function (value) { return moment(value); },
+                to: function (value) { return moment(value).format("DD/MMM/YYYY hh:mm A"); }
+            }
+        }
+    });
+});
+</script>
+{% endblock %}

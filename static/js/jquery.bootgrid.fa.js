@@ -9,11 +9,11 @@
     "use strict";
 
     $.extend($.fn.bootgrid.Constructor.defaults.css, {
-        icon: "icon fa",
+        icon: "icon fas",
         iconColumns: "fa-th-list",
-        iconDown: "fa-sort-desc",
-        iconRefresh: "fa-refresh",
+        iconDown: "fa-sort-down",
+        iconRefresh: "fa-sync-alt",
         iconSearch: "fa-search",
-        iconUp: "fa-sort-asc"
+        iconUp: "fa-sort-up"
 });
 })(jQuery, window);

@@ -23,7 +23,6 @@ INSTALLED_APPS = [
     'compressor',
     'rest_framework',
     'crispy_forms',
-    'django_bootstrap_breadcrumbs',
     #ME
     'xauth',
     'core',
