@@ -68,14 +68,14 @@ class LocalidadSerializer(serializers.ModelSerializer):
         fields = ('id', 'nombre', 'ciudad', 'ciudad__nombre', 'pais__nombre', 'altitud', 'creado', 'modificado')
 
 class MarcaComercialSerializer(serializers.ModelSerializer):
-    proveedor__razon_social = serializers.ReadOnlyField()
-    categoria_servicio__nombre = serializers.ReadOnlyField()
-    localidad__nombre = serializers.ReadOnlyField()
-    modalidad_pago__nombre = serializers.ReadOnlyField()
+    proveedor__razon_social_ro = serializers.ReadOnlyField()
+    categoria_servicio__nombre_ro = serializers.ReadOnlyField()
+    localidad__nombre_ro = serializers.ReadOnlyField()
+    modalidad_pago__nombre_ro = serializers.ReadOnlyField()
 
     class Meta:
         model = MarcaComercial
-        fields = ('id', 'nombre', 'proveedor', 'proveedor__razon_social', 'categoria_servicio', 'categoria_servicio__nombre', 'localidad', 'localidad__nombre', 'modalidad_pago', 'modalidad_pago__nombre', 'direccion', 'telefono_fijo', 'telefono_movil', 'email', 'sitio_web', 'observaciones', 'creado', 'modificado')
+        fields = ('id', 'nombre', 'proveedor', 'proveedor__razon_social_ro', 'categoria_servicio', 'categoria_servicio__nombre_ro', 'localidad', 'localidad__nombre_ro', 'modalidad_pago', 'modalidad_pago__nombre_ro', 'direccion', 'telefono_fijo', 'telefono_movil', 'email', 'sitio_web', 'observaciones', 'creado', 'modificado')
 
 class TipoCuentaBancoSerializer(serializers.ModelSerializer):
     class Meta:

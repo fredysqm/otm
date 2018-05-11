@@ -10,18 +10,19 @@
 <table id="grid-data" class="table table-striped table-hover table-condensed table-sm">
     <thead>
         <tr>
-            <th data-column-id="id" data-width="60px">ID</th>
+            <th data-column-id="id" data-identifier="true" data-width="60px">ID</th>
             <th data-column-id="proveedor" data-width="90px">RUC</th>
+            <th data-column-id="proveedor__razon_social_ro" data-visible="false">Razon social</th>
             <th data-column-id="nombre">Nombre comercial</th>
-            <th data-column-id="categoria_servicio__nombre" data-width="100px">Categoría</th>
-            <th data-column-id="localidad__nombre">Localidad</th>
-            <th data-column-id="modalidad_pago__nombre" data-width="80px">Modalidad</th>
+            <th data-column-id="categoria_servicio__nombre_ro" data-width="100px">Categoría</th>
+            <th data-column-id="modalidad_pago__nombre_ro" data-width="80px">Modalidad</th>
+            <th data-column-id="localidad__nombre_ro" data-width="150px">Localidad</th>
             <th data-column-id="direccion">Dirección</th>
             <th data-column-id="telefono_fijo" data-width="80px">Fijo</th>
             <th data-column-id="telefono_movil" data-width="90px">Movil</th>
-            <th data-column-id="email">Email</th>
-            <th data-column-id="sitio_web">Web</th>
-            <th data-column-id="creado" data-width="150px" data-converter="datetime">Creado</th>
+            <th data-column-id="email" data-visible="false" data-formatter="email" data-sortable="false">Email</th>
+            <th data-column-id="sitio_web" data-visible="false" data-formatter="link" data-sortable="false">Web</th>
+            <th data-column-id="creado" data-visible="false" data-width="150px" data-converter="datetime">Creado</th>
             <th data-column-id="modificado" data-width="150px" data-converter="datetime">Modificado</th>
         </tr>
     </thead>
@@ -39,11 +40,21 @@ $(document).ready(function() {
         searchSettings: {
             fulltext: false,
         },
+        formatters: {
+            "email": function(column, row) {
+                if (row.email != "")
+                    return "<a href=\"mailto:" + row.email + "\"><i class=\"far fa-envelope\"></i> " + row.email + "</a>";
+            },
+            "link": function(column, row) {
+                if (row.sitio_web != "")
+                    return "<a target=\"_blank\" href=\"" + row.sitio_web + "\"><i class=\"fas fa-external-link-alt\"></i> " + row.sitio_web + "</a>";
+            }
+        },
         converters: {
             datetime: {
                 from: function (value) { return moment(value); },
                 to: function (value) { return moment(value).format("DD/MMM/YYYY hh:mm A"); }
-            }
+            },
         }
     });
 });

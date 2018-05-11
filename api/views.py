@@ -118,7 +118,7 @@ class MarcaComercialViewSet(viewsets.ModelViewSet):
     pagination_class = DefaultPagination
     permission_classes = (DefaultPermissions,)
     filter_backends = (filters.SearchFilter, filters.OrderingFilter,)
-    search_fields = ('id', 'nombre',)
+    search_fields = ('id', 'nombre', 'proveedor__id', 'proveedor__razon_social','categoria_servicio__id','categoria_servicio__nombre','localidad__nombre', 'modalidad_pago__id','modalidad_pago__nombre','direccion','observaciones',)
 
 class TipoCuentaBancoViewSet(mixins.RetrieveModelMixin, mixins.ListModelMixin, viewsets.GenericViewSet):
     serializer_class = TipoCuentaBancoSerializer
