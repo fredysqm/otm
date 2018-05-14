@@ -24,7 +24,7 @@
             <th data-column-id="sitio_web" data-visible="false" data-formatter="link" data-sortable="false">Web</th>
             <th data-column-id="creado" data-visible="false" data-width="150px" data-converter="datetime">Creado</th>
             <th data-column-id="modificado" data-width="150px" data-converter="datetime">Modificado</th>
-            <th data-column-id="acciones" data-formatter="acciones" data-sortable="false">Acciones</th>
+            <th data-column-id="acciones" data-width="80px" data-formatter="acciones" data-sortable="false">Acciones</th>
         </tr>
     </thead>
 </table> 
@@ -51,8 +51,8 @@ $(document).ready(function() {
                     return "<a target=\"_blank\" href=\"" + row.sitio_web + "\"><i class=\"fas fa-external-link-alt\"></i> " + row.sitio_web + "</a>";
             },
             "acciones": function(column, row) {
-                return "<button type=\"button\" class=\"btn btn-xs btn-default command-edit\" data-row-id=\"" + row.id + "\"><span class=\"fa fa-pencil\"></span></button> " + 
-                "<button type=\"button\" class=\"btn btn-xs btn-default command-delete\" data-row-id=\"" + row.id + "\"><span class=\"fa fa-trash-o\"></span></button>";
+                return "<button type=\"button\" class=\"btn btn-xs btn-secondary command-edit\" data-row-id=\"" + row.id + "\"><i class=\"far fa-edit\"></i></button> " + 
+                "<button type=\"button\" class=\"btn btn-xs btn-secondary command-delete\" data-row-id=\"" + row.id + "\"><i class=\"far fa-trash-alt\"></i></button>";
             }
         },
         converters: {
