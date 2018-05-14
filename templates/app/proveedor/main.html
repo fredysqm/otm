@@ -24,13 +24,32 @@
             <th data-column-id="sitio_web" data-visible="false" data-formatter="link" data-sortable="false">Web</th>
             <th data-column-id="creado" data-visible="false" data-width="150px" data-converter="datetime">Creado</th>
             <th data-column-id="modificado" data-width="150px" data-converter="datetime">Modificado</th>
-            <th data-column-id="acciones" data-width="80px" data-formatter="acciones" data-sortable="false">Acciones</th>
+            <th data-column-id="acciones" data-width="120px" data-formatter="acciones" data-sortable="false">Acciones</th>
         </tr>
     </thead>
 </table> 
 {% endblock %}
 
 {% block modals %}
+<div id="myModal" class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Modal title</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+            ...
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary float-left" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary float-right">Save changes</button>
+            </div>
+        </div>
+    </div>
+</div>
 {% endblock %}
 
 {% block js %}
@@ -51,8 +70,10 @@ $(document).ready(function() {
                     return "<a target=\"_blank\" href=\"" + row.sitio_web + "\"><i class=\"fas fa-external-link-alt\"></i> " + row.sitio_web + "</a>";
             },
             "acciones": function(column, row) {
-                return "<button type=\"button\" class=\"btn btn-xs btn-secondary command-edit\" data-row-id=\"" + row.id + "\"><i class=\"far fa-edit\"></i></button> " + 
-                "<button type=\"button\" class=\"btn btn-xs btn-secondary command-delete\" data-row-id=\"" + row.id + "\"><i class=\"far fa-trash-alt\"></i></button>";
+                return "<button type=\"button\" class=\"btn btn-xs btn-success command-detail\" data-row-id=\"" + row.id + "\"><i class=\"fas fa-info-circle\"></i></button> " +
+                "<button type=\"button\" class=\"btn btn-xs btn-primary command-bank\" data-row-id=\"" + row.id + "\"><i class=\"fas fa-piggy-bank\"></i></button> " +
+                "<button type=\"button\" class=\"btn btn-xs btn-warning command-edit\" data-row-id=\"" + row.id + "\"><i class=\"far fa-edit\"></i></button> " +
+                "<button type=\"button\" class=\"btn btn-xs btn-danger command-delete\" data-row-id=\"" + row.id + "\"><i class=\"far fa-trash-alt\"></i></button>";
             }
         },
         converters: {
@@ -63,9 +84,13 @@ $(document).ready(function() {
         }
     }).on("loaded.rs.jquery.bootgrid", function() {
         grid.find(".command-edit").on("click", function(e){
-            alert("You pressed edit on row: " + $(this).data("row-id"));
+            $('#myModal').modal('show');
         }).end().find(".command-delete").on("click", function(e) {
             alert("You pressed delete on row: " + $(this).data("row-id"));
+        }).end().find(".command-bank").on("click", function(e) {
+            alert("You pressed bank on row: " + $(this).data("row-id"));
+        }).end().find(".command-detail").on("click", function(e) {
+            alert("You pressed detail on row: " + $(this).data("row-id"));
         });
     });
 });
