@@ -100,8 +100,8 @@
                             <label class="col-form-label col-form-label-sm" for="observaciones">Observaciones</label>
                             <textarea class="form-control form-control-sm" id="observaciones" name="observaciones" rows="3"></textarea>
                         </div>
-                        <a href="#" class="btn btn-secondary float-left" data-dismiss="modal"><i class="far fa-times-circle"></i> Cancelar</a>
-                        <a href="#" class="btn btn-primary float-right"><i class="far fa-save"></i> Guardar</a>
+                        <button class="btn btn-secondary float-left" data-dismiss="modal"><i class="far fa-times-circle"></i> Cancelar</button>
+                        <button id="cmdEnviarFormulario" class="btn btn-primary float-right"><i class="far fa-save"></i> Guardar</button>
                     </fieldset>
                 </form>
             </div>
@@ -211,7 +211,7 @@ function fProveedorShow(id) {
     }
 
     $('#dlgProveedor').modal('show');
-    $( "#proveedor" ).focus();
+    $('#proveedor').focus();
 }
 
 /*events*/
@@ -253,6 +253,17 @@ $(document).ready(function() {
         }).end().find(".command-delete").on("click", function(e) {
             //alert("You pressed detail on row: " + $(this).data("row-id"));
         });
+    });
+
+    $("#grid-toolbar").append('<button id="cmdNuevaMarcaComercial" class="btn btn-primary" type="button"><i class="far fa-file"></i> Nueva marca comercial</button>');
+
+    $('#cmdNuevaMarcaComercial').on('click', function(event) {
+        event.preventDefault();
+        fProveedorShow(0);
+    });
+
+    $('#cmdEnviarFormulario').on('click', function(event) {
+        event.preventDefault();
     });
 });
 </script>
