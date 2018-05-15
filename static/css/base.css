@@ -31,3 +31,6 @@
     border-radius : .2rem;
     width: 1.5rem;
 }
+
+/*table.table tr td button { display:none;}
+table.table tr:hover td button { display:inline-block;}*/
