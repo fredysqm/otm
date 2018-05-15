@@ -31,8 +31,8 @@
 {% endblock %}
 
 {% block modals %}
-<div id="myModal" class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-hidden="true">
-    <div class="modal-dialog" role="document">
+<div id="myModal" class="modal" id="exampleModal" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title">Modal title</h5>
@@ -43,90 +43,95 @@
             <div class="modal-body">
                     <form>
                             <div class="form-group row">
-                              <label class="col-4 col-form-label" for="proveedor">Proveedor</label> 
-                              <div class="col-8">
-                                <select id="proveedor" name="proveedor" class="selectpicker" data-live-search="true">
+                              <label class="col-3 col-form-label" for="proveedor">Proveedor</label> 
+                              <div class="col-9">
+                                <select id="proveedor" name="proveedor" class="custom-select" aria-describedby="proveedorHelpBlock">
                                   <option value="rabbit">Rabbit</option>
                                   <option value="duck">Duck</option>
                                   <option value="fish">Fish</option>
-                                </select>
+                                </select> 
+                                <span id="proveedorHelpBlock" class="form-text text-muted">help</span>
                               </div>
                             </div>
                             <div class="form-group row">
-                              <label for="nombre" class="col-4 col-form-label">Nombre</label> 
-                              <div class="col-8">
-                                <input id="nombre" name="nombre" class="form-control here" type="text">
+                              <label for="nombre" class="col-3 col-form-label">Nombre</label> 
+                              <div class="col-9">
+                                <input id="nombre" name="nombre" aria-describedby="nombreHelpBlock" class="form-control here" type="text"> 
+                                <span id="nombreHelpBlock" class="form-text text-muted">help</span>
                               </div>
                             </div>
                             <div class="form-group row">
-                              <label for="categoria_servicio" class="col-4 col-form-label">Categoría</label> 
-                              <div class="col-8">
-                                <select id="categoria_servicio" name="categoria_servicio" class="custom-select">
+                              <label for="categoria_servicio" class="col-3 col-form-label">Categoría</label> 
+                              <div class="col-9">
+                                <select id="categoria_servicio" name="categoria_servicio" class="custom-select" aria-describedby="categoria_servicioHelpBlock">
                                   <option value="rabbit">Rabbit</option>
                                   <option value="duck">Duck</option>
                                   <option value="fish">Fish</option>
-                                </select>
+                                </select> 
+                                <span id="categoria_servicioHelpBlock" class="form-text text-muted">help</span>
                               </div>
                             </div>
                             <div class="form-group row">
-                              <label for="localidad" class="col-4 col-form-label">Localidad</label> 
-                              <div class="col-8">
-                                <select id="localidad" name="localidad" class="custom-select">
+                              <label for="modalidad_pago" class="col-3 col-form-label">Modalidad</label> 
+                              <div class="col-9">
+                                <select id="modalidad_pago" name="modalidad_pago" class="custom-select" aria-describedby="modalidad_pagoHelpBlock">
                                   <option value="rabbit">Rabbit</option>
                                   <option value="duck">Duck</option>
                                   <option value="fish">Fish</option>
-                                </select>
+                                </select> 
+                                <span id="modalidad_pagoHelpBlock" class="form-text text-muted">help</span>
                               </div>
                             </div>
                             <div class="form-group row">
-                              <label for="modalidad_pago" class="col-4 col-form-label">Modalidad</label> 
-                              <div class="col-8">
-                                <select id="modalidad_pago" name="modalidad_pago" class="custom-select">
+                              <label for="localidad" class="col-3 col-form-label">Localidad</label> 
+                              <div class="col-9">
+                                <select id="localidad" name="localidad" class="custom-select" aria-describedby="localidadHelpBlock">
                                   <option value="rabbit">Rabbit</option>
                                   <option value="duck">Duck</option>
                                   <option value="fish">Fish</option>
-                                </select>
+                                </select> 
+                                <span id="localidadHelpBlock" class="form-text text-muted">help</span>
                               </div>
                             </div>
                             <div class="form-group row">
-                              <label for="direccion" class="col-4 col-form-label">Dirección</label> 
-                              <div class="col-8">
-                                <input id="direccion" name="direccion" class="form-control here" type="text">
+                              <label for="direccion" class="col-3 col-form-label">Dirección</label> 
+                              <div class="col-9">
+                                <input id="direccion" name="direccion" class="form-control here" aria-describedby="direccionHelpBlock" type="text"> 
+                                <span id="direccionHelpBlock" class="form-text text-muted">help</span>
                               </div>
                             </div>
                             <div class="form-group row">
-                              <label for="telefono_fijo" class="col-4 col-form-label">Telefono fijo</label> 
-                              <div class="col-8">
-                                <input id="telefono_fijo" name="telefono_fijo" class="form-control here" type="text">
+                              <label for="telefono_fijo" class="col-3 col-form-label">Teléfono fijo</label> 
+                              <div class="col-9">
+                                <input id="telefono_fijo" name="telefono_fijo" class="form-control here" aria-describedby="telefono_fijoHelpBlock" type="text"> 
+                                <span id="telefono_fijoHelpBlock" class="form-text text-muted">help</span>
                               </div>
                             </div>
                             <div class="form-group row">
-                              <label for="telefono_movil" class="col-4 col-form-label">Telefono movil</label> 
-                              <div class="col-8">
-                                <input id="telefono_movil" name="telefono_movil" class="form-control here" type="text">
+                              <label for="telefono_movil" class="col-3 col-form-label">Teléfono móvil</label> 
+                              <div class="col-9">
+                                <input id="telefono_movil" name="telefono_movil" class="form-control here" aria-describedby="telefono_movilHelpBlock" type="text"> 
+                                <span id="telefono_movilHelpBlock" class="form-text text-muted">help</span>
                               </div>
                             </div>
                             <div class="form-group row">
-                              <label for="email" class="col-4 col-form-label">Email</label> 
-                              <div class="col-8">
-                                <input id="email" name="email" class="form-control here" type="text">
+                              <label for="email" class="col-3 col-form-label">Email</label> 
+                              <div class="col-9">
+                                <input id="email" name="email" class="form-control here" aria-describedby="emailHelpBlock" type="text"> 
+                                <span id="emailHelpBlock" class="form-text text-muted">help</span>
                               </div>
                             </div>
                             <div class="form-group row">
-                              <label for="sitio_web" class="col-4 col-form-label">Web</label> 
-                              <div class="col-8">
-                                <input id="sitio_web" name="sitio_web" class="form-control here" type="text">
+                              <label for="sitio_web" class="col-3 col-form-label">Web</label> 
+                              <div class="col-9">
+                                <input id="sitio_web" name="sitio_web" class="form-control here" aria-describedby="sitio_webHelpBlock" type="text"> 
+                                <span id="sitio_webHelpBlock" class="form-text text-muted">help</span>
                               </div>
                             </div>
                             <div class="form-group row">
-                              <label for="observaciones" class="col-4 col-form-label">Observaciones</label> 
-                              <div class="col-8">
+                              <label for="observaciones" class="col-3 col-form-label">Observaciones</label> 
+                              <div class="col-9">
                                 <textarea id="observaciones" name="observaciones" cols="40" rows="5" class="form-control"></textarea>
-                              </div>
-                            </div> 
-                            <div class="form-group row">
-                              <div class="offset-4 col-8">
-                                <button name="submit" type="submit" class="btn btn-primary">Submit</button>
                               </div>
                             </div>
                           </form>
@@ -171,13 +176,13 @@ $(document).ready(function() {
             },
         }
     }).on("loaded.rs.jquery.bootgrid", function() {
-        grid.find(".command-edit").on("click", function(e){
+        grid.find(".command-detail").on("click", function(e){
             $('#myModal').modal('show');
-        }).end().find(".command-delete").on("click", function(e) {
-            alert("You pressed delete on row: " + $(this).data("row-id"));
         }).end().find(".command-bank").on("click", function(e) {
+            alert("You pressed delete on row: " + $(this).data("row-id"));
+        }).end().find(".command-edit").on("click", function(e) {
             alert("You pressed bank on row: " + $(this).data("row-id"));
-        }).end().find(".command-detail").on("click", function(e) {
+        }).end().find(".command-delete").on("click", function(e) {
             alert("You pressed detail on row: " + $(this).data("row-id"));
         });
     });
