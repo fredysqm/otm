@@ -31,79 +31,79 @@
 {% endblock %}
 
 {% block modals %}
-<div id="myModal" class="modal" id="exampleModal" tabindex="-1" role="dialog" aria-hidden="true">
-    <div class="modal-dialog" style="max-width: 800px;" role="document">
+<div id="dlgProveedor" class="modal" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog" style="max-width: 700px;" role="document">
         <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title">Modal title</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
             <div class="modal-body">
-                <form>
-                    <div class="form-group">
-                        <label class="col-form-label col-form-label-sm" for="proveedor">Proveedor</label>
-                        <input class="form-control form-control-sm" id="proveedor" name="proveedor" type="text">
-                    </div>
-                    <div class="form-group">
-                        <label class="col-form-label col-form-label-sm" for="nombre">Nombre comercial</label>
-                        <input class="form-control form-control-sm" id="nombre" name="nombre" type="text">
-                    </div>
-                    <div class="form-row">
-                        <div class="col">
-                            <label class="col-form-label col-form-label-sm" for="categoria_servicio">Categoría</label>
-                            <select class="form-control form-control-sm" id="categoria_servicio">
-                            </select>
+                <form id="fProveedor">
+                    <fieldset>
+                        <legend>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                            <h5 id="dlgProveedorTitulo" class="modal-title">TITULO</h5>
+                        </legend>
+                        <div class="form-group">
+                            <label class="col-form-label col-form-label-sm" for="proveedor">Proveedor</label>
+                            <select class="form-control form-control-sm" data-live-search="true" id="proveedor" name="proveedor"></select>
                         </div>
-                        <div class="col">
-                            <label class="col-form-label col-form-label-sm" for="modalidad_pago">Modalidad</label>
-                            <select class="form-control form-control-sm" id="modalidad_pago">
-                            </select>
+                        <div class="form-group">
+                            <label class="col-form-label col-form-label-sm" for="nombre">Nombre comercial</label>
+                            <input class="form-control form-control-sm" id="nombre" name="nombre" type="text">
                         </div>
-                    </div>
-                    <div class="form-row">
-                        <div class="col">
-                            <label class="col-form-label col-form-label-sm" for="localidad">Localidad</label>
-                            <select class="form-control form-control-sm" id="localidad">
-                            </select>
+                        <div class="form-row">
+                            <div class="col">
+                                <label class="col-form-label col-form-label-sm" for="categoria_servicio">Categoría</label>
+                                <select class="form-control form-control-sm" id="categoria_servicio" name="categoria_servicio">
+                                </select>
+                            </div>
+                            <div class="col">
+                                <label class="col-form-label col-form-label-sm" for="modalidad_pago">Modalidad</label>
+                                <select class="form-control form-control-sm" id="modalidad_pago" name="modalidad_pago">
+                                </select>
+                            </div>
                         </div>
-                        <div class="col">
-                            <label class="col-form-label col-form-label-sm" for="direccion">Dirección</label>
-                            <input class="form-control form-control-sm" id="direccion" name="direccion" type="text">
+                        <div class="form-row">
+                            <div class="col">
+                                <label class="col-form-label col-form-label-sm" for="localidad">Localidad</label>
+                                <select class="form-control form-control-sm" id="localidad" name="localidad">
+                                </select>
+                            </div>
+                            <div class="col">
+                                <label class="col-form-label col-form-label-sm" for="direccion">Dirección</label>
+                                <input class="form-control form-control-sm" id="direccion" name="direccion" type="text">
+                            </div>
                         </div>
-                    </div>
-                    <div class="form-row">
-                        <div class="col">
-                            <label class="col-form-label col-form-label-sm" for="telefono_fijo">Teléfono fijo</label>
-                            <input class="form-control form-control-sm" id="telefono_fijo" name="telefono_fijo" type="text">
-                            </select>
+                        <div class="form-row">
+                            <div class="col">
+                                <label class="col-form-label col-form-label-sm" for="telefono_fijo">Teléfono fijo</label>
+                                <input class="form-control form-control-sm" id="telefono_fijo" name="telefono_fijo" type="text">
+                                </select>
+                            </div>
+                            <div class="col">
+                                <label class="col-form-label col-form-label-sm" for="telefono_movil">Telefono móvil</label>
+                                <input class="form-control form-control-sm" id="telefono_movil" name="telefono_movil" type="text">
+                            </div>
                         </div>
-                        <div class="col">
-                            <label class="col-form-label col-form-label-sm" for="telefono_movil">Telefono móvil</label>
-                            <input class="form-control form-control-sm" id="telefono_movil" name="telefono_movil" type="text">
+                        <div class="form-row">
+                            <div class="col">
+                                <label class="col-form-label col-form-label-sm" for="email">Email</label>
+                                <input class="form-control form-control-sm" id="email" name="email" type="text">
+                                </select>
+                            </div>
+                            <div class="col">
+                                <label class="col-form-label col-form-label-sm" for="sitio_web">Web</label>
+                                <input class="form-control form-control-sm" id="sitio_web" name="sitio_web" type="text">
+                            </div>
                         </div>
-                    </div>
-                    <div class="form-row">
-                        <div class="col">
-                            <label class="col-form-label col-form-label-sm" for="email">Email</label>
-                            <input class="form-control form-control-sm" id="email" name="email" type="text">
-                            </select>
+                        <div class="form-group">
+                            <label class="col-form-label col-form-label-sm" for="observaciones">Observaciones</label>
+                            <textarea class="form-control form-control-sm" id="observaciones" name="observaciones" rows="3"></textarea>
                         </div>
-                        <div class="col">
-                            <label class="col-form-label col-form-label-sm" for="sitio_web">Web</label>
-                            <input class="form-control form-control-sm" id="sitio_web" name="sitio_web" type="text">
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label class="col-form-label col-form-label-sm" for="exampleTextarea">Example textarea</label>
-                        <textarea class="form-control form-control-sm" id="exampleTextarea" rows="3"></textarea>
-                    </div>
+                        <a href="#" class="btn btn-secondary float-left" data-dismiss="modal"><i class="far fa-times-circle"></i> Cancelar</a>
+                        <a href="#" class="btn btn-primary float-right"><i class="far fa-save"></i> Guardar</a>
+                    </fieldset>
                 </form>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary float-left" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary float-right">Save changes</button>
             </div>
         </div>
     </div>
@@ -112,6 +112,109 @@
 
 {% block js %}
 <script>
+/**/
+function fProveedorReset(){
+    $('#fProveedor')[0].reset();
+
+    $.ajax({
+        async: false,
+        cache: false,
+        type: "GET",
+        dataType: "json",
+        url: "/api/v1/proveedor/?page_size=100",
+        success: function(data){
+            $('#proveedor').empty();
+            $('#proveedor').append('<option value="">---</option>');
+            $.each(data.results, function (key, value) {
+                $('#proveedor').append('<option value=' + value.id + '>' + value.razon_social + ' (' +  value.id + ') </option>');
+            });
+        }
+    });
+
+    $.ajax({
+        async: false,
+        cache: false,
+        type: "GET",
+        dataType: "json",
+        url: "/api/v1/categoria_servicio/?page_size=100",
+        success: function(data){
+            $('#categoria_servicio').empty();
+            $('#categoria_servicio').append('<option value="">---</option>');
+            $.each(data.results, function (key, value) {
+                $('#categoria_servicio').append('<option value=' + value.id + '>' + value.nombre + '</option>');
+            });
+        }
+    });
+
+    $.ajax({
+        async: false,
+        cache: false,
+        type: "GET",
+        dataType: "json",
+        url: "/api/v1/modalidad_pago/?page_size=100",
+        success: function(data){
+            $('#modalidad_pago').empty();
+            $('#modalidad_pago').append('<option value="">---</option>');
+            $.each(data.results, function (key, value) {
+                $('#modalidad_pago').append('<option value=' + value.id + '>' + value.nombre + '</option>');
+            });
+        }
+    });
+
+    $.ajax({
+        async: false,
+        cache: false,
+        type: "GET",
+        dataType: "json",
+        url: "/api/v1/localidad/?page_size=100",
+        success: function(data){
+            $('#localidad').empty();
+            $('#localidad').append('<option value="">---</option>');
+            $.each(data.results, function (key, value) {
+                $('#localidad').append('<option value=' + value.id + '>' + value.nombre + '</option>');
+            });
+        }
+    });
+}
+
+function fProveedorLoadData(id) {
+    $.ajax({
+        async: false,
+        cache: false,
+        type: "GET",
+        dataType: "json",
+        url: "/api/v1/marca_comercial/" + id + "/",
+        success: function(data){
+            $('#proveedor').val(data.proveedor);
+            $('#nombre').val(data.nombre);
+            $('#categoria_servicio').val(data.categoria_servicio);
+            $('#modalidad_pago').val(data.modalidad_pago);
+            $('#localidad').val(data.localidad);
+            $('#direccion').val(data.direccion);
+            $('#telefono_fijo').val(data.telefono_fijo);
+            $('#telefono_movil').val(data.telefono_movil);
+            $('#email').val(data.email);
+            $('#sitio_web').val(data.sitio_web);
+            $('#observaciones').val(data.observaciones);
+        }
+    });
+}
+
+function fProveedorShow(id) {
+    fProveedorReset();
+
+    if ( id!=0 ) {
+        fProveedorLoadData(id);
+        $('#dlgProveedorTitulo').html('<i class="far fa-edit"></i> Modificar marca comercial');
+    } else {
+        $('#dlgProveedorTitulo').html('<i class="far fa-file"></i> Nueva marca comercial');
+    }
+
+    $('#dlgProveedor').modal('show');
+    $( "#proveedor" ).focus();
+}
+
+/*events*/
 $(document).ready(function() {
     var grid = $("#grid-data").bootgrid({
         url: "/api/v1/marca_comercial/",
@@ -142,13 +245,13 @@ $(document).ready(function() {
         }
     }).on("loaded.rs.jquery.bootgrid", function() {
         grid.find(".command-detail").on("click", function(e){
-            $('#myModal').modal('show');
+            //fProveedorShow( 0 );
         }).end().find(".command-bank").on("click", function(e) {
-            alert("You pressed delete on row: " + $(this).data("row-id"));
+            //alert("You pressed delete on row: " + $(this).data("row-id"));
         }).end().find(".command-edit").on("click", function(e) {
-            alert("You pressed bank on row: " + $(this).data("row-id"));
+            fProveedorShow( $(this).data("row-id") );
         }).end().find(".command-delete").on("click", function(e) {
-            alert("You pressed detail on row: " + $(this).data("row-id"));
+            //alert("You pressed detail on row: " + $(this).data("row-id"));
         });
     });
 });
