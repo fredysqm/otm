@@ -32,7 +32,7 @@
 
 {% block modals %}
 <div id="myModal" class="modal" id="exampleModal" tabindex="-1" role="dialog" aria-hidden="true">
-    <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-dialog" style="max-width: 800px;" role="document">
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title">Modal title</h5>
@@ -41,100 +41,65 @@
                 </button>
             </div>
             <div class="modal-body">
-                    <form>
-                            <div class="form-group row">
-                              <label class="col-3 col-form-label" for="proveedor">Proveedor</label> 
-                              <div class="col-9">
-                                <select id="proveedor" name="proveedor" class="custom-select" aria-describedby="proveedorHelpBlock">
-                                  <option value="rabbit">Rabbit</option>
-                                  <option value="duck">Duck</option>
-                                  <option value="fish">Fish</option>
-                                </select> 
-                                <span id="proveedorHelpBlock" class="form-text text-muted">help</span>
-                              </div>
-                            </div>
-                            <div class="form-group row">
-                              <label for="nombre" class="col-3 col-form-label">Nombre</label> 
-                              <div class="col-9">
-                                <input id="nombre" name="nombre" aria-describedby="nombreHelpBlock" class="form-control here" type="text"> 
-                                <span id="nombreHelpBlock" class="form-text text-muted">help</span>
-                              </div>
-                            </div>
-                            <div class="form-group row">
-                              <label for="categoria_servicio" class="col-3 col-form-label">Categoría</label> 
-                              <div class="col-9">
-                                <select id="categoria_servicio" name="categoria_servicio" class="custom-select" aria-describedby="categoria_servicioHelpBlock">
-                                  <option value="rabbit">Rabbit</option>
-                                  <option value="duck">Duck</option>
-                                  <option value="fish">Fish</option>
-                                </select> 
-                                <span id="categoria_servicioHelpBlock" class="form-text text-muted">help</span>
-                              </div>
-                            </div>
-                            <div class="form-group row">
-                              <label for="modalidad_pago" class="col-3 col-form-label">Modalidad</label> 
-                              <div class="col-9">
-                                <select id="modalidad_pago" name="modalidad_pago" class="custom-select" aria-describedby="modalidad_pagoHelpBlock">
-                                  <option value="rabbit">Rabbit</option>
-                                  <option value="duck">Duck</option>
-                                  <option value="fish">Fish</option>
-                                </select> 
-                                <span id="modalidad_pagoHelpBlock" class="form-text text-muted">help</span>
-                              </div>
-                            </div>
-                            <div class="form-group row">
-                              <label for="localidad" class="col-3 col-form-label">Localidad</label> 
-                              <div class="col-9">
-                                <select id="localidad" name="localidad" class="custom-select" aria-describedby="localidadHelpBlock">
-                                  <option value="rabbit">Rabbit</option>
-                                  <option value="duck">Duck</option>
-                                  <option value="fish">Fish</option>
-                                </select> 
-                                <span id="localidadHelpBlock" class="form-text text-muted">help</span>
-                              </div>
-                            </div>
-                            <div class="form-group row">
-                              <label for="direccion" class="col-3 col-form-label">Dirección</label> 
-                              <div class="col-9">
-                                <input id="direccion" name="direccion" class="form-control here" aria-describedby="direccionHelpBlock" type="text"> 
-                                <span id="direccionHelpBlock" class="form-text text-muted">help</span>
-                              </div>
-                            </div>
-                            <div class="form-group row">
-                              <label for="telefono_fijo" class="col-3 col-form-label">Teléfono fijo</label> 
-                              <div class="col-9">
-                                <input id="telefono_fijo" name="telefono_fijo" class="form-control here" aria-describedby="telefono_fijoHelpBlock" type="text"> 
-                                <span id="telefono_fijoHelpBlock" class="form-text text-muted">help</span>
-                              </div>
-                            </div>
-                            <div class="form-group row">
-                              <label for="telefono_movil" class="col-3 col-form-label">Teléfono móvil</label> 
-                              <div class="col-9">
-                                <input id="telefono_movil" name="telefono_movil" class="form-control here" aria-describedby="telefono_movilHelpBlock" type="text"> 
-                                <span id="telefono_movilHelpBlock" class="form-text text-muted">help</span>
-                              </div>
-                            </div>
-                            <div class="form-group row">
-                              <label for="email" class="col-3 col-form-label">Email</label> 
-                              <div class="col-9">
-                                <input id="email" name="email" class="form-control here" aria-describedby="emailHelpBlock" type="text"> 
-                                <span id="emailHelpBlock" class="form-text text-muted">help</span>
-                              </div>
-                            </div>
-                            <div class="form-group row">
-                              <label for="sitio_web" class="col-3 col-form-label">Web</label> 
-                              <div class="col-9">
-                                <input id="sitio_web" name="sitio_web" class="form-control here" aria-describedby="sitio_webHelpBlock" type="text"> 
-                                <span id="sitio_webHelpBlock" class="form-text text-muted">help</span>
-                              </div>
-                            </div>
-                            <div class="form-group row">
-                              <label for="observaciones" class="col-3 col-form-label">Observaciones</label> 
-                              <div class="col-9">
-                                <textarea id="observaciones" name="observaciones" cols="40" rows="5" class="form-control"></textarea>
-                              </div>
-                            </div>
-                          </form>
+                <form>
+                    <div class="form-group">
+                        <label class="col-form-label col-form-label-sm" for="proveedor">Proveedor</label>
+                        <input class="form-control form-control-sm" id="proveedor" name="proveedor" type="text">
+                    </div>
+                    <div class="form-group">
+                        <label class="col-form-label col-form-label-sm" for="nombre">Nombre comercial</label>
+                        <input class="form-control form-control-sm" id="nombre" name="nombre" type="text">
+                    </div>
+                    <div class="form-row">
+                        <div class="col">
+                            <label class="col-form-label col-form-label-sm" for="categoria_servicio">Categoría</label>
+                            <select class="form-control form-control-sm" id="categoria_servicio">
+                            </select>
+                        </div>
+                        <div class="col">
+                            <label class="col-form-label col-form-label-sm" for="modalidad_pago">Modalidad</label>
+                            <select class="form-control form-control-sm" id="modalidad_pago">
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="col">
+                            <label class="col-form-label col-form-label-sm" for="localidad">Localidad</label>
+                            <select class="form-control form-control-sm" id="localidad">
+                            </select>
+                        </div>
+                        <div class="col">
+                            <label class="col-form-label col-form-label-sm" for="direccion">Dirección</label>
+                            <input class="form-control form-control-sm" id="direccion" name="direccion" type="text">
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="col">
+                            <label class="col-form-label col-form-label-sm" for="telefono_fijo">Teléfono fijo</label>
+                            <input class="form-control form-control-sm" id="telefono_fijo" name="telefono_fijo" type="text">
+                            </select>
+                        </div>
+                        <div class="col">
+                            <label class="col-form-label col-form-label-sm" for="telefono_movil">Telefono móvil</label>
+                            <input class="form-control form-control-sm" id="telefono_movil" name="telefono_movil" type="text">
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="col">
+                            <label class="col-form-label col-form-label-sm" for="email">Email</label>
+                            <input class="form-control form-control-sm" id="email" name="email" type="text">
+                            </select>
+                        </div>
+                        <div class="col">
+                            <label class="col-form-label col-form-label-sm" for="sitio_web">Web</label>
+                            <input class="form-control form-control-sm" id="sitio_web" name="sitio_web" type="text">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-form-label col-form-label-sm" for="exampleTextarea">Example textarea</label>
+                        <textarea class="form-control form-control-sm" id="exampleTextarea" rows="3"></textarea>
+                    </div>
+                </form>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary float-left" data-dismiss="modal">Close</button>
