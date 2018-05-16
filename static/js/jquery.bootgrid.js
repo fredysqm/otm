@@ -1138,7 +1138,8 @@
              * @for ajaxSettings
              **/
             method: "GET",
-            cache: false
+            cache: false,
+            async: true,
         },
 
         /**

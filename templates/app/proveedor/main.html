@@ -7,7 +7,7 @@
 {% endblock %}
 
 {% block content %}
-<table id="grid-data" class="table table-hover table-condensed table-sm">
+<table id="grid-data" class="table table-hover table-striped table-condensed table-sm">
     <thead>
         <tr>
             <th data-column-id="id" data-identifier="true" data-width="60px">ID</th>
@@ -37,7 +37,7 @@
             <div class="modal-body">
                 <form id="fProveedor">
                     <input type="hidden" id="marca_comercial_id" name="marca_comercial_id">
-                    <input type="hidden" id="csrfmiddlewaretoken" name="csrfmiddlewaretoken" />
+                    <!-- <input type="hidden" id="csrfmiddlewaretoken" name="csrfmiddlewaretoken" /> -->
                     <fieldset>
                         <legend>
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -82,7 +82,7 @@
                         <div class="form-row">
                             <div class="col">
                                 <label class="col-form-label col-form-label-sm" for="telefono_fijo">Teléfono fijo</label>
-                                <input class="form-control form-control-sm" id="telefono_fijo" name="telefono_fijo" type="text"></select>
+                                <input class="form-control form-control-sm" id="telefono_fijo" name="telefono_fijo" type="text">
                                 <div class="invalid-feedback"></div>
                             </div>
                             <div class="col">
@@ -94,7 +94,7 @@
                         <div class="form-row">
                             <div class="col">
                                 <label class="col-form-label col-form-label-sm" for="email">Email</label>
-                                <input class="form-control form-control-sm" id="email" name="email" type="text"></select>
+                                <input class="form-control form-control-sm" id="email" name="email" type="text">
                                 <div class="invalid-feedback"></div>
                             </div>
                             <div class="col">
@@ -120,15 +120,23 @@
 
 {% block js %}
 <script>
-/**/
+$.ajaxSetup({
+    async: false,
+    cache: false,
+    contentType: 'application/json',
+    beforeSend: function(xhr, settings) {
+        if (!$.fn.csrfSafeMethod(settings.type) && !this.crossDomain) {
+            xhr.setRequestHeader("X-CSRFToken", $.fn.getCookie('csrftoken'));
+        }
+    }
+});
+
 function fProveedorReset(){
     $('#fProveedor')[0].reset();
+    $('#fProveedor').resetValidation();
 
     $.ajax({
-        async: false,
-        cache: false,
         type: "GET",
-        dataType: "json",
         url: "/api/v1/proveedor/?page_size=100",
         success: function(data){
             $('#proveedor').empty();
@@ -140,10 +148,7 @@ function fProveedorReset(){
     });
 
     $.ajax({
-        async: false,
-        cache: false,
         type: "GET",
-        dataType: "json",
         url: "/api/v1/categoria_servicio/?page_size=100",
         success: function(data){
             $('#categoria_servicio').empty();
@@ -155,10 +160,7 @@ function fProveedorReset(){
     });
 
     $.ajax({
-        async: false,
-        cache: false,
         type: "GET",
-        dataType: "json",
         url: "/api/v1/modalidad_pago/?page_size=100",
         success: function(data){
             $('#modalidad_pago').empty();
@@ -170,10 +172,7 @@ function fProveedorReset(){
     });
 
     $.ajax({
-        async: false,
-        cache: false,
         type: "GET",
-        dataType: "json",
         url: "/api/v1/localidad/?page_size=100",
         success: function(data){
             $('#localidad').empty();
@@ -187,10 +186,7 @@ function fProveedorReset(){
 
 function fProveedorLoadData(id) {
     $.ajax({
-        async: false,
-        cache: false,
         type: "GET",
-        dataType: "json",
         url: "/api/v1/marca_comercial/" + id + "/",
         success: function(data){
             $('#marca_comercial_id').val(data.id);
@@ -224,23 +220,6 @@ function fProveedorShow(id) {
     $('#proveedor').focus();
 }
 
-function getCookie(name) {
-    var cookieValue = null;
-    if (document.cookie && document.cookie != '') {
-        var cookies = document.cookie.split(';');
-        for (var i = 0; i < cookies.length; i++) {
-            var cookie = jQuery.trim(cookies[i]);
-            // Does this cookie string begin with the name we want?
-            if (cookie.substring(0, name.length + 1) == (name + '=')) {
-                cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
-                break;
-            }
-        }
-    }
-    return cookieValue;
-}
-
-
 /*events*/
 $(document).ready(function() {
     var grid = $("#grid-data").bootgrid({
@@ -258,10 +237,10 @@ $(document).ready(function() {
                     return "<a target=\"_blank\" href=\"" + row.sitio_web + "\"><i class=\"fas fa-external-link-alt\"></i> " + row.sitio_web + "</a>";
             },
             "acciones": function(column, row) {
-                return "<button type=\"button\" class=\"btn btn-xs btn-success command-detail\" data-row-id=\"" + row.id + "\"><i class=\"fas fa-info-circle\"></i></button> " +
-                "<button type=\"button\" class=\"btn btn-xs btn-primary command-bank\" data-row-id=\"" + row.id + "\"><i class=\"fas fa-piggy-bank\"></i></button> " +
-                "<button type=\"button\" class=\"btn btn-xs btn-warning command-edit\" data-row-id=\"" + row.id + "\"><i class=\"far fa-edit\"></i></button> " +
-                "<button type=\"button\" class=\"btn btn-xs btn-danger command-delete\" data-row-id=\"" + row.id + "\"><i class=\"far fa-trash-alt\"></i></button>";
+                return "<button type=\"button\" class=\"btn btn-xs btn-outline-success command-detail\" data-row-id=\"" + row.id + "\"><i class=\"fas fa-info-circle\"></i></button> " +
+                "<button type=\"button\" class=\"btn btn-xs btn-outline-primary command-bank\" data-row-id=\"" + row.id + "\"><i class=\"fas fa-piggy-bank\"></i></button> " +
+                "<button type=\"button\" class=\"btn btn-xs btn-outline-warning command-edit\" data-row-id=\"" + row.id + "\"><i class=\"far fa-edit\"></i></button> " +
+                "<button type=\"button\" class=\"btn btn-xs btn-outline-danger command-delete\" data-row-id=\"" + row.id + "\"><i class=\"far fa-trash-alt\"></i></button>";
             }
         },
         converters: {
@@ -272,7 +251,7 @@ $(document).ready(function() {
         }
     }).on("loaded.rs.jquery.bootgrid", function() {
         grid.find(".command-detail").on("click", function(e){
-            //fProveedorShow( 0 );
+            //alert("aa");
         }).end().find(".command-bank").on("click", function(e) {
             //alert("You pressed delete on row: " + $(this).data("row-id"));
         }).end().find(".command-edit").on("click", function(e) {
@@ -291,32 +270,24 @@ $(document).ready(function() {
 
     $('#cmdEnviarFormulario').on('click', function(event) {
         event.preventDefault();
-        $('#csrfmiddlewaretoken').val(getCookie('csrftoken'));
+        $('#fProveedor').resetValidation();
 
         if ($('#marca_comercial_id').val() == "0") {
             $.ajax({
-                async: false,
-                cache: false,
                 type: "POST",
-                data: $('#fProveedor').serialize(),
+                data: $('#fProveedor').getJSONdata(),
                 url: "/api/v1/marca_comercial/",
-                success: function(data){
-                    $('#dlgProveedor').modal('hide');
-                },
-                error: function (jqXHR) {
-                    $.each(jqXHR.responseJSON, function( index, value ) {
-                        $("#fProveedor input[name=" + index +"]").addClass("is-invalid");
-                        $("#fProveedor select[name=" + index +"]").addClass("is-invalid");
-                        $("#fProveedor input[name=" + index +"]").next().html(value);
-                        $("#fProveedor select[name=" + index +"]").next().html(value);
-                    });
-                },
-                complete:function () {
-                    //$('#btnCortar').button('reset');
-                },
+                success: function(data){ $("#grid-data").bootgrid("reload"); $('#dlgProveedor').modal('hide'); },
+                error: function (jqXHR) { $('#fProveedor').validateFromJSON(jqXHR.responseJSON); },
             });
         } else {
-            console.log($('#fProveedor').serialize());
+            $.ajax({
+                type: "PUT",
+                data: $('#fProveedor').getJSONdata(),
+                url: "/api/v1/marca_comercial/" + $('#marca_comercial_id').val() + "/",
+                success: function(data){ $("#grid-data").bootgrid("reload"); $('#dlgProveedor').modal('hide'); },
+                error: function (jqXHR) { $('#fProveedor').validateFromJSON(jqXHR.responseJSON); },
+            });
         }
     });
 });
