@@ -221,6 +221,12 @@ function fProveedorShow(id) {
 
 /*events*/
 $(document).ready(function() {
+    $("#fProveedor").bind("keypress", function (e) {
+        if (e.keyCode == 13) {
+            return false;
+        }
+    });
+
     var grid = $("#grid-data").bootgrid({
         url: "/api/v1/marca_comercial/",
         searchSettings: {
