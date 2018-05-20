@@ -31,18 +31,18 @@
 {% endblock %}
 
 {% block modals %}
-<div id="dlgProveedor" class="modal" tabindex="-1" role="dialog" aria-hidden="true" data-backdrop="static">
+<div id="dlgMarcaComercial" class="modal" tabindex="-1" role="dialog" aria-hidden="true" data-backdrop="static">
     <div class="modal-dialog" style="max-width: 700px;" role="document">
         <div class="modal-content">
             <div class="modal-body">
-                <form id="fProveedor">
+                <form id="fMarcaComercial">
                     <input type="hidden" id="marca_comercial_id" name="marca_comercial_id">
                     <fieldset>
                         <legend>
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                 <span aria-hidden="true">&times;</span>
                             </button>
-                            <h5 id="dlgProveedorTitulo" class="modal-title">TITULO</h5>
+                            <h5 id="lblMarcaComercial" class="modal-title">TITULO</h5>
                         </legend>
                         <div class="form-group">
                             <label class="col-form-label col-form-label-sm" for="proveedor">Proveedor</label>
@@ -115,6 +115,42 @@
         </div>
     </div>
 </div>
+<div id="dlgProveedor" class="modal" tabindex="-1" role="dialog" aria-hidden="true" data-backdrop="static">
+    <div class="modal-dialog" style="max-width: 700px;" role="document">
+        <div class="modal-content">
+            <div class="modal-body">
+                <form id="fProveedor">
+                    <!-- <input type="hidden" name="proveedor_id"> -->
+                    <fieldset>
+                        <legend>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                            <h5 id="lblProveedor" class="modal-title">TITULO</h5>
+                        </legend>
+                        <div class="form-group">
+                            <label class="col-form-label col-form-label-sm">Tipo de documento</label>
+                            <select class="form-control form-control-sm" data-live-search="true" name="tipo_documento"></select>
+                            <div class="invalid-feedback"></div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-form-label col-form-label-sm" >Número de documento</label>
+                            <input class="form-control form-control-sm" name="id" type="text">
+                            <div class="invalid-feedback"></div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-form-label col-form-label-sm">Razón social</label>
+                            <input class="form-control form-control-sm" name="razon_social" type="text">
+                            <div class="invalid-feedback"></div>
+                        </div>
+                        <button class="btn btn-secondary float-left" data-dismiss="modal"><i class="far fa-times-circle"></i> Cancelar</button>
+                        <button id="bSendProveedor" class="btn btn-primary float-right"><i class="far fa-save"></i> Guardar</button>
+                    </fieldset>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
 {% endblock %}
 
 {% block js %}
@@ -130,10 +166,10 @@ $.ajaxSetup({
     }
 });
 
-function fProveedorReset(){
-    $('#fProveedor')[0].reset();
-    $('#fProveedor').resetValidation();
-
+function fMarcaComercialReset(){
+    $('#fMarcaComercial')[0].reset();
+    $('#fMarcaComercial').resetValidation();
+    
     $.ajax({
         type: "GET",
         url: "/api/v1/proveedor/?page_size=100",
@@ -183,7 +219,7 @@ function fProveedorReset(){
     });
 }
 
-function fProveedorLoadData(id) {
+function fMarcaComercialLoadData(id) {
     $.ajax({
         type: "GET",
         url: "/api/v1/marca_comercial/" + id + "/",
@@ -204,24 +240,57 @@ function fProveedorLoadData(id) {
     });
 }
 
-function fProveedorShow(id) {
-    fProveedorReset();
-
+function fMarcaComercialShow(id) {
+    fMarcaComercialReset();
+    
     if ( id!=0 ) {
-        fProveedorLoadData(id);
-        $('#dlgProveedorTitulo').html('<i class="far fa-edit"></i> Modificar marca comercial');
+        fMarcaComercialLoadData(id);
+        $('#lblMarcaComercial').html('<i class="far fa-edit"></i> Modificar marca comercial');
     } else {
         $('#marca_comercial_id').val(0);
-        $('#dlgProveedorTitulo').html('<i class="far fa-file"></i> Nueva marca comercial');
+        $('#lblMarcaComercial').html('<i class="far fa-file"></i> Nueva marca comercial');
     }
-
-    $('#dlgProveedor').modal('show');
+    
+    $('#dlgMarcaComercial').modal('show');
     $('#proveedor').focus();
+}
+
+/*proveedor*/
+function fProveedorShow(id) {
+    fProveedorReset();
+    
+    if ( id!=0 ) {
+        fMarcaComercialLoadData(id);
+        $('#lblProveedor').html('<i class="far fa-edit"></i> Modificar proveedor');
+    } else {
+        $('#marca_comercial_id').val(0);
+        $('#lblProveedor').html('<i class="far fa-file"></i> Nuevo proveedor');
+    }
+    
+    $('#dlgProveedor').modal('show');
+    //$('#proveedor').focus();
+}
+
+function fProveedorReset(){
+    $('#fProveedor')[0].reset();
+    //$('#fProveedor').resetValidation();
+    
+    /*$.ajax({
+        type: "GET",
+        url: "/api/v1/tipo_doc_proveedor/?page_size=100",
+        success: function(data){
+            $('#tip').empty();
+            $('#proveedor').append('<option value="">---</option>');
+            $.each(data.results, function (key, value) {
+                $('#proveedor').append('<option value=' + value.id + '>' + value.razon_social + ' (' +  value.id + ') </option>');
+            });
+        }
+    });*/
 }
 
 /*events*/
 $(document).ready(function() {
-    $("#fProveedor").bind("keypress", function (e) {
+    $("#fMarcaComercial").bind("keypress", function (e) {
         if (e.keyCode == 13) {
             return false;
         }
@@ -260,38 +329,44 @@ $(document).ready(function() {
         }).end().find(".command-bank").on("click", function(e) {
             //alert("You pressed delete on row: " + $(this).data("row-id"));
         }).end().find(".command-edit").on("click", function(e) {
-            fProveedorShow( $(this).data("row-id") );
+            fMarcaComercialShow( $(this).data("row-id") );
         }).end().find(".command-delete").on("click", function(e) {
             //alert("You pressed detail on row: " + $(this).data("row-id"));
         });
     });
 
-    $("#grid-toolbar").append('<button id="cmdNuevaMarcaComercial" class="btn btn-primary" type="button"><i class="far fa-file"></i> Nueva marca comercial</button>');
+    $("#grid-toolbar").append('<button id="cmdNuevoProveedor" class="btn btn-primary" type="button"><i class="far fa-file"></i> Nuevo proveedor</button> ');
+    $("#grid-toolbar").append('<button id="cmdNuevaMarcaComercial" class="btn btn-primary" type="button"><i class="far fa-file"></i> Nueva marca comercial</button> ');
 
-    $('#cmdNuevaMarcaComercial').on('click', function(event) {
+    $('#cmdNuevoProveedor').on('click', function(event) {
         event.preventDefault();
         fProveedorShow(0);
     });
 
+    $('#cmdNuevaMarcaComercial').on('click', function(event) {
+        event.preventDefault();
+        fMarcaComercialShow(0);
+    });
+
     $('#cmdEnviarFormulario').on('click', function(event) {
         event.preventDefault();
-        $('#fProveedor').resetValidation();
+        $('#fMarcaComercial').resetValidation();
 
         if ($('#marca_comercial_id').val() == "0") {
             $.ajax({
                 type: "POST",
-                data: $('#fProveedor').getJSONdata(),
+                data: $('#fMarcaComercial').getJSONdata(),
                 url: "/api/v1/marca_comercial/",
-                success: function(data){ $("#grid-data").bootgrid("reload"); $('#dlgProveedor').modal('hide'); },
-                error: function (jqXHR) { $('#fProveedor').validateFromJSON(jqXHR.responseJSON); },
+                success: function(data){ $("#grid-data").bootgrid("reload"); $('#dlgMarcaComercial').modal('hide'); },
+                error: function (jqXHR) { $('#fMarcaComercial').validateFromJSON(jqXHR.responseJSON); },
             });
         } else {
             $.ajax({
                 type: "PUT",
-                data: $('#fProveedor').getJSONdata(),
+                data: $('#fMarcaComercial').getJSONdata(),
                 url: "/api/v1/marca_comercial/" + $('#marca_comercial_id').val() + "/",
-                success: function(data){ $("#grid-data").bootgrid("reload"); $('#dlgProveedor').modal('hide'); },
-                error: function (jqXHR) { $('#fProveedor').validateFromJSON(jqXHR.responseJSON); },
+                success: function(data){ $("#grid-data").bootgrid("reload"); $('#dlgMarcaComercial').modal('hide'); },
+                error: function (jqXHR) { $('#fMarcaComercial').validateFromJSON(jqXHR.responseJSON); },
             });
         }
     });
