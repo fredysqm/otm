@@ -31,18 +31,18 @@
 {% endblock %}
 
 {% block modals %}
-<div id="dlgMarcaComercial" class="modal" tabindex="-1" role="dialog" aria-hidden="true" data-backdrop="static">
+<div id="dMarcaComercial" class="modal" tabindex="-1" role="dialog" aria-hidden="true" data-backdrop="static">
     <div class="modal-dialog" style="max-width: 700px;" role="document">
         <div class="modal-content">
             <div class="modal-body">
-                <form id="fMarcaComercial">
+                <form id="fMarcaComercial" autocomplete="off">
                     <input type="hidden" id="marca_comercial_id" name="marca_comercial_id">
                     <fieldset>
                         <legend>
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                 <span aria-hidden="true">&times;</span>
                             </button>
-                            <h5 id="lblMarcaComercial" class="modal-title">TITULO</h5>
+                            <h5 id="tMarcaComercial" class="modal-title">TITULO</h5>
                         </legend>
                         <div class="form-group">
                             <label class="col-form-label col-form-label-sm" for="proveedor">Proveedor</label>
@@ -119,7 +119,7 @@
     <div class="modal-dialog" style="max-width: 500px;" role="document">
         <div class="modal-content">
             <div class="modal-body">
-                <form id="fMarcaComercialDelete">
+                <form id="fMarcaComercialDelete" autocomplete="off">
                     <input type="hidden" id="fMarcaComercialDelete_marca_comercial_id" name="marca_comercial_id">
                     <fieldset>
                         <legend>
@@ -143,7 +143,7 @@
     <div class="modal-dialog" style="max-width: 500px;" role="document">
         <div class="modal-content">
             <div class="modal-body">
-                <form id="fProveedor">
+                <form id="fProveedor" autocomplete="off">
                     <fieldset>
                         <legend>
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -174,6 +174,36 @@
         </div>
     </div>
 </div>
+<div id="dMarcaComercialCuenta" class="modal" tabindex="-1" role="dialog" aria-hidden="true" data-backdrop="static">
+    <div class="modal-dialog" style="max-width: 900px;" role="document">
+        <div class="modal-content">
+            <div class="modal-body">
+                <legend>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                    <h5 id="tProveedor" class="modal-title"><i class="fas fa-piggy-bank"></i> Cuentas de marca comercial</h5>
+                </legend>
+                <table id="grid-data-cuentas" class="table table-hover table-striped table-condensed table-sm">
+                    <thead>
+                        <tr>
+                            <th data-column-id="id" data-identifier="true" data-width="60px">ID</th>
+                            <th data-column-id="banco__nombre" data-width="90px">Banco</th>
+                            <th data-column-id="moneda">Moneda</th>
+                            <th data-column-id="tipo_cuenta" data-width="100px">Tipo cuenta</th>
+                            <th data-column-id="cta" data-width="80px">CTA</th>
+                            <th data-column-id="titular" data-width="150px">Titular</th>
+                            <th data-column-id="cci" data-visible="false">CCI</th>
+                            <th data-column-id="creado" data-visible="false" data-width="150px" data-converter="datetime">Creado</th>
+                            <th data-column-id="modificado" data-width="150px" data-converter="datetime">Modificado</th>
+                            <th data-column-id="acciones" data-width="120px" data-formatter="acciones" data-sortable="false">Acciones</th>
+                        </tr>
+                    </thead>
+                </table> 
+            </div>
+        </div>
+    </div>
+</div>
 {% endblock %}
 
 {% block js %}
@@ -181,7 +211,6 @@
 $(document).ajaxStop($.unblockUI);
 
 $.ajaxSetup({
-    //async: false,
     cache: false,
     contentType: 'application/json',
     beforeSend: function(xhr, settings) {
@@ -270,13 +299,13 @@ function fMarcaComercialShow(id) {
     
     if ( id!=0 ) {
         fMarcaComercialLoadData(id);
-        $('#lblMarcaComercial').html('<i class="far fa-edit"></i> Modificar marca comercial');
+        $('#tMarcaComercial').html('<i class="far fa-edit"></i> Modificar marca comercial');
     } else {
         $('#marca_comercial_id').val(0);
-        $('#lblMarcaComercial').html('<i class="far fa-file"></i> Nueva marca comercial');
+        $('#tMarcaComercial').html('<i class="far fa-file"></i> Nueva marca comercial');
     }
     
-    $('#dlgMarcaComercial').modal('show');
+    $('#dMarcaComercial').modal('show');
     $('#proveedor').focus();
 }
 
@@ -318,6 +347,32 @@ function fProveedorReset(){
     });
 }
 
+/*marca comercial cuentas*/
+function gridMarcaComercialShow(marca_comercial_id) {
+    var gridCuentas = $("#grid-data-cuentas").bootgrid({
+        url: "/api/v1/marca_comercial_cuenta/",
+        searchSettings: {
+            fulltext: false,
+        },
+        formatters: {
+            "acciones": function(column, row) {
+                return "<button type=\"button\" class=\"btn btn-xs btn-outline-success command-detail\" data-row-id=\"" + row.id + "\"><i class=\"fas fa-info-circle\"></i></button> " +
+                "<button type=\"button\" class=\"btn btn-xs btn-outline-primary command-bank\" data-row-id=\"" + row.id + "\"><i class=\"fas fa-piggy-bank\"></i></button> " +
+                "<button type=\"button\" class=\"btn btn-xs btn-outline-warning command-edit\" data-row-id=\"" + row.id + "\"><i class=\"far fa-edit\"></i></button> " +
+                "<button type=\"button\" class=\"btn btn-xs btn-outline-danger command-delete\" data-row-id=\"" + row.id + "\"><i class=\"far fa-trash-alt\"></i></button>";
+            }
+        },
+        converters: {
+            datetime: {
+                from: function (value) { return moment(value); },
+                to: function (value) { return moment(value).format("DD/MMM/YYYY hh:mm A"); }
+            },
+        }
+    });
+
+    $('#dMarcaComercialCuenta').modal('show');
+}
+
 /*events*/
 $(document).ready(function() {
     $("#fMarcaComercial").bind("keypress", function (e) {
@@ -357,7 +412,7 @@ $(document).ready(function() {
         grid.find(".command-detail").on("click", function(e){
             //alert("aa");
         }).end().find(".command-bank").on("click", function(e) {
-            //alert("You pressed delete on row: " + $(this).data("row-id"));
+            gridMarcaComercialShow( $(this).data("row-id") );
         }).end().find(".command-edit").on("click", function(e) {
             $.blockUI({ message: $('#dWaitMessage'), });
             fMarcaComercialShow( $(this).data("row-id") );
@@ -391,7 +446,7 @@ $(document).ready(function() {
                 type: "POST",
                 data: $('#fMarcaComercial').getJSONdata(),
                 url: "/api/v1/marca_comercial/",
-                success: function(data){ $("#grid-data").bootgrid("reload"); $('#dlgMarcaComercial').modal('hide'); },
+                success: function(data){ $("#grid-data").bootgrid("reload"); $('#dMarcaComercial').modal('hide'); },
                 error: function (jqXHR) { $('#fMarcaComercial').validateFromJSON(jqXHR.responseJSON); },
             });
         } else {
@@ -399,7 +454,7 @@ $(document).ready(function() {
                 type: "PUT",
                 data: $('#fMarcaComercial').getJSONdata(),
                 url: "/api/v1/marca_comercial/" + $('#marca_comercial_id').val() + "/",
-                success: function(data){ $("#grid-data").bootgrid("reload"); $('#dlgMarcaComercial').modal('hide'); },
+                success: function(data){ $("#grid-data").bootgrid("reload"); $('#dMarcaComercial').modal('hide'); },
                 error: function (jqXHR) { $('#fMarcaComercial').validateFromJSON(jqXHR.responseJSON); },
             });
         }
@@ -410,31 +465,19 @@ $(document).ready(function() {
         event.preventDefault();
         $('#fProveedor').resetValidation();
 
-        /*if ($('#fProveedor_proveedor_id').val() == "0") {*/
-            $.ajax({
-                type: "POST",
-                data: $('#fProveedor').getJSONdata(),
-                url: "/api/v1/proveedor/",
-                success: function(data){ $("#grid-data").bootgrid("reload"); $('#dlgProveedor').modal('hide'); },
-                error: function (jqXHR) { $('#fProveedor').validateFromJSON(jqXHR.responseJSON); },
-            });
-        /*} /*else {
-            $.ajax({
-                type: "PUT",
-                data: $('#fMarcaComercial').getJSONdata(),
-                url: "/api/v1/marca_comercial/" + $('#marca_comercial_id').val() + "/",
-                success: function(data){ $("#grid-data").bootgrid("reload"); $('#dlgMarcaComercial').modal('hide'); },
-                error: function (jqXHR) { $('#fMarcaComercial').validateFromJSON(jqXHR.responseJSON); },
-            });
-        }*/
+        $.ajax({
+            type: "POST",
+            data: $('#fProveedor').getJSONdata(),
+            url: "/api/v1/proveedor/",
+            success: function(data){ $("#grid-data").bootgrid("reload"); $('#dlgProveedor').modal('hide'); },
+            error: function (jqXHR) { $('#fProveedor').validateFromJSON(jqXHR.responseJSON); },
+        });
     });
 
     $('#fMarcaComercialDelete_submit').on('click', function(event) {
         $.blockUI({ message: $('#dWaitMessage'), });
         event.preventDefault();
-        //$('#fMarcaComercialDelete').resetValidation();
 
-        /*if ($('#fProveedor_proveedor_id').val() == "0") {*/
         $.ajax({
             type: "DELETE",
             data: $('#fMarcaComercialDelete').getJSONdata(),
