@@ -171,10 +171,16 @@
         </div>
     </div>
 </div>
+<div id="mdl_wait_msg">
+    <h5><img src="{% static 'img/loader.gif' %}" /> Procesando...</h5>
+</div>
 {% endblock %}
 
 {% block js %}
 <script>
+$(document).ajaxStop($.unblockUI);
+$.blockUI({ message: $('#mdl_wait_msg') });
+
 $.ajaxSetup({
     async: false,
     cache: false,
@@ -187,6 +193,7 @@ $.ajaxSetup({
 });
 
 function fMarcaComercialReset(){
+    $.blockUI({ message: $('#mdl_wait_msg') });
     $('#fMarcaComercial')[0].reset();
     $('#fMarcaComercial').resetValidation();
     

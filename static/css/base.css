@@ -32,5 +32,9 @@
     width: 1.5rem;
 }
 
+#mdl_wait_msg {
+    display: none;
+}
+
 /*table.table tr td button { display:none;}
 table.table tr:hover td button { display:inline-block;}*/
