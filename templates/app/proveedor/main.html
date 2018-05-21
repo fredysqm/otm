@@ -115,18 +115,38 @@
         </div>
     </div>
 </div>
-<div id="dlgProveedor" class="modal" tabindex="-1" role="dialog" aria-hidden="true" data-backdrop="static">
+<div id="dMarcaComercialDelete" class="modal" tabindex="-1" role="dialog" aria-hidden="true" data-backdrop="static">
     <div class="modal-dialog" style="max-width: 500px;" role="document">
         <div class="modal-content">
             <div class="modal-body">
-                <form id="fProveedor">
-                    <!-- <input type="hidden" id="fProveedor_proveedor_id" name="proveedor_id"> -->
+                <form id="fMarcaComercialDelete">
+                    <input type="hidden" id="fMarcaComercialDelete_marca_comercial_id" name="marca_comercial_id">
                     <fieldset>
                         <legend>
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                 <span aria-hidden="true">&times;</span>
                             </button>
-                            <h5 id="lblProveedor" class="modal-title">TITULO</h5>
+                            <h5 id="tMarcaComercialDelete" class="modal-title">¿Esta seguro?</h5>
+                        </legend>
+                        <button class="btn btn-secondary float-left" data-dismiss="modal"><i class="far fa-times-circle"></i> Cancelar</button>
+                        <button id="fMarcaComercialDelete_submit" class="btn btn-danger float-right"><i class="far fa-savexx"></i> Eliminar</button>
+                    </fieldset>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<div id="dProveedor" class="modal" tabindex="-1" role="dialog" aria-hidden="true" data-backdrop="static">
+    <div class="modal-dialog" style="max-width: 500px;" role="document">
+        <div class="modal-content">
+            <div class="modal-body">
+                <form id="fProveedor">
+                    <fieldset>
+                        <legend>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                            <h5 id="tProveedor" class="modal-title">TITULO</h5>
                         </legend>
                         <div class="form-group">
                             <label class="col-form-label col-form-label-sm" for="fProveedor_tipo_documento">Tipo de documento</label>
@@ -255,19 +275,24 @@ function fMarcaComercialShow(id) {
     $('#proveedor').focus();
 }
 
+function fMarcaComercialDelete(id) {
+    $('#fMarcaComercialDelete_marca_comercial_id').val(id);
+    $('#dMarcaComercialDelete').modal('show');
+}
+
 /*proveedor*/
 function fProveedorShow(id) {
     fProveedorReset();
     
     if ( id!=0 ) {
         fMarcaComercialLoadData(id);
-        $('#lblProveedor').html('<i class="far fa-edit"></i> Modificar proveedor');
+        $('#tProveedor').html('<i class="far fa-edit"></i> Modificar proveedor');
     } else {
         $('#fProveedor_proveedor_id').val(0);
-        $('#lblProveedor').html('<i class="far fa-file"></i> Nuevo proveedor');
+        $('#tProveedor').html('<i class="far fa-file"></i> Nuevo proveedor');
     }
     
-    $('#dlgProveedor').modal('show');
+    $('#dProveedor').modal('show');
     $('#fProveedor_tipo_documento').focus();
 }
 
@@ -331,7 +356,7 @@ $(document).ready(function() {
         }).end().find(".command-edit").on("click", function(e) {
             fMarcaComercialShow( $(this).data("row-id") );
         }).end().find(".command-delete").on("click", function(e) {
-            //alert("You pressed detail on row: " + $(this).data("row-id"));
+            fMarcaComercialDelete( $(this).data("row-id") );
         });
     });
 
@@ -393,6 +418,21 @@ $(document).ready(function() {
             });
         }*/
     });
+
+    $('#fMarcaComercialDelete_submit').on('click', function(event) {
+        event.preventDefault();
+        //$('#fMarcaComercialDelete').resetValidation();
+
+        /*if ($('#fProveedor_proveedor_id').val() == "0") {*/
+        $.ajax({
+            type: "DELETE",
+            data: $('#fMarcaComercialDelete').getJSONdata(),
+            url: "/api/v1/marca_comercial/" + $('#fMarcaComercialDelete_marca_comercial_id').val() + "/",
+            success: function(data){ $("#grid-data").bootgrid("reload"); $('#dMarcaComercialDelete').modal('hide'); },
+            error: function (jqXHR) { $('#fMarcaComercialDelete').validateFromJSON(jqXHR.responseJSON); },
+        });
+    });
+
 });
 </script>
 {% endblock %}
