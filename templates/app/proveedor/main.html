@@ -126,10 +126,13 @@
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                 <span aria-hidden="true">&times;</span>
                             </button>
-                            <h5 id="tMarcaComercialDelete" class="modal-title">¿Esta seguro?</h5>
+                            <h5 id="tMarcaComercialDelete" class="modal-title"><i class="far fa-trash-alt"></i> Eliminar marca comercial</h5>
                         </legend>
+                        <div class="form-group">
+                            <label class="col-form-label col-form-label-sm">¿Está seguro(a) que desea eliminar esta marca comercial?</label>
+                        </div>
                         <button class="btn btn-secondary float-left" data-dismiss="modal"><i class="far fa-times-circle"></i> Cancelar</button>
-                        <button id="fMarcaComercialDelete_submit" class="btn btn-danger float-right"><i class="far fa-savexx"></i> Eliminar</button>
+                        <button id="fMarcaComercialDelete_submit" class="btn btn-danger float-right"><i class="far fa-trash-alt"></i> Eliminar</button>
                     </fieldset>
                 </form>
             </div>
@@ -359,7 +362,6 @@ $(document).ready(function() {
             $.blockUI({ message: $('#dWaitMessage'), });
             fMarcaComercialShow( $(this).data("row-id") );
         }).end().find(".command-delete").on("click", function(e) {
-            $.blockUI({ message: $('#dWaitMessage'), });
             fMarcaComercialDelete( $(this).data("row-id") );
         });
     });
