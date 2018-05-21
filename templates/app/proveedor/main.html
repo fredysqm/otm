@@ -347,28 +347,46 @@ function fProveedorReset(){
     });
 }
 
+var primeravez = true;
 /*marca comercial cuentas*/
 function gridMarcaComercialShow(marca_comercial_id) {
-    var gridCuentas = $("#grid-data-cuentas").bootgrid({
-        url: "/api/v1/marca_comercial_cuenta/?marca_comercial=" + marca_comercial_id + "&page_size=100",
-        searchSettings: {
-            fulltext: false,
-        },
-        formatters: {
-            "acciones": function(column, row) {
-                //return "<button type=\"button\" class=\"btn btn-xs btn-outline-success command-detail\" data-row-id=\"" + row.id + "\"><i class=\"fas fa-info-circle\"></i></button> " +
-                return "<button type=\"button\" class=\"btn btn-xs btn-outline-warning command-edit\" data-row-id=\"" + row.id + "\"><i class=\"far fa-edit\"></i></button> " +
-                "<button type=\"button\" class=\"btn btn-xs btn-outline-danger command-delete\" data-row-id=\"" + row.id + "\"><i class=\"far fa-trash-alt\"></i></button>";
-            }
-        },
-        converters: {
-            datetime: {
-                from: function (value) { return moment(value); },
-                to: function (value) { return moment(value).format("DD/MMM/YYYY hh:mm A"); }
-            },
-        }
-    });
 
+    var instance = $("#grid-data-cuentas");
+
+    function initialize() {
+        console.log(marca_comercial_id);
+        instance.bootgrid({
+            navigation: 0,
+            url: function () {
+                    var mid = marca_comercial_id;
+                    console.log(mid);
+                    console.log("/api/v1/marca_comercial_cuenta/?marca_comercial=" + mid + "&page_size=100");
+                    return "/api/v1/marca_comercial_cuenta/?marca_comercial=" + mid + "&page_size=100";
+                },
+            searchSettings: {
+                fulltext: false,
+            },
+            formatters: {
+                "acciones": function(column, row) {
+                    //return "<button type=\"button\" class=\"btn btn-xs btn-outline-success command-detail\" data-row-id=\"" + row.id + "\"><i class=\"fas fa-info-circle\"></i></button> " +
+                    return "<button type=\"button\" class=\"btn btn-xs btn-outline-warning command-edit\" data-row-id=\"" + row.id + "\"><i class=\"far fa-edit\"></i></button> " +
+                    "<button type=\"button\" class=\"btn btn-xs btn-outline-danger command-delete\" data-row-id=\"" + row.id + "\"><i class=\"far fa-trash-alt\"></i></button>";
+                }
+            },
+            converters: {
+                datetime: {
+                    from: function (value) { return moment(value); },
+                    to: function (value) { return moment(value).format("DD/MMM/YYYY hh:mm A"); }
+                },
+            }
+        });
+    }
+
+    if(primeravez) {
+        initialize();
+        primeravez = false;
+    }
+    instance.bootgrid("reload");
     $('#dMarcaComercialCuenta').modal('show');
 }
 
@@ -397,7 +415,7 @@ $(document).ready(function() {
             "acciones": function(column, row) {
                 //return "<button type=\"button\" class=\"btn btn-xs btn-outline-success command-detail\" data-row-id=\"" + row.id + "\"><i class=\"fas fa-info-circle\"></i></button> " +
                 return "<button type=\"button\" class=\"btn btn-xs btn-outline-primary command-bank\" data-row-id=\"" + row.id + "\"><i class=\"fas fa-piggy-bank\"></i></button> " +
-                "<button type=\"button\" class=\"btn btn-xs btn-outline-warning command-edit\" data-row-id=\"" + row.id + "\"><i class=\"far fa-edit\"></i></button> " +
+                "<button title=\"Hello World!\" type=\"button\" class=\"btn btn-xs btn-outline-warning command-edit\" data-row-id=\"" + row.id + "\"><i class=\"far fa-edit\"></i></button> " +
                 "<button type=\"button\" class=\"btn btn-xs btn-outline-danger command-delete\" data-row-id=\"" + row.id + "\"><i class=\"far fa-trash-alt\"></i></button>";
             }
         },
@@ -409,8 +427,9 @@ $(document).ready(function() {
         }
     }).on("loaded.rs.jquery.bootgrid", function() {
         grid.find(".command-detail").on("click", function(e){
-            //alert("aa");
+            alert("aa");
         }).end().find(".command-bank").on("click", function(e) {
+            alert( $(this).data("row-id") );
             gridMarcaComercialShow( $(this).data("row-id") );
         }).end().find(".command-edit").on("click", function(e) {
             $.blockUI({ message: $('#dWaitMessage'), });
