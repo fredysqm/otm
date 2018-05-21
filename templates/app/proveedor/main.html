@@ -24,7 +24,7 @@
             <th data-column-id="sitio_web" data-visible="false" data-formatter="link" data-sortable="false">Web</th>
             <th data-column-id="creado" data-visible="false" data-width="150px" data-converter="datetime">Creado</th>
             <th data-column-id="modificado" data-width="150px" data-converter="datetime">Modificado</th>
-            <th data-column-id="acciones" data-width="120px" data-formatter="acciones" data-sortable="false">Acciones</th>
+            <th data-column-id="acciones" data-width="90px" data-formatter="acciones" data-sortable="false">Acciones</th>
         </tr>
     </thead>
 </table> 
@@ -196,7 +196,7 @@
                             <th data-column-id="cci" data-visible="false">CCI</th>
                             <th data-column-id="creado" data-visible="false" data-width="150px" data-converter="datetime">Creado</th>
                             <th data-column-id="modificado" data-width="150px" data-converter="datetime">Modificado</th>
-                            <th data-column-id="acciones" data-width="90px" data-formatter="acciones" data-sortable="false">Acciones</th>
+                            <th data-column-id="acciones" data-width="65px" data-formatter="acciones" data-sortable="false">Acciones</th>
                         </tr>
                     </thead>
                 </table> 
@@ -356,8 +356,8 @@ function gridMarcaComercialShow(marca_comercial_id) {
         },
         formatters: {
             "acciones": function(column, row) {
-                return "<button type=\"button\" class=\"btn btn-xs btn-outline-success command-detail\" data-row-id=\"" + row.id + "\"><i class=\"fas fa-info-circle\"></i></button> " +
-                "<button type=\"button\" class=\"btn btn-xs btn-outline-warning command-edit\" data-row-id=\"" + row.id + "\"><i class=\"far fa-edit\"></i></button> " +
+                //return "<button type=\"button\" class=\"btn btn-xs btn-outline-success command-detail\" data-row-id=\"" + row.id + "\"><i class=\"fas fa-info-circle\"></i></button> " +
+                return "<button type=\"button\" class=\"btn btn-xs btn-outline-warning command-edit\" data-row-id=\"" + row.id + "\"><i class=\"far fa-edit\"></i></button> " +
                 "<button type=\"button\" class=\"btn btn-xs btn-outline-danger command-delete\" data-row-id=\"" + row.id + "\"><i class=\"far fa-trash-alt\"></i></button>";
             }
         },
@@ -395,8 +395,8 @@ $(document).ready(function() {
                     return "<a target=\"_blank\" href=\"" + row.sitio_web + "\"><i class=\"fas fa-external-link-alt\"></i> " + row.sitio_web + "</a>";
             },
             "acciones": function(column, row) {
-                return "<button type=\"button\" class=\"btn btn-xs btn-outline-success command-detail\" data-row-id=\"" + row.id + "\"><i class=\"fas fa-info-circle\"></i></button> " +
-                "<button type=\"button\" class=\"btn btn-xs btn-outline-primary command-bank\" data-row-id=\"" + row.id + "\"><i class=\"fas fa-piggy-bank\"></i></button> " +
+                //return "<button type=\"button\" class=\"btn btn-xs btn-outline-success command-detail\" data-row-id=\"" + row.id + "\"><i class=\"fas fa-info-circle\"></i></button> " +
+                return "<button type=\"button\" class=\"btn btn-xs btn-outline-primary command-bank\" data-row-id=\"" + row.id + "\"><i class=\"fas fa-piggy-bank\"></i></button> " +
                 "<button type=\"button\" class=\"btn btn-xs btn-outline-warning command-edit\" data-row-id=\"" + row.id + "\"><i class=\"far fa-edit\"></i></button> " +
                 "<button type=\"button\" class=\"btn btn-xs btn-outline-danger command-delete\" data-row-id=\"" + row.id + "\"><i class=\"far fa-trash-alt\"></i></button>";
             }
