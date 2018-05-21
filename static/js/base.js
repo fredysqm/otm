@@ -32,7 +32,7 @@ jQuery.fn.getJSONdata = function() {
 };
 
 jQuery.fn.resetValidation = function() {
-    var el = "#" + this[0].id;
+    var el = "#" + this.attr('id');
     var formArray = $(this[0]).serializeArray();
     for (var i = 0; i < formArray.length; i++){
         $(el + " input[name=" + formArray[i]['name'] +"]").removeClass('is-invalid');
@@ -42,13 +42,13 @@ jQuery.fn.resetValidation = function() {
 };
 
 jQuery.fn.validateFromJSON = function(responseJSON) {
-    var el = this[0].id;
+    var el = "#" + this.attr('id');
     $.each(responseJSON, function( index, value ) {
-        $("#" + el + " input[name=" + index +"]").addClass("is-invalid");
-        $("#" + el + " select[name=" + index +"]").addClass("is-invalid");
-        $("#" + el + " textarea[name=" + index +"]").addClass("is-invalid");
-        $("#" + el + " input[name=" + index +"]").next().html(value);
-        $("#" + el + " select[name=" + index +"]").next().html(value);
-        $("#" + el + " textarea[name=" + index +"]").next().html(value);
+        $(el + " input[name=" + index +"]").addClass("is-invalid");
+        $(el + " select[name=" + index +"]").addClass("is-invalid");
+        $(el + " textarea[name=" + index +"]").addClass("is-invalid");
+        $(el + " input[name=" + index +"]").next().html(value);
+        $(el + " select[name=" + index +"]").next().html(value);
+        $(el + " textarea[name=" + index +"]").next().html(value);
     });
 };

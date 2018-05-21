@@ -116,11 +116,11 @@
     </div>
 </div>
 <div id="dlgProveedor" class="modal" tabindex="-1" role="dialog" aria-hidden="true" data-backdrop="static">
-    <div class="modal-dialog" style="max-width: 700px;" role="document">
+    <div class="modal-dialog" style="max-width: 500px;" role="document">
         <div class="modal-content">
             <div class="modal-body">
                 <form id="fProveedor">
-                    <!-- <input type="hidden" name="proveedor_id"> -->
+                    <!-- <input type="hidden" id="fProveedor_proveedor_id" name="proveedor_id"> -->
                     <fieldset>
                         <legend>
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -129,22 +129,22 @@
                             <h5 id="lblProveedor" class="modal-title">TITULO</h5>
                         </legend>
                         <div class="form-group">
-                            <label class="col-form-label col-form-label-sm">Tipo de documento</label>
-                            <select class="form-control form-control-sm" data-live-search="true" name="tipo_documento"></select>
+                            <label class="col-form-label col-form-label-sm" for="fProveedor_tipo_documento">Tipo de documento</label>
+                            <select class="form-control form-control-sm" id="fProveedor_tipo_documento" name="tipo_documento"></select>
                             <div class="invalid-feedback"></div>
                         </div>
                         <div class="form-group">
-                            <label class="col-form-label col-form-label-sm" >Número de documento</label>
-                            <input class="form-control form-control-sm" name="id" type="text">
+                            <label class="col-form-label col-form-label-sm" for="fProveedor_id">Número de documento</label>
+                            <input class="form-control form-control-sm" id="fProveedor_id" name="id" type="text">
                             <div class="invalid-feedback"></div>
                         </div>
                         <div class="form-group">
-                            <label class="col-form-label col-form-label-sm">Razón social</label>
-                            <input class="form-control form-control-sm" name="razon_social" type="text">
+                            <label class="col-form-label col-form-label-sm" for="fProveedor_razon_social">Razón social</label>
+                            <input class="form-control form-control-sm" id="fProveedor_razon_social" name="razon_social" type="text">
                             <div class="invalid-feedback"></div>
                         </div>
                         <button class="btn btn-secondary float-left" data-dismiss="modal"><i class="far fa-times-circle"></i> Cancelar</button>
-                        <button id="bSendProveedor" class="btn btn-primary float-right"><i class="far fa-save"></i> Guardar</button>
+                        <button id="fProveedor_submit" class="btn btn-primary float-right"><i class="far fa-save"></i> Guardar</button>
                     </fieldset>
                 </form>
             </div>
@@ -263,29 +263,29 @@ function fProveedorShow(id) {
         fMarcaComercialLoadData(id);
         $('#lblProveedor').html('<i class="far fa-edit"></i> Modificar proveedor');
     } else {
-        $('#marca_comercial_id').val(0);
+        $('#fProveedor_proveedor_id').val(0);
         $('#lblProveedor').html('<i class="far fa-file"></i> Nuevo proveedor');
     }
     
     $('#dlgProveedor').modal('show');
-    //$('#proveedor').focus();
+    $('#fProveedor_tipo_documento').focus();
 }
 
 function fProveedorReset(){
     $('#fProveedor')[0].reset();
-    //$('#fProveedor').resetValidation();
+    $('#fProveedor').resetValidation();
     
-    /*$.ajax({
+    $.ajax({
         type: "GET",
         url: "/api/v1/tipo_doc_proveedor/?page_size=100",
         success: function(data){
-            $('#tip').empty();
-            $('#proveedor').append('<option value="">---</option>');
+            $('#fProveedor_tipo_documento').empty();
+            $('#fProveedor_tipo_documento').append('<option value="">---</option>');
             $.each(data.results, function (key, value) {
-                $('#proveedor').append('<option value=' + value.id + '>' + value.razon_social + ' (' +  value.id + ') </option>');
+                $('#fProveedor_tipo_documento').append('<option value=' + value.id + '>' + value.nombre + ' (' +  value.id + ') </option>');
             });
         }
-    });*/
+    });
 }
 
 /*events*/
@@ -369,6 +369,29 @@ $(document).ready(function() {
                 error: function (jqXHR) { $('#fMarcaComercial').validateFromJSON(jqXHR.responseJSON); },
             });
         }
+    });
+
+    $('#fProveedor_submit').on('click', function(event) {
+        event.preventDefault();
+        $('#fProveedor').resetValidation();
+
+        /*if ($('#fProveedor_proveedor_id').val() == "0") {*/
+            $.ajax({
+                type: "POST",
+                data: $('#fProveedor').getJSONdata(),
+                url: "/api/v1/proveedor/",
+                success: function(data){ $("#grid-data").bootgrid("reload"); $('#dlgProveedor').modal('hide'); },
+                error: function (jqXHR) { $('#fProveedor').validateFromJSON(jqXHR.responseJSON); },
+            });
+        /*} /*else {
+            $.ajax({
+                type: "PUT",
+                data: $('#fMarcaComercial').getJSONdata(),
+                url: "/api/v1/marca_comercial/" + $('#marca_comercial_id').val() + "/",
+                success: function(data){ $("#grid-data").bootgrid("reload"); $('#dlgMarcaComercial').modal('hide'); },
+                error: function (jqXHR) { $('#fMarcaComercial').validateFromJSON(jqXHR.responseJSON); },
+            });
+        }*/
     });
 });
 </script>
