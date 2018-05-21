@@ -22,6 +22,7 @@ INSTALLED_APPS = [
     'reversion',
     'compressor',
     'rest_framework',
+    'django_filters',
     'crispy_forms',
     #ME
     'xauth',

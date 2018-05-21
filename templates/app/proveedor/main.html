@@ -350,7 +350,7 @@ function fProveedorReset(){
 /*marca comercial cuentas*/
 function gridMarcaComercialShow(marca_comercial_id) {
     var gridCuentas = $("#grid-data-cuentas").bootgrid({
-        url: "/api/v1/marca_comercial_cuenta/",
+        url: "/api/v1/marca_comercial_cuenta/?marca_comercial=" + marca_comercial_id + "&page_size=100",
         searchSettings: {
             fulltext: false,
         },

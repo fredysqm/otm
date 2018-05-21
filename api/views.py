@@ -3,6 +3,7 @@ from rest_framework import mixins
 from rest_framework import pagination
 from rest_framework import filters
 from rest_framework import permissions
+from django_filters.rest_framework import DjangoFilterBackend
 from core.models import *
 from api.serializers import *
 
@@ -133,5 +134,6 @@ class MarcaComercialCuentaViewSet(viewsets.ModelViewSet):
     queryset = MarcaComercialCuenta.objects.select_related('marca_comercial','banco','moneda','tipo_cuenta').filter(estado_obj='A')
     pagination_class = DefaultPagination
     permission_classes = (DefaultPermissions,)
-    filter_backends = (filters.SearchFilter, filters.OrderingFilter,)
-    search_fields = ('id', 'nombre',)
+    filter_backends = (filters.SearchFilter, filters.OrderingFilter, DjangoFilterBackend,)
+    search_fields = ('id', 'titular',)
+    filter_fields = ('marca_comercial',)
