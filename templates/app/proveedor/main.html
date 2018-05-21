@@ -171,18 +171,14 @@
         </div>
     </div>
 </div>
-<div id="mdl_wait_msg">
-    <h5><img src="{% static 'img/loader.gif' %}" /> Procesando...</h5>
-</div>
 {% endblock %}
 
 {% block js %}
 <script>
 $(document).ajaxStop($.unblockUI);
-$.blockUI({ message: $('#mdl_wait_msg') });
 
 $.ajaxSetup({
-    async: false,
+    //async: false,
     cache: false,
     contentType: 'application/json',
     beforeSend: function(xhr, settings) {
@@ -193,7 +189,6 @@ $.ajaxSetup({
 });
 
 function fMarcaComercialReset(){
-    $.blockUI({ message: $('#mdl_wait_msg') });
     $('#fMarcaComercial')[0].reset();
     $('#fMarcaComercial').resetValidation();
     
@@ -361,8 +356,10 @@ $(document).ready(function() {
         }).end().find(".command-bank").on("click", function(e) {
             //alert("You pressed delete on row: " + $(this).data("row-id"));
         }).end().find(".command-edit").on("click", function(e) {
+            $.blockUI({ message: $('#dWaitMessage'), });
             fMarcaComercialShow( $(this).data("row-id") );
         }).end().find(".command-delete").on("click", function(e) {
+            $.blockUI({ message: $('#dWaitMessage'), });
             fMarcaComercialDelete( $(this).data("row-id") );
         });
     });
@@ -371,16 +368,19 @@ $(document).ready(function() {
     $("#grid-toolbar").append('<button id="cmdNuevaMarcaComercial" class="btn btn-primary" type="button"><i class="far fa-file"></i> Nueva marca comercial</button> ');
 
     $('#cmdNuevoProveedor').on('click', function(event) {
+        $.blockUI({ message: $('#dWaitMessage') });
         event.preventDefault();
         fProveedorShow(0);
     });
 
     $('#cmdNuevaMarcaComercial').on('click', function(event) {
+        $.blockUI({ message: $('#dWaitMessage') });
         event.preventDefault();
         fMarcaComercialShow(0);
     });
 
     $('#cmdEnviarFormulario').on('click', function(event) {
+        $.blockUI({ message: $('#dWaitMessage'), });
         event.preventDefault();
         $('#fMarcaComercial').resetValidation();
 
@@ -404,6 +404,7 @@ $(document).ready(function() {
     });
 
     $('#fProveedor_submit').on('click', function(event) {
+        $.blockUI({ message: $('#dWaitMessage'), });
         event.preventDefault();
         $('#fProveedor').resetValidation();
 
@@ -427,6 +428,7 @@ $(document).ready(function() {
     });
 
     $('#fMarcaComercialDelete_submit').on('click', function(event) {
+        $.blockUI({ message: $('#dWaitMessage'), });
         event.preventDefault();
         //$('#fMarcaComercialDelete').resetValidation();
 

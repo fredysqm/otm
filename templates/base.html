@@ -36,7 +36,9 @@
 
     {% block footer %}{% endblock %}
     {% block modals %}{% endblock %}
-
+    <div id="dWaitMessage">
+        <h6 class="pt-2"><img src="{% static 'img/loader.gif' %}" /> Procesando...</h6>
+    </div>
     {% compress js %}
         <script src="/static/js/jquery.js" type="text/javascript" charset="utf-8"></script>
         <script src="/static/js/base.js" type="text/javascript" charset="utf-8"></script>

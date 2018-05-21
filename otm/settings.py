@@ -89,7 +89,11 @@ LOGIN_REDIRECT_URL = '/'
 if DEBUG:
     INTERNAL_IPS = ('127.0.0.1',)
     INSTALLED_APPS += ['debug_toolbar',]
-    MIDDLEWARE += ['debug_toolbar.middleware.DebugToolbarMiddleware',]
+    SLEEP_TIME = 2
+    MIDDLEWARE += [
+        'debug_toolbar.middleware.DebugToolbarMiddleware',
+        'app.middlewares.SleepMiddleware',
+    ]
     DEBUG_TOOLBAR_PANELS = [
         'debug_toolbar.panels.versions.VersionsPanel',
         'debug_toolbar.panels.timer.TimerPanel',
