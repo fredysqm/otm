@@ -92,7 +92,7 @@ if DEBUG:
     SLEEP_TIME = 2
     MIDDLEWARE += [
         'debug_toolbar.middleware.DebugToolbarMiddleware',
-        'app.middlewares.SleepMiddleware',
+        #'app.middlewares.SleepMiddleware',
     ]
     DEBUG_TOOLBAR_PANELS = [
         'debug_toolbar.panels.versions.VersionsPanel',

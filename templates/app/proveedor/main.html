@@ -192,7 +192,7 @@ function fMarcaComercialReset(){
     $('#fMarcaComercial')[0].reset();
     $('#fMarcaComercial').resetValidation();
     
-    $.ajax({
+    $.ajaxQueue({
         type: "GET",
         url: "/api/v1/proveedor/?page_size=100",
         success: function(data){
@@ -204,7 +204,7 @@ function fMarcaComercialReset(){
         }
     });
 
-    $.ajax({
+    $.ajaxQueue({
         type: "GET",
         url: "/api/v1/categoria_servicio/?page_size=100",
         success: function(data){
@@ -216,7 +216,7 @@ function fMarcaComercialReset(){
         }
     });
 
-    $.ajax({
+    $.ajaxQueue({
         type: "GET",
         url: "/api/v1/modalidad_pago/?page_size=100",
         success: function(data){
@@ -228,7 +228,7 @@ function fMarcaComercialReset(){
         }
     });
 
-    $.ajax({
+    $.ajaxQueue({
         type: "GET",
         url: "/api/v1/localidad/?page_size=100",
         success: function(data){
@@ -242,7 +242,7 @@ function fMarcaComercialReset(){
 }
 
 function fMarcaComercialLoadData(id) {
-    $.ajax({
+    $.ajaxQueue({
         type: "GET",
         url: "/api/v1/marca_comercial/" + id + "/",
         success: function(data){
