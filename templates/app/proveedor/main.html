@@ -182,7 +182,7 @@
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
-                    <h5 id="tProveedor" class="modal-title"><i class="fas fa-piggy-bank"></i> Cuentas de marca comercial</h5>
+                    <h5 id="tProveedor" class="modal-title"><i class="fas fa-piggy-bank"></i> Cuentas de la marca comercial</h5>
                 </legend>
                 <table id="grid-data-cuentas" class="table table-hover table-striped table-condensed table-sm">
                     <thead>
@@ -354,10 +354,14 @@ function fProveedorReset(){
 function gridMarcaComercialShow(marca_comercial_id) {
     $("#grid-data-cuentas").bootgrid("destroy");
     var grid_data_cuentas = $("#grid-data-cuentas").bootgrid({
-        //navigation: 0,
+        rowCount: -1,
         url: function () {
                 return "/api/v1/marca_comercial_cuenta/?marca_comercial=" + marca_comercial_id + "&page_size=100";
-            },
+        },
+        templates: {
+            search: "",
+            pagination: "",
+        },
         searchSettings: {
             fulltext: false,
         },
@@ -376,8 +380,7 @@ function gridMarcaComercialShow(marca_comercial_id) {
         }
     });
 
-    //$('#grid-data-cuentas').bootgrid('reload');
-    //instance.bootgrid("reload");
+    $("#grid-data-cuentas").prev().find(".gridToolbar").append('<button id="bNuevaCuenta" class="btn btn-primary" type="button"><i class="far fa-file"></i> Nueva cuenta</button> ');
     $('#dMarcaComercialCuenta').modal('show');
 }
 
@@ -420,7 +423,7 @@ $(document).ready(function() {
         grid.find(".command-detail").on("click", function(e){
             alert("aa");
         }).end().find(".command-bank").on("click", function(e) {
-            alert( $(this).data("row-id") );
+            $.blockUI({ message: $('#dWaitMessage'), });
             gridMarcaComercialShow( $(this).data("row-id") );
         }).end().find(".command-edit").on("click", function(e) {
             $.blockUI({ message: $('#dWaitMessage'), });
@@ -430,8 +433,8 @@ $(document).ready(function() {
         });
     });
 
-    $("#grid-toolbar").append('<button id="cmdNuevoProveedor" class="btn btn-primary" type="button"><i class="far fa-file"></i> Nuevo proveedor</button> ');
-    $("#grid-toolbar").append('<button id="cmdNuevaMarcaComercial" class="btn btn-primary" type="button"><i class="far fa-file"></i> Nueva marca comercial</button> ');
+    $("#grid-data").prev().find(".gridToolbar").append('<button id="cmdNuevoProveedor" class="btn btn-primary" type="button"><i class="far fa-file"></i> Nuevo proveedor</button> ');
+    $("#grid-data").prev().find(".gridToolbar").append('<button id="cmdNuevaMarcaComercial" class="btn btn-primary" type="button"><i class="far fa-file"></i> Nueva marca comercial</button> ');
 
     $('#cmdNuevoProveedor').on('click', function(event) {
         $.blockUI({ message: $('#dWaitMessage') });

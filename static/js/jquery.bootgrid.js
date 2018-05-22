@@ -1023,7 +1023,7 @@
         navigation: 3, // it's a flag: 0 = none, 1 = top, 2 = bottom, 3 = both (top and bottom)
         padding: 2, // page padding (pagination)
         columnSelection: true,
-        rowCount: [25, 50, 100, 500], // rows per page int or array of int (-1 represents "All")
+        rowCount: [25, 50, 100], // rows per page int or array of int (-1 represents "All")
 
         /**
          * Enables row selection (to enable multi selection see also `multiSelect`). Default value is `false`.
@@ -1371,7 +1371,7 @@
             body: "<tbody></tbody>",
             cell: "<td class=\"{{ctx.css}}\" style=\"{{ctx.style}}\">{{ctx.content}}</td>",
             footer: "<div id=\"{{ctx.id}}\" class=\"{{css.footer}}\"><div class=\"row\"><div class=\"col-sm-6 px-0\"><p class=\"{{css.pagination}}\"></p></div><div class=\"col-sm-6 infoBar px-0\"><p class=\"{{css.infos}}\"></p></div></div></div>",
-            header: "<div id=\"{{ctx.id}}\" class=\"{{css.header}}\"><div class=\"row\"><div id=\"grid-toolbar\" class=\"col-sm-6 px-0\"></div><div class=\"col-sm-6 actionBar px-0\"><p class=\"{{css.search}}\"></p><p class=\"{{css.actions}}\"></p></div></div></div>",
+            header: "<div id=\"{{ctx.id}}\" class=\"{{css.header}}\"><div class=\"row\"><div id=\"gridToolbar\" class=\"gridToolbar col-sm-6 px-0\"></div><div class=\"col-sm-6 actionBar px-0\"><p class=\"{{css.search}}\"></p><p class=\"{{css.actions}}\"></p></div></div></div>",
             headerCell: "<th data-column-id=\"{{ctx.column.id}}\" class=\"{{ctx.css}}\" style=\"{{ctx.style}}\"><a href=\"javascript:void(0);\" class=\"{{css.columnHeaderAnchor}} {{ctx.sortable}}\"><span class=\"{{css.columnHeaderText}}\">{{ctx.column.text}}</span>{{ctx.icon}}</a></th>",
             icon: "<span class=\"{{css.icon}} {{ctx.iconCss}}\"></span>",
             infos: "<div class=\"{{css.infos}}\"><small>{{lbl.infos}}</small></div>",
