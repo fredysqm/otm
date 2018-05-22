@@ -347,46 +347,37 @@ function fProveedorReset(){
     });
 }
 
-var primeravez = true;
+
 /*marca comercial cuentas*/
+//var grid_data_cuentas = $("#grid-data-cuentas");
+
 function gridMarcaComercialShow(marca_comercial_id) {
-
-    var instance = $("#grid-data-cuentas");
-
-    function initialize() {
-        console.log(marca_comercial_id);
-        instance.bootgrid({
-            navigation: 0,
-            url: function () {
-                    var mid = marca_comercial_id;
-                    console.log(mid);
-                    console.log("/api/v1/marca_comercial_cuenta/?marca_comercial=" + mid + "&page_size=100");
-                    return "/api/v1/marca_comercial_cuenta/?marca_comercial=" + mid + "&page_size=100";
-                },
-            searchSettings: {
-                fulltext: false,
+    $("#grid-data-cuentas").bootgrid("destroy");
+    var grid_data_cuentas = $("#grid-data-cuentas").bootgrid({
+        //navigation: 0,
+        url: function () {
+                return "/api/v1/marca_comercial_cuenta/?marca_comercial=" + marca_comercial_id + "&page_size=100";
             },
-            formatters: {
-                "acciones": function(column, row) {
-                    //return "<button type=\"button\" class=\"btn btn-xs btn-outline-success command-detail\" data-row-id=\"" + row.id + "\"><i class=\"fas fa-info-circle\"></i></button> " +
-                    return "<button type=\"button\" class=\"btn btn-xs btn-outline-warning command-edit\" data-row-id=\"" + row.id + "\"><i class=\"far fa-edit\"></i></button> " +
-                    "<button type=\"button\" class=\"btn btn-xs btn-outline-danger command-delete\" data-row-id=\"" + row.id + "\"><i class=\"far fa-trash-alt\"></i></button>";
-                }
-            },
-            converters: {
-                datetime: {
-                    from: function (value) { return moment(value); },
-                    to: function (value) { return moment(value).format("DD/MMM/YYYY hh:mm A"); }
-                },
+        searchSettings: {
+            fulltext: false,
+        },
+        formatters: {
+            "acciones": function(column, row) {
+                //return "<button type=\"button\" class=\"btn btn-xs btn-outline-success command-detail\" data-row-id=\"" + row.id + "\"><i class=\"fas fa-info-circle\"></i></button> " +
+                return "<button type=\"button\" class=\"btn btn-xs btn-outline-warning command-edit\" data-row-id=\"" + row.id + "\"><i class=\"far fa-edit\"></i></button> " +
+                "<button type=\"button\" class=\"btn btn-xs btn-outline-danger command-delete\" data-row-id=\"" + row.id + "\"><i class=\"far fa-trash-alt\"></i></button>";
             }
-        });
-    }
+        },
+        converters: {
+            datetime: {
+                from: function (value) { return moment(value); },
+                to: function (value) { return moment(value).format("DD/MMM/YYYY hh:mm A"); }
+            },
+        }
+    });
 
-    if(primeravez) {
-        initialize();
-        primeravez = false;
-    }
-    instance.bootgrid("reload");
+    //$('#grid-data-cuentas').bootgrid('reload');
+    //instance.bootgrid("reload");
     $('#dMarcaComercialCuenta').modal('show');
 }
 
