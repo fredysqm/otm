@@ -182,8 +182,10 @@
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
-                    <h5 id="tProveedor" class="modal-title"><i class="fas fa-piggy-bank"></i> Cuentas de la marca comercial</h5>
+                    <h5 class="modal-title"><i class="fas fa-piggy-bank"></i> Cuentas de la marca comercial</h5>
                 </legend>
+                <dl class="row">
+                </dl>
                 <table id="grid-data-cuentas" class="table table-hover table-striped table-condensed table-sm">
                     <thead>
                         <tr>
@@ -347,11 +349,23 @@ function fProveedorReset(){
     });
 }
 
-
-/*marca comercial cuentas*/
-//var grid_data_cuentas = $("#grid-data-cuentas");
-
 function gridMarcaComercialShow(marca_comercial_id) {
+    var dlDetalle = $("#dMarcaComercialCuenta").find("dl");
+    dlDetalle.empty();
+
+    $.ajax({
+        type: "GET",
+        url: "http://127.0.0.1:8000/api/v1/marca_comercial/" + marca_comercial_id + "/",
+        success: function(data){
+            dlDetalle.append("<dt class=\"col-sm-2\">Proveedor:</dt><dd class=\"col-sm-10\">" + data.proveedor__razon_social + " <small>(id: " + data.proveedor + ")</small></dd>");
+            dlDetalle.append("<dt class=\"col-sm-2\">Marca comercial:</dt><dd class=\"col-sm-10\">" + data.nombre + " <small>(id: " + data.id + ")</small></dd>");
+            dlDetalle.append("<dt class=\"col-sm-2\">Modalidad pago:</dt><dd class=\"col-sm-10\">" + data.modalidad_pago__nombre + "</dd>");
+            dlDetalle.append("<dt class=\"col-sm-2\">Categoría servicio:</dt><dd class=\"col-sm-10\">" + data.categoria_servicio__nombre + "</dd>");
+            dlDetalle.append("<dt class=\"col-sm-2\">Localidad:</dt><dd class=\"col-sm-10\">" + data.localidad__nombre + "</dd>");
+            
+        }
+    });
+
     $("#grid-data-cuentas").bootgrid("destroy");
     var grid_data_cuentas = $("#grid-data-cuentas").bootgrid({
         rowCount: -1,
