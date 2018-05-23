@@ -183,6 +183,7 @@
                         <span aria-hidden="true">&times;</span>
                     </button>
                     <h5 class="modal-title"><i class="fas fa-piggy-bank"></i> Cuentas de la marca comercial</h5>
+                    <hr/>
                 </legend>
                 <dl class="row">
                 </dl>
@@ -202,6 +203,90 @@
                         </tr>
                     </thead>
                 </table> 
+            </div>
+        </div>
+    </div>
+</div>
+<div id="dMarcaComercialCuentaData" class="modal" tabindex="-1" role="dialog" aria-hidden="true" data-backdrop="static">
+    <div class="modal-dialog" style="max-width: 700px;" role="document">
+        <div class="modal-content">
+            <div class="modal-body">
+                <form id="fMarcaComercial" autocomplete="off">
+                    <input type="hidden" id="marca_comercial_id" name="marca_comercial_id">
+                    <fieldset>
+                        <legend>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                            <h5 id="tMarcaComercial" class="modal-title">TITULO</h5>
+                        </legend>
+                        <div class="form-group">
+                            <label class="col-form-label col-form-label-sm" for="proveedor">Proveedor</label>
+                            <select class="form-control form-control-sm" data-live-search="true" id="proveedor" name="proveedor"></select>
+                            <div class="invalid-feedback"></div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-form-label col-form-label-sm" for="nombre">Nombre comercial</label>
+                            <input class="form-control form-control-sm" id="nombre" name="nombre" type="text">
+                            <div class="invalid-feedback"></div>
+                        </div>
+                        <div class="form-row">
+                            <div class="col">
+                                <label class="col-form-label col-form-label-sm" for="categoria_servicio">Categoría</label>
+                                <select class="form-control form-control-sm" id="categoria_servicio" name="categoria_servicio"></select>
+                                <div class="invalid-feedback"></div>
+                            </div>
+                            <div class="col">
+                                <label class="col-form-label col-form-label-sm" for="modalidad_pago">Modalidad</label>
+                                <select class="form-control form-control-sm" id="modalidad_pago" name="modalidad_pago"></select>
+                                <div class="invalid-feedback"></div>
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="col">
+                                <label class="col-form-label col-form-label-sm" for="localidad">Localidad</label>
+                                <select class="form-control form-control-sm" id="localidad" name="localidad"></select>
+                                <div class="invalid-feedback"></div>
+                            </div>
+                            <div class="col">
+                                <label class="col-form-label col-form-label-sm" for="direccion">Dirección</label>
+                                <input class="form-control form-control-sm" id="direccion" name="direccion" type="text">
+                                <div class="invalid-feedback"></div>
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="col">
+                                <label class="col-form-label col-form-label-sm" for="telefono_fijo">Teléfono fijo</label>
+                                <input class="form-control form-control-sm" id="telefono_fijo" name="telefono_fijo" type="text">
+                                <div class="invalid-feedback"></div>
+                            </div>
+                            <div class="col">
+                                <label class="col-form-label col-form-label-sm" for="telefono_movil">Telefono móvil</label>
+                                <input class="form-control form-control-sm" id="telefono_movil" name="telefono_movil" type="text">
+                                <div class="invalid-feedback"></div>
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="col">
+                                <label class="col-form-label col-form-label-sm" for="email">Email</label>
+                                <input class="form-control form-control-sm" id="email" name="email" type="text">
+                                <div class="invalid-feedback"></div>
+                            </div>
+                            <div class="col">
+                                <label class="col-form-label col-form-label-sm" for="sitio_web">Web</label>
+                                <input class="form-control form-control-sm" id="sitio_web" name="sitio_web" type="text">
+                                <div class="invalid-feedback"></div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-form-label col-form-label-sm" for="observaciones">Observaciones</label>
+                            <textarea class="form-control form-control-sm" id="observaciones" name="observaciones" rows="3"></textarea>
+                            <div class="invalid-feedback"></div>
+                        </div>
+                        <button class="btn btn-secondary float-left" data-dismiss="modal"><i class="far fa-times-circle"></i> Cancelar</button>
+                        <button id="cmdEnviarFormulario" class="btn btn-primary float-right"><i class="far fa-save"></i> Guardar</button>
+                    </fieldset>
+                </form>
             </div>
         </div>
     </div>
@@ -392,12 +477,26 @@ function gridMarcaComercialShow(marca_comercial_id) {
                 to: function (value) { return moment(value).format("DD/MMM/YYYY hh:mm A"); }
             },
         }
+    }).on("loaded.rs.jquery.bootgrid", function() {
+        grid_data_cuentas.find(".command-detail").on("click", function(e){
+            //alert("aa");
+        }).end().find(".command-bank").on("click", function(e) {
+            /*$.blockUI({ message: $('#dWaitMessage'), });
+            gridMarcaComercialShow( $(this).data("row-id") );*/
+        }).end().find(".command-edit").on("click", function(e) {
+            fMarcaComercialCuentaShow( $(this).data("row-id") );
+        }).end().find(".command-delete").on("click", function(e) {
+            fMarcaComercialDelete( $(this).data("row-id") );
+        });
     });
 
     $("#grid-data-cuentas").prev().find(".gridToolbar").append('<button id="bNuevaCuenta" class="btn btn-primary" type="button"><i class="far fa-file"></i> Nueva cuenta</button> ');
     $('#dMarcaComercialCuenta').modal('show');
 }
 
+function fMarcaComercialCuentaShow(marca_comercial_id) {
+    $("#dMarcaComercialCuentaData").modal('show');
+}
 /*events*/
 $(document).ready(function() {
     $("#fMarcaComercial").bind("keypress", function (e) {
