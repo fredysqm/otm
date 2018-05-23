@@ -355,7 +355,7 @@ function gridMarcaComercialShow(marca_comercial_id) {
 
     $.ajax({
         type: "GET",
-        url: "http://127.0.0.1:8000/api/v1/marca_comercial/" + marca_comercial_id + "/",
+        url: "/api/v1/marca_comercial/" + marca_comercial_id + "/",
         success: function(data){
             dlDetalle.append("<dt class=\"col-sm-2\">Proveedor:</dt><dd class=\"col-sm-10\">" + data.proveedor__razon_social + " <small>(id: " + data.proveedor + ")</small></dd>");
             dlDetalle.append("<dt class=\"col-sm-2\">Marca comercial:</dt><dd class=\"col-sm-10\">" + data.nombre + " <small>(id: " + data.id + ")</small></dd>");
