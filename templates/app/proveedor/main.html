@@ -43,8 +43,8 @@
                                 <span aria-hidden="true">&times;</span>
                             </button>
                             <h5 class="modal-title">TITULO</h5>
+                            <hr/>
                         </legend>
-                        <hr />
                         <div class="form-group">
                             <label class="col-form-label col-form-label-sm" for="fMarcaComercial_proveedor">Proveedor</label>
                             <select class="form-control form-control-sm" data-live-search="true" id="fMarcaComercial_proveedor" name="proveedor"></select>
@@ -128,6 +128,7 @@
                                 <span aria-hidden="true">&times;</span>
                             </button>
                             <h5 class="modal-title"><i class="far fa-trash-alt"></i> Eliminar marca comercial</h5>
+                            <hr/>
                         </legend>
                         <div class="alert alert-dismissible alert-danger detail">
                             No se puede eliminar está marca comercial porque esta siendo utilizada por otros módulos del sistema.
@@ -154,6 +155,7 @@
                                 <span aria-hidden="true">&times;</span>
                             </button>
                             <h5 class="modal-title">TITULO</h5>
+                            <hr/>
                         </legend>
                         <div class="form-group">
                             <label class="col-form-label col-form-label-sm" for="fProveedor_tipo_documento">Tipo de documento</label>
@@ -178,7 +180,7 @@
         </div>
     </div>
 </div>
-<div id="dMarcaComercialCuenta" class="modal" tabindex="-1" role="dialog" aria-hidden="true" data-backdrop="static">
+<div id="fMarcaComercialCuentaList" class="modal" tabindex="-1" role="dialog" aria-hidden="true" data-backdrop="static">
     <div class="modal-dialog" style="max-width: 1050px;" role="document">
         <div class="modal-content">
             <div class="modal-body">
@@ -311,6 +313,7 @@ $.ajaxSetup({
     }
 });
 
+/*marca comercial*/
 function fMarcaComercialShow(id) {
     var dialog = $("#fMarcaComercial");
     var form = $(dialog).find("form");
@@ -324,11 +327,11 @@ function fMarcaComercialShow(id) {
     $(form).find("[name=modalidad_pago]").fillItems("/api/v1/modalidad_pago/?page_size=100", "id", "nombre");
     $(form).find("[name=localidad]").fillItems("/api/v1/localidad/?page_size=100", "id", "nombre");
     
-    if ( id!=0 ) {
+    if ( id==0 ) {
+        $(title).html("<i class=\"far fa-file\"></i> Nueva marca comercial");
+    } else {
         $(form).fillForm("/api/v1/marca_comercial/" + id + "/");
         $(title).html("<i class=\"far fa-edit\"></i> Modificar marca comercial");
-    } else {
-        $(title).html("<i class=\"far fa-file\"></i> Nueva marca comercial");
     }
     
     $(dialog).modal("show");
@@ -391,51 +394,49 @@ function fMarcaComercialDeleteSync() {
 
 /*proveedor*/
 function fProveedorShow(id) {
-    fProveedorReset();
+    var dialog = $("#fProveedor");
+    var form = $(dialog).find("form");
+    var title = $(form).find("h5");
+
+    $(form)[0].reset();
+    $(form).resetValidation();
+    $(form).find("[name=tipo_documento]").fillItems("/api/v1/tipo_doc_proveedor/?page_size=100", "id", "nombre");
     
-    if ( id!=0 ) {
-        fMarcaComercialLoadData(id);
-        $('#tProveedor').html('<i class="far fa-edit"></i> Modificar proveedor');
-    } else {
-        $('#fProveedor_proveedor_id').val(0);
-        $('#tProveedor').html('<i class="far fa-file"></i> Nuevo proveedor');
-    }
-    
-    $('#dProveedor').modal('show');
-    $('#fProveedor_tipo_documento').focus();
+    $(title).html("<i class=\"far fa-file\"></i> Nuevo proveedor");
+    $(dialog).modal("show");
+    $(form).find("[name=tipo_documento]").focus();
 }
 
-function fProveedorReset(){
-    $('#fProveedor')[0].reset();
-    $('#fProveedor').resetValidation();
-    
+function fProveedorSync() {
+    var dialog = $("#fProveedor");
+    var form = $(dialog).find("form");
+
+    $(form).resetValidation();
+
     $.ajax({
-        type: "GET",
-        url: "/api/v1/tipo_doc_proveedor/?page_size=100",
-        success: function(data){
-            $('#fProveedor_tipo_documento').empty();
-            $('#fProveedor_tipo_documento').append('<option value="">---</option>');
-            $.each(data.results, function (key, value) {
-                $('#fProveedor_tipo_documento').append('<option value=' + value.id + '>' + value.nombre + ' (' +  value.id + ') </option>');
-            });
-        }
+        type: "POST",
+        data: $(form).getJSONdata(),
+        url: "/api/v1/proveedor/",
+        success: function(data){ $("#grid-data").bootgrid("reload"); $(dialog).modal('hide'); },
+        error: function (jqXHR) { $(form).validateFromJSON(jqXHR.responseJSON); },
     });
 }
 
-function gridMarcaComercialShow(marca_comercial_id) {
-    var dlDetalle = $("#dMarcaComercialCuenta").find("dl");
-    dlDetalle.empty();
+function fMarcaComercialCuentaListShow(id) {
+    var dialog = $("#fMarcaComercialCuentaList");
+    var detalle = $(dialog).find("dl");
+
+    detalle.empty();
 
     $.ajax({
         type: "GET",
-        url: "/api/v1/marca_comercial/" + marca_comercial_id + "/",
+        url: "/api/v1/marca_comercial/" + id + "/",
         success: function(data){
-            dlDetalle.append("<dt class=\"col-sm-2\">Proveedor:</dt><dd class=\"col-sm-10\">" + data.proveedor__razon_social + " <small>(id: " + data.proveedor + ")</small></dd>");
-            dlDetalle.append("<dt class=\"col-sm-2\">Marca comercial:</dt><dd class=\"col-sm-10\">" + data.nombre + " <small>(id: " + data.id + ")</small></dd>");
-            dlDetalle.append("<dt class=\"col-sm-2\">Modalidad pago:</dt><dd class=\"col-sm-10\">" + data.modalidad_pago__nombre + "</dd>");
-            dlDetalle.append("<dt class=\"col-sm-2\">Categoría servicio:</dt><dd class=\"col-sm-10\">" + data.categoria_servicio__nombre + "</dd>");
-            dlDetalle.append("<dt class=\"col-sm-2\">Localidad:</dt><dd class=\"col-sm-10\">" + data.localidad__nombre + "</dd>");
-            
+            detalle.append("<dt class=\"col-sm-2\">Proveedor:</dt><dd class=\"col-sm-10\">" + data.proveedor__razon_social + " <small>(id: " + data.proveedor + ")</small></dd>");
+            detalle.append("<dt class=\"col-sm-2\">Marca comercial:</dt><dd class=\"col-sm-10\">" + data.nombre + " <small>(id: " + data.id + ")</small></dd>");
+            detalle.append("<dt class=\"col-sm-2\">Modalidad pago:</dt><dd class=\"col-sm-10\">" + data.modalidad_pago__nombre + "</dd>");
+            detalle.append("<dt class=\"col-sm-2\">Categoría servicio:</dt><dd class=\"col-sm-10\">" + data.categoria_servicio__nombre + "</dd>");
+            detalle.append("<dt class=\"col-sm-2\">Localidad:</dt><dd class=\"col-sm-10\">" + data.localidad__nombre + "</dd>");
         }
     });
 
@@ -443,7 +444,7 @@ function gridMarcaComercialShow(marca_comercial_id) {
     var grid_data_cuentas = $("#grid-data-cuentas").bootgrid({
         rowCount: -1,
         url: function () {
-                return "/api/v1/marca_comercial_cuenta/?marca_comercial=" + marca_comercial_id + "&page_size=100";
+            return "/api/v1/marca_comercial_cuenta/?marca_comercial=" + id + "&page_size=100";
         },
         templates: {
             search: "",
@@ -454,7 +455,6 @@ function gridMarcaComercialShow(marca_comercial_id) {
         },
         formatters: {
             "acciones": function(column, row) {
-                //return "<button type=\"button\" class=\"btn btn-xs btn-outline-success command-detail\" data-row-id=\"" + row.id + "\"><i class=\"fas fa-info-circle\"></i></button> " +
                 return "<button type=\"button\" class=\"btn btn-xs btn-outline-warning command-edit\" data-row-id=\"" + row.id + "\"><i class=\"far fa-edit\"></i></button> " +
                 "<button type=\"button\" class=\"btn btn-xs btn-outline-danger command-delete\" data-row-id=\"" + row.id + "\"><i class=\"far fa-trash-alt\"></i></button>";
             }
@@ -466,28 +466,23 @@ function gridMarcaComercialShow(marca_comercial_id) {
             },
         }
     }).on("loaded.rs.jquery.bootgrid", function() {
-        grid_data_cuentas.find(".command-detail").on("click", function(e){
-            //alert("aa");
-        }).end().find(".command-bank").on("click", function(e) {
-            /*$.blockUI({ message: $('#dWaitMessage'), });
-            gridMarcaComercialShow( $(this).data("row-id") );*/
-        }).end().find(".command-edit").on("click", function(e) {
-            fMarcaComercialCuentaShow( $(this).data("row-id") );
+        grid_data_cuentas.find(".command-edit").on("click", function(e) {
+            //fMarcaComercialCuentaShow( $(this).data("row-id") );
         }).end().find(".command-delete").on("click", function(e) {
-            fMarcaComercialDelete( $(this).data("row-id") );
+            //fMarcaComercialDelete( $(this).data("row-id") );
         });
     });
 
-    $("#grid-data-cuentas").prev().find(".gridToolbar").append('<button id="bNuevaCuenta" class="btn btn-primary" type="button"><i class="far fa-file"></i> Nueva cuenta</button> ');
-    $('#dMarcaComercialCuenta').modal('show');
+    $("#grid-data-cuentas").prev().find(".gridToolbar").append('<button id="bNuevaMarcaComercialCuenta" class="btn btn-primary" type="button"><i class="far fa-file"></i> Nueva cuenta</button> ');
+    $(dialog).modal("show");
 }
 
 function fMarcaComercialCuentaShow(marca_comercial_id) {
-    $("#dMarcaComercialCuentaData").modal('show');
+    $("#fMarcaComercialCuentaList").modal('show');
 }
 
 
-/*events*/
+
 $(document).ready(function() {
     /*$("#fMarcaComercial").bind("keypress", function (e) {
         if (e.keyCode == 13) {
@@ -510,7 +505,6 @@ $(document).ready(function() {
                     return "<a target=\"_blank\" href=\"" + row.sitio_web + "\"><i class=\"fas fa-external-link-alt\"></i> " + row.sitio_web + "</a>";
             },
             "acciones": function(column, row) {
-                //return "<button type=\"button\" class=\"btn btn-xs btn-outline-success command-detail\" data-row-id=\"" + row.id + "\"><i class=\"fas fa-info-circle\"></i></button> " +
                 return "<button type=\"button\" class=\"btn btn-xs btn-outline-primary command-bank\" data-row-id=\"" + row.id + "\"><i class=\"fas fa-piggy-bank\"></i></button> " +
                 "<button title=\"Hello World!\" type=\"button\" class=\"btn btn-xs btn-outline-warning command-edit\" data-row-id=\"" + row.id + "\"><i class=\"far fa-edit\"></i></button> " +
                 "<button type=\"button\" class=\"btn btn-xs btn-outline-danger command-delete\" data-row-id=\"" + row.id + "\"><i class=\"far fa-trash-alt\"></i></button>";
@@ -523,24 +517,14 @@ $(document).ready(function() {
             },
         }
     }).on("loaded.rs.jquery.bootgrid", function() {
-        grid.find(".command-detail").on("click", function(e){
-
-            alert("aa");
-
-        }).end().find(".command-bank").on("click", function(e) {
-
+        grid.find(".command-bank").on("click", function(e) {
             $.blockUI({ message: $('#dWaitMessage'), });
-            gridMarcaComercialShow( $(this).data("row-id") );
-
+            fMarcaComercialCuentaListShow( $(this).data("row-id") );
         }).end().find(".command-edit").on("click", function(e) {
-
             $.blockUI({ message: $('#dWaitMessage'), });
             fMarcaComercialShow( $(this).data("row-id") );
-
         }).end().find(".command-delete").on("click", function(e) {
-
             fMarcaComercialDeleteShow( $(this).data("row-id") );
-
         });
     });
 
@@ -573,22 +557,10 @@ $(document).ready(function() {
         fProveedorShow( 0 );
     });
 
-
-
-
-
     $('#fProveedor_submit').on('click', function(event) {
         $.blockUI({ message: $('#dWaitMessage'), });
         event.preventDefault();
-        $('#fProveedor').resetValidation();
-
-        $.ajax({
-            type: "POST",
-            data: $('#fProveedor').getJSONdata(),
-            url: "/api/v1/proveedor/",
-            success: function(data){ $("#grid-data").bootgrid("reload"); $('#dlgProveedor').modal('hide'); },
-            error: function (jqXHR) { $('#fProveedor').validateFromJSON(jqXHR.responseJSON); },
-        });
+        fProveedorSync();
     });
 
 
