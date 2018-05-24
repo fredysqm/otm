@@ -213,84 +213,57 @@
         </div>
     </div>
 </div>
-<div id="dMarcaComercialCuentaData" class="modal" tabindex="-1" role="dialog" aria-hidden="true" data-backdrop="static">
+<div id="fMarcaComercialCuenta" class="modal" tabindex="-1" role="dialog" aria-hidden="true" data-backdrop="static">
     <div class="modal-dialog" style="max-width: 700px;" role="document">
         <div class="modal-content">
             <div class="modal-body">
-                <form id="fMarcaComercial" autocomplete="off">
+                <form autocomplete="off">
                     <input type="hidden" name="id">
+                    <input type="hidden" name="marca_comercial">
                     <fieldset>
                         <legend>
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                 <span aria-hidden="true">&times;</span>
                             </button>
-                            <h5 id="tMarcaComercial" class="modal-title">TITULO</h5>
+                            <h5 class="modal-title">TITULO</h5>
+                            <hr />
                         </legend>
                         <div class="form-group">
-                            <label class="col-form-label col-form-label-sm" for="proveedor">Proveedor</label>
-                            <select class="form-control form-control-sm" data-live-search="true" id="proveedor" name="proveedor"></select>
-                            <div class="invalid-feedback"></div>
-                        </div>
-                        <div class="form-group">
-                            <label class="col-form-label col-form-label-sm" for="nombre">Nombre comercial</label>
-                            <input class="form-control form-control-sm" id="nombre" name="nombre" type="text">
+                            <label class="col-form-label col-form-label-sm" for="fMarcaComercialCuenta_banco">Banco</label>
+                            <select class="form-control form-control-sm" data-live-search="true" id="fMarcaComercialCuenta_banco" name="banco"></select>
                             <div class="invalid-feedback"></div>
                         </div>
                         <div class="form-row">
                             <div class="col">
-                                <label class="col-form-label col-form-label-sm" for="categoria_servicio">Categoría</label>
-                                <select class="form-control form-control-sm" id="categoria_servicio" name="categoria_servicio"></select>
+                                <label class="col-form-label col-form-label-sm" for="fMarcaComercialCuenta_moneda">Moneda</label>
+                                <select class="form-control form-control-sm" id="fMarcaComercialCuenta_moneda" name="moneda"></select>
                                 <div class="invalid-feedback"></div>
                             </div>
                             <div class="col">
-                                <label class="col-form-label col-form-label-sm" for="modalidad_pago">Modalidad</label>
-                                <select class="form-control form-control-sm" id="modalidad_pago" name="modalidad_pago"></select>
-                                <div class="invalid-feedback"></div>
-                            </div>
-                        </div>
-                        <div class="form-row">
-                            <div class="col">
-                                <label class="col-form-label col-form-label-sm" for="localidad">Localidad</label>
-                                <select class="form-control form-control-sm" id="localidad" name="localidad"></select>
-                                <div class="invalid-feedback"></div>
-                            </div>
-                            <div class="col">
-                                <label class="col-form-label col-form-label-sm" for="direccion">Dirección</label>
-                                <input class="form-control form-control-sm" id="direccion" name="direccion" type="text">
-                                <div class="invalid-feedback"></div>
-                            </div>find(".gridToolbar")
-                        </div>
-                        <div class="form-row">
-                            <div class="col">
-                                <label class="col-form-label col-form-label-sm" for="telefono_fijo">Teléfono fijo</label>
-                                <input class="form-control form-control-sm" id="telefono_fijo" name="telefono_fijo" type="text">
-                                <div class="invalid-feedback"></div>
-                            </div>
-                            <div class="col">
-                                <label class="col-form-label col-form-label-sm" for="telefono_movil">Telefono móvil</label>
-                                <input class="form-control form-control-sm" id="telefono_movil" name="telefono_movil" type="text">
+                                <label class="col-form-label col-form-label-sm" for="fMarcaComercialCuenta_tipo_cuenta">Tipo cuenta</label>
+                                <select class="form-control form-control-sm" id="fMarcaComercialCuenta_tipo_cuenta" name="tipo_cuenta"></select>
                                 <div class="invalid-feedback"></div>
                             </div>
                         </div>
                         <div class="form-row">
-                            <div class="col">
-                                <label class="col-form-label col-form-label-sm" for="email">Email</label>
-                                <input class="form-control form-control-sm" id="email" name="email" type="text">
-                                <div class="invalid-feedbafind(".gridToolbar")ck"></div>
+                                <div class="col">
+                                    <label class="col-form-label col-form-label-sm" for="fMarcaComercialCuenta_cta">Nro Cuenta</label>
+                                    <input class="form-control form-control-sm" id="fMarcaComercialCuenta_cta" name="cta" type="text">
+                                    <div class="invalid-feedback"></div>
+                                </div>
+                                <div class="col">
+                                    <label class="col-form-label col-form-label-sm" for="fMarcaComercialCuenta_cci">Nro CCI</label>
+                                    <input class="form-control form-control-sm" id="fMarcaComercialCuenta_cci" name="cci" type="text">
+                                    <div class="invalid-feedback"></div>
+                                </div>
                             </div>
-                            <div class="col">
-                                <label class="col-form-label col-form-label-sm" for="sitio_web">Web</label>
-                                <input class="form-control form-control-sm" id="sitio_web" name="sitio_web" type="text">
-                                <div class="invalid-feedback"></div>
-                            </div>
-                        </div>
                         <div class="form-group">
-                            <label class="col-form-label col-form-label-sm" for="observaciones">Observaciones</label>
-                            <textarea class="form-control form-control-sm" id="observaciones" name="observaciones" rows="3"></textarea>
+                            <label class="col-form-label col-form-label-sm" for="fMarcaComercialCuenta_titular">Titular</label>
+                            <input class="form-control form-control-sm" id="fMarcaComercialCuenta_titular" name="titular" type="text">
                             <div class="invalid-feedback"></div>
                         </div>
                         <button class="btn btn-secondary float-left" data-dismiss="modal"><i class="far fa-times-circle"></i> Cancelar</button>
-                        <button id="cmdEnviarFormularissso" class="btn btn-primary float-right"><i class="far fa-save"></i> Guardar</button>
+                        <button id="fMarcaComercialCuenta_submit" class="btn btn-primary float-right"><i class="far fa-save"></i> Guardar</button>
                     </fieldset>
                 </form>
             </div>
@@ -426,7 +399,7 @@ function fProveedorSync() {
 function fMarcaComercialCuentaListShow(id) {
     var dialog = $("#fMarcaComercialCuentaList");
     var detalle = $(dialog).find("dl");
-
+    
     detalle.empty();
 
     $.ajax({
@@ -479,14 +452,34 @@ function fMarcaComercialCuentaListShow(id) {
     $("#bNuevaMarcaComercialCuenta").on("click", function(event) {
         //$.blockUI({ message: $("#dWaitMessage") });
         event.preventDefault();
-        alert( 0 );
+        fMarcaComercialCuentaShow( id );
     });
 
     $(dialog).modal("show");
 }
 
 function fMarcaComercialCuentaShow(id) {
-    $("#fMarcaComercialCuentaList").modal('show');
+    var dialog = $("#fMarcaComercialCuenta");
+    var form = $(dialog).find("form");
+    var title = $(form).find("h5");
+
+    $(form)[0].reset();
+    $(form).resetValidation();
+    $(form).find("[name=id]").val(0);
+    $(form).find("[name=proveedor]").fillItems("/api/v1/proveedor/?page_size=100", "id", "razon_social");
+    $(form).find("[name=categoria_servicio]").fillItems("/api/v1/categoria_servicio/?page_size=100", "id", "nombre");
+    $(form).find("[name=modalidad_pago]").fillItems("/api/v1/modalidad_pago/?page_size=100", "id", "nombre");
+    $(form).find("[name=localidad]").fillItems("/api/v1/localidad/?page_size=100", "id", "nombre");
+    
+    if ( id==0 ) {
+        $(title).html("<i class=\"far fa-file\"></i> Nueva marca comercial");
+    } else {
+        $(form).fillForm("/api/v1/marca_comercial/" + id + "/");
+        $(title).html("<i class=\"far fa-edit\"></i> Modificar marca comercial");
+    }
+    
+    $(dialog).modal("show");
+    $(form).find("[name=proveedor]").focus();
 }
 
 
