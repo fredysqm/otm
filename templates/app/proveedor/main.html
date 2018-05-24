@@ -422,6 +422,7 @@ function fProveedorSync() {
     });
 }
 
+/*marca comercial cuentas*/
 function fMarcaComercialCuentaListShow(id) {
     var dialog = $("#fMarcaComercialCuentaList");
     var detalle = $(dialog).find("dl");
@@ -474,13 +475,19 @@ function fMarcaComercialCuentaListShow(id) {
     });
 
     $("#dtCuentas").prev().find(".gridToolbar").append('<button id="bNuevaMarcaComercialCuenta" class="btn btn-primary" type="button"><i class="far fa-file"></i> Nueva cuenta</button> ');
+
+    $("#bNuevaMarcaComercialCuenta").on("click", function(event) {
+        //$.blockUI({ message: $("#dWaitMessage") });
+        event.preventDefault();
+        alert( 0 );
+    });
+
     $(dialog).modal("show");
 }
 
 function fMarcaComercialCuentaShow(id) {
     $("#fMarcaComercialCuentaList").modal('show');
 }
-
 
 
 $(document).ready(function() {
@@ -531,7 +538,7 @@ $(document).ready(function() {
     $("#dtMain").prev().find(".gridToolbar").append('<button id="bNuevoProveedor" class="btn btn-primary" type="button"><i class="far fa-file"></i> Nuevo proveedor</button> ');
     $("#dtMain").prev().find(".gridToolbar").append('<button id="bNuevaMarcaComercial" class="btn btn-primary" type="button"><i class="far fa-file"></i> Nueva marca comercial</button> ');
 
-    /**/
+
     $("#bNuevaMarcaComercial").on("click", function(event) {
         $.blockUI({ message: $("#dWaitMessage") });
         event.preventDefault();
@@ -562,8 +569,8 @@ $(document).ready(function() {
         fProveedorSync();
     });
 
-
-
 });
+
+
 </script>
 {% endblock %}
