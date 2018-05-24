@@ -44,24 +44,46 @@ jQuery.fn.getJSONdata = function() {
     return JSON.stringify ( returnArray );
 };
 
+jQuery.fn.fillItems = function(url_data, param_key, param_value) {
+    var el = this[0];
+    $.ajaxQueue({
+        type: "GET",
+        url: url_data,
+        success: function(data) {
+            $(el).empty();
+            $(el).append('<option value="">---</option>');
+            $.each(data.results, function (key, value) {
+                $(el).append('<option value=' + value[param_key] + '>' + value[param_value] + '</option>');
+            });
+        }
+    });
+};
+
+jQuery.fn.fillForm = function(url_data) {
+    var el = this[0];
+    $.ajaxQueue({
+        type: "GET",
+        url: url_data,
+        success: function(data) {
+            $.each(data, function (key, value) {
+                $(el).find("[name=" + key + "]").val(value);
+            });
+        }
+    });
+};
+
 jQuery.fn.resetValidation = function() {
-    var el = "#" + this.attr('id');
-    var formArray = $(this[0]).serializeArray();
+    var el = this[0];
+    var formArray = $(el).serializeArray();
     for (var i = 0; i < formArray.length; i++){
-        $(el + " input[name=" + formArray[i]['name'] +"]").removeClass('is-invalid');
-        $(el + " select[name=" + formArray[i]['name'] +"]").removeClass('is-invalid');
-        $(el + " textarea[name=" + formArray[i]['name'] +"]").removeClass('is-invalid');
+        $(el).find("[name=" + formArray[i]["name"] + "]").removeClass("is-invalid");
     }
 };
 
 jQuery.fn.validateFromJSON = function(responseJSON) {
-    var el = "#" + this.attr('id');
+    var el = this[0];
     $.each(responseJSON, function( index, value ) {
-        $(el + " input[name=" + index +"]").addClass("is-invalid");
-        $(el + " select[name=" + index +"]").addClass("is-invalid");
-        $(el + " textarea[name=" + index +"]").addClass("is-invalid");
-        $(el + " input[name=" + index +"]").next().html(value);
-        $(el + " select[name=" + index +"]").next().html(value);
-        $(el + " textarea[name=" + index +"]").next().html(value);
+        $(el).find("[name=" + index + "]").addClass("is-invalid");
+        $(el).find("[name=" + index + "]").next().html(value);
     });
 };

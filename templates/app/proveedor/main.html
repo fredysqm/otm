@@ -31,103 +31,107 @@
 {% endblock %}
 
 {% block modals %}
-<div id="dMarcaComercial" class="modal" tabindex="-1" role="dialog" aria-hidden="true" data-backdrop="static">
+<div id="fMarcaComercial" class="modal" tabindex="-1" role="dialog" aria-hidden="true" data-backdrop="static">
     <div class="modal-dialog" style="max-width: 700px;" role="document">
         <div class="modal-content">
             <div class="modal-body">
-                <form id="fMarcaComercial" autocomplete="off">
-                    <input type="hidden" id="marca_comercial_id" name="marca_comercial_id">
+                <form autocomplete="off">
+                    <input type="hidden" name="id">
                     <fieldset>
                         <legend>
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                 <span aria-hidden="true">&times;</span>
                             </button>
-                            <h5 id="tMarcaComercial" class="modal-title">TITULO</h5>
-                        </legend>d
+                            <h5 class="modal-title">TITULO</h5>
+                        </legend>
+                        <hr />
                         <div class="form-group">
-                            <label class="col-form-label col-form-label-sm" for="proveedor">Proveedor</label>
-                            <select class="form-control form-control-sm" data-live-search="true" id="proveedor" name="proveedor"></select>
+                            <label class="col-form-label col-form-label-sm" for="fMarcaComercial_proveedor">Proveedor</label>
+                            <select class="form-control form-control-sm" data-live-search="true" id="fMarcaComercial_proveedor" name="proveedor"></select>
                             <div class="invalid-feedback"></div>
                         </div>
                         <div class="form-group">
-                            <label class="col-form-label col-form-label-sm" for="nombre">Nombre comercial</label>
-                            <input class="form-control form-control-sm" id="nombre" name="nombre" type="text">
+                            <label class="col-form-label col-form-label-sm" for="fMarcaComercial_nombre">Nombre comercial</label>
+                            <input class="form-control form-control-sm" id="fMarcaComercial_nombre" name="nombre" type="text">
                             <div class="invalid-feedback"></div>
                         </div>
                         <div class="form-row">
                             <div class="col">
-                                <label class="col-form-label col-form-label-sm" for="categoria_servicio">Categoría</label>
-                                <select class="form-control form-control-sm" id="categoria_servicio" name="categoria_servicio"></select>
+                                <label class="col-form-label col-form-label-sm" for="fMarcaComercial_categoria_servicio">Categoría</label>
+                                <select class="form-control form-control-sm" id="fMarcaComercial_categoria_servicio" name="categoria_servicio"></select>
                                 <div class="invalid-feedback"></div>
                             </div>
                             <div class="col">
-                                <label class="col-form-label col-form-label-sm" for="modalidad_pago">Modalidad</label>
-                                <select class="form-control form-control-sm" id="modalidad_pago" name="modalidad_pago"></select>
-                                <div class="invalid-feedback"></div>
-                            </div>
-                        </div>
-                        <div class="form-row">
-                            <div class="col">
-                                <label class="col-form-label col-form-label-sm" for="localidad">Localidad</label>
-                                <select class="form-control form-control-sm" id="localidad" name="localidad"></select>
-                                <div class="invalid-feedback"></div>
-                            </div>
-                            <div class="col">
-                                <label class="col-form-label col-form-label-sm" for="direccion">Dirección</label>
-                                <input class="form-control form-control-sm" id="direccion" name="direccion" type="text">
+                                <label class="col-form-label col-form-label-sm" for="fMarcaComercial_modalidad_pago">Modalidad</label>
+                                <select class="form-control form-control-sm" id="fMarcaComercial_modalidad_pago" name="modalidad_pago"></select>
                                 <div class="invalid-feedback"></div>
                             </div>
                         </div>
                         <div class="form-row">
                             <div class="col">
-                                <label class="col-form-label col-form-label-sm" for="telefono_fijo">Teléfono fijo</label>
-                                <input class="form-control form-control-sm" id="telefono_fijo" name="telefono_fijo" type="text">
+                                <label class="col-form-label col-form-label-sm" for="fMarcaComercial_localidad">Localidad</label>
+                                <select class="form-control form-control-sm" id="fMarcaComercial_localidad" name="localidad"></select>
                                 <div class="invalid-feedback"></div>
                             </div>
                             <div class="col">
-                                <label class="col-form-label col-form-label-sm" for="telefono_movil">Telefono móvil</label>
-                                <input class="form-control form-control-sm" id="telefono_movil" name="telefono_movil" type="text">
+                                <label class="col-form-label col-form-label-sm" for="fMarcaComercial_direccion">Dirección</label>
+                                <input class="form-control form-control-sm" id="fMarcaComercial_direccion" name="direccion" type="text">
                                 <div class="invalid-feedback"></div>
                             </div>
                         </div>
                         <div class="form-row">
                             <div class="col">
-                                <label class="col-form-label col-form-label-sm" for="email">Email</label>
-                                <input class="form-control form-control-sm" id="email" name="email" type="text">
+                                <label class="col-form-label col-form-label-sm" for="fMarcaComercial_telefono_fijo">Teléfono fijo</label>
+                                <input class="form-control form-control-sm" id="fMarcaComercial_telefono_fijo" name="telefono_fijo" type="text">
                                 <div class="invalid-feedback"></div>
                             </div>
                             <div class="col">
-                                <label class="col-form-label col-form-label-sm" for="sitio_web">Web</label>
-                                <input class="form-control form-control-sm" id="sitio_web" name="sitio_web" type="text">
+                                <label class="col-form-label col-form-label-sm" for="fMarcaComercial_telefono_movil">Telefono móvil</label>
+                                <input class="form-control form-control-sm" id="fMarcaComercial_telefono_movil" name="telefono_movil" type="text">
+                                <div class="invalid-feedback"></div>
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="col">
+                                <label class="col-form-label col-form-label-sm" for="fMarcaComercial_email">Email</label>
+                                <input class="form-control form-control-sm" id="fMarcaComercial_email" name="email" type="text">
+                                <div class="invalid-feedback"></div>
+                            </div>
+                            <div class="col">
+                                <label class="col-form-label col-form-label-sm" for="fMarcaComercial_sitio_web">Web</label>
+                                <input class="form-control form-control-sm" id="fMarcaComercial_sitio_web" name="sitio_web" type="text">
                                 <div class="invalid-feedback"></div>
                             </div>
                         </div>
                         <div class="form-group">
-                            <label class="col-form-label col-form-label-sm" for="observaciones">Observaciones</label>
-                            <textarea class="form-control form-control-sm" id="observaciones" name="observaciones" rows="3"></textarea>
+                            <label class="col-form-label col-form-label-sm" for="fMarcaComercial_observaciones">Observaciones</label>
+                            <textarea class="form-control form-control-sm" id="fMarcaComercial_observaciones" name="observaciones" rows="3"></textarea>
                             <div class="invalid-feedback"></div>
                         </div>
                         <button class="btn btn-secondary float-left" data-dismiss="modal"><i class="far fa-times-circle"></i> Cancelar</button>
-                        <button id="cmdEnviarFormulario" class="btn btn-primary float-right"><i class="far fa-save"></i> Guardar</button>
+                        <button id="fMarcaComercial_submit" class="btn btn-primary float-right"><i class="far fa-save"></i> Guardar</button>
                     </fieldset>
                 </form>
             </div>
         </div>
     </div>
 </div>
-<div id="dMarcaComercialDelete" class="modal" tabindex="-1" role="dialog" aria-hidden="true" data-backdrop="static">
+<div id="fMarcaComercialDelete" class="modal" tabindex="-1" role="dialog" aria-hidden="true" data-backdrop="static">
     <div class="modal-dialog" style="max-width: 500px;" role="document">
         <div class="modal-content">
             <div class="modal-body">
-                <form id="fMarcaComercialDelete" autocomplete="off">
-                    <input type="hidden" id="fMarcaComercialDelete_marca_comercial_id" name="marca_comercial_id">
+                <form autocomplete="off">
+                    <input type="hidden" name="id">
                     <fieldset>
                         <legend>
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                 <span aria-hidden="true">&times;</span>
                             </button>
-                            <h5 id="tMarcaComercialDelete" class="modal-title"><i class="far fa-trash-alt"></i> Eliminar marca comercial</h5>
+                            <h5 class="modal-title"><i class="far fa-trash-alt"></i> Eliminar marca comercial</h5>
                         </legend>
+                        <div class="alert alert-dismissible alert-danger detail">
+                            No se puede eliminar está marca comercial porque esta siendo utilizada por otros módulos del sistema.
+                        </div>
                         <div class="form-group">
                             <label class="col-form-label col-form-label-sm">¿Está seguro(a) que desea eliminar esta marca comercial?</label>
                         </div>
@@ -139,17 +143,17 @@
         </div>
     </div>
 </div>
-<div id="dProveedor" class="modal" tabindex="-1" role="dialog" aria-hidden="true" data-backdrop="static">
+<div id="fProveedor" class="modal" tabindex="-1" role="dialog" aria-hidden="true" data-backdrop="static">
     <div class="modal-dialog" style="max-width: 500px;" role="document">
         <div class="modal-content">
             <div class="modal-body">
-                <form id="fProveedor" autocomplete="off">
+                <form autocomplete="off">
                     <fieldset>
                         <legend>
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                 <span aria-hidden="true">&times;</span>
                             </button>
-                            <h5 id="tProveedor" class="modal-title">TITULO</h5>
+                            <h5 class="modal-title">TITULO</h5>
                         </legend>
                         <div class="form-group">
                             <label class="col-form-label col-form-label-sm" for="fProveedor_tipo_documento">Tipo de documento</label>
@@ -212,7 +216,7 @@
         <div class="modal-content">
             <div class="modal-body">
                 <form id="fMarcaComercial" autocomplete="off">
-                    <input type="hidden" id="marca_comercial_id" name="marca_comercial_id">
+                    <input type="hidden" name="id">
                     <fieldset>
                         <legend>
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -252,7 +256,7 @@
                                 <label class="col-form-label col-form-label-sm" for="direccion">Dirección</label>
                                 <input class="form-control form-control-sm" id="direccion" name="direccion" type="text">
                                 <div class="invalid-feedback"></div>
-                            </div>
+                            </div>find(".gridToolbar")
                         </div>
                         <div class="form-row">
                             <div class="col">
@@ -270,7 +274,7 @@
                             <div class="col">
                                 <label class="col-form-label col-form-label-sm" for="email">Email</label>
                                 <input class="form-control form-control-sm" id="email" name="email" type="text">
-                                <div class="invalid-feedback"></div>
+                                <div class="invalid-feedbafind(".gridToolbar")ck"></div>
                             </div>
                             <div class="col">
                                 <label class="col-form-label col-form-label-sm" for="sitio_web">Web</label>
@@ -284,7 +288,7 @@
                             <div class="invalid-feedback"></div>
                         </div>
                         <button class="btn btn-secondary float-left" data-dismiss="modal"><i class="far fa-times-circle"></i> Cancelar</button>
-                        <button id="cmdEnviarFormulario" class="btn btn-primary float-right"><i class="far fa-save"></i> Guardar</button>
+                        <button id="cmdEnviarFormularissso" class="btn btn-primary float-right"><i class="far fa-save"></i> Guardar</button>
                     </fieldset>
                 </form>
             </div>
@@ -299,106 +303,90 @@ $(document).ajaxStop($.unblockUI);
 
 $.ajaxSetup({
     cache: false,
-    contentType: 'application/json',
+    contentType: "application/json",
     beforeSend: function(xhr, settings) {
         if (!$.fn.csrfSafeMethod(settings.type) && !this.crossDomain) {
-            xhr.setRequestHeader("X-CSRFToken", $.fn.getCookie('csrftoken'));
+            xhr.setRequestHeader("X-CSRFToken", $.fn.getCookie("csrftoken"));
         }
     }
 });
 
-function fMarcaComercialReset(){
-    $('#fMarcaComercial')[0].reset();
-    $('#fMarcaComercial').resetValidation();
-    
-    $.ajaxQueue({
-        type: "GET",
-        url: "/api/v1/proveedor/?page_size=100",
-        success: function(data){
-            $('#proveedor').empty();
-            $('#proveedor').append('<option value="">---</option>');
-            $.each(data.results, function (key, value) {
-                $('#proveedor').append('<option value=' + value.id + '>' + value.razon_social + ' (' +  value.id + ') </option>');
-            });
-        }
-    });
-
-    $.ajaxQueue({
-        type: "GET",
-        url: "/api/v1/categoria_servicio/?page_size=100",
-        success: function(data){
-            $('#categoria_servicio').empty();
-            $('#categoria_servicio').append('<option value="">---</option>');
-            $.each(data.results, function (key, value) {
-                $('#categoria_servicio').append('<option value=' + value.id + '>' + value.nombre + '</option>');
-            });
-        }
-    });
-
-    $.ajaxQueue({
-        type: "GET",
-        url: "/api/v1/modalidad_pago/?page_size=100",
-        success: function(data){
-            $('#modalidad_pago').empty();
-            $('#modalidad_pago').append('<option value="">---</option>');
-            $.each(data.results, function (key, value) {
-                $('#modalidad_pago').append('<option value=' + value.id + '>' + value.nombre + '</option>');
-            });
-        }
-    });
-
-    $.ajaxQueue({
-        type: "GET",
-        url: "/api/v1/localidad/?page_size=100",
-        success: function(data){
-            $('#localidad').empty();
-            $('#localidad').append('<option value="">---</option>');
-            $.each(data.results, function (key, value) {
-                $('#localidad').append('<option value=' + value.id + '>' + value.nombre + '</option>');
-            });
-        }
-    });
-}
-
-function fMarcaComercialLoadData(id) {
-    $.ajaxQueue({
-        type: "GET",
-        url: "/api/v1/marca_comercial/" + id + "/",
-        success: function(data){
-            $('#marca_comercial_id').val(data.id);
-            $('#proveedor').val(data.proveedor);
-            $('#nombre').val(data.nombre);
-            $('#categoria_servicio').val(data.categoria_servicio);
-            $('#modalidad_pago').val(data.modalidad_pago);
-            $('#localidad').val(data.localidad);
-            $('#direccion').val(data.direccion);
-            $('#telefono_fijo').val(data.telefono_fijo);
-            $('#telefono_movil').val(data.telefono_movil);
-            $('#email').val(data.email);
-            $('#sitio_web').val(data.sitio_web);
-            $('#observaciones').val(data.observaciones);
-        }
-    });
-}
-
 function fMarcaComercialShow(id) {
-    fMarcaComercialReset();
+    var dialog = $("#fMarcaComercial");
+    var form = $(dialog).find("form");
+    var title = $(form).find("h5");
+
+    $(form)[0].reset();
+    $(form).resetValidation();
+    $(form).find("[name=id]").val(0);
+    $(form).find("[name=proveedor]").fillItems("/api/v1/proveedor/?page_size=100", "id", "razon_social");
+    $(form).find("[name=categoria_servicio]").fillItems("/api/v1/categoria_servicio/?page_size=100", "id", "nombre");
+    $(form).find("[name=modalidad_pago]").fillItems("/api/v1/modalidad_pago/?page_size=100", "id", "nombre");
+    $(form).find("[name=localidad]").fillItems("/api/v1/localidad/?page_size=100", "id", "nombre");
     
     if ( id!=0 ) {
-        fMarcaComercialLoadData(id);
-        $('#tMarcaComercial').html('<i class="far fa-edit"></i> Modificar marca comercial');
+        $(form).fillForm("/api/v1/marca_comercial/" + id + "/");
+        $(title).html("<i class=\"far fa-edit\"></i> Modificar marca comercial");
     } else {
-        $('#marca_comercial_id').val(0);
-        $('#tMarcaComercial').html('<i class="far fa-file"></i> Nueva marca comercial');
+        $(title).html("<i class=\"far fa-file\"></i> Nueva marca comercial");
     }
     
-    $('#dMarcaComercial').modal('show');
-    $('#proveedor').focus();
+    $(dialog).modal("show");
+    $(form).find("[name=proveedor]").focus();
 }
 
-function fMarcaComercialDelete(id) {
-    $('#fMarcaComercialDelete_marca_comercial_id').val(id);
-    $('#dMarcaComercialDelete').modal('show');
+function fMarcaComercialSync() {
+    var dialog = $("#fMarcaComercial");
+    var form = $(dialog).find("form");
+
+    var id = $(form).find("[name=id]").val();
+    var form_data = $(form).getJSONdata();
+    var base_url = "/api/v1/marca_comercial/";
+
+    $(form).resetValidation();
+
+    if ( id==0 ) {
+        $.ajax({
+            type: "POST",
+            data: form_data,
+            url: base_url,
+            success: function(data){ $("#grid-data").bootgrid("reload"); $(dialog).modal("hide"); },
+            error: function (jqXHR) { $(form).validateFromJSON(jqXHR.responseJSON); },
+        });
+    } else {
+        $.ajax({
+            type: "PUT",
+            data: form_data,
+            url: base_url + id + "/",
+            success: function(data){ $("#grid-data").bootgrid("reload"); $(dialog).modal("hide"); },
+            error: function (jqXHR) { $(form).validateFromJSON(jqXHR.responseJSON); },
+        });
+    }
+}
+
+function fMarcaComercialDeleteShow(id) {
+    var dialog = $("#fMarcaComercialDelete");
+    var form = $(dialog).find("form");
+    var detail = $(form).find(".detail");
+
+    $(detail).hide();
+    $(form).find("[name=id]").val(id);
+    $(dialog).modal("show");
+}
+
+function fMarcaComercialDeleteSync() {
+    var dialog = $("#fMarcaComercialDelete");
+    var form = $(dialog).find("form");
+    var detail = $(form).find(".detail");
+    var id = $(form).find("[name=id]").val();
+
+    $.ajax({
+        type: "DELETE",
+        data: $(form).getJSONdata(),
+        url: "/api/v1/marca_comercial/" + id + "/",
+        success: function(data){ $("#grid-data").bootgrid("reload"); $(dialog).modal('hide'); },
+        error: function (jqXHR) { $(form).validateFromJSON(jqXHR.responseJSON); $(detail).show();},
+     });
 }
 
 /*proveedor*/
@@ -497,13 +485,15 @@ function gridMarcaComercialShow(marca_comercial_id) {
 function fMarcaComercialCuentaShow(marca_comercial_id) {
     $("#dMarcaComercialCuentaData").modal('show');
 }
+
+
 /*events*/
 $(document).ready(function() {
-    $("#fMarcaComercial").bind("keypress", function (e) {
+    /*$("#fMarcaComercial").bind("keypress", function (e) {
         if (e.keyCode == 13) {
             return false;
         }
-    });
+    });*/
 
     var grid = $("#grid-data").bootgrid({
         url: "/api/v1/marca_comercial/",
@@ -534,56 +524,58 @@ $(document).ready(function() {
         }
     }).on("loaded.rs.jquery.bootgrid", function() {
         grid.find(".command-detail").on("click", function(e){
+
             alert("aa");
+
         }).end().find(".command-bank").on("click", function(e) {
+
             $.blockUI({ message: $('#dWaitMessage'), });
             gridMarcaComercialShow( $(this).data("row-id") );
+
         }).end().find(".command-edit").on("click", function(e) {
+
             $.blockUI({ message: $('#dWaitMessage'), });
             fMarcaComercialShow( $(this).data("row-id") );
+
         }).end().find(".command-delete").on("click", function(e) {
-            fMarcaComercialDelete( $(this).data("row-id") );
+
+            fMarcaComercialDeleteShow( $(this).data("row-id") );
+
         });
     });
 
-    $("#grid-data").prev().find(".gridToolbar").append('<button id="cmdNuevoProveedor" class="btn btn-primary" type="button"><i class="far fa-file"></i> Nuevo proveedor</button> ');
-    $("#grid-data").prev().find(".gridToolbar").append('<button id="cmdNuevaMarcaComercial" class="btn btn-primary" type="button"><i class="far fa-file"></i> Nueva marca comercial</button> ');
+    $("#grid-data").prev().find(".gridToolbar").append('<button id="bNuevoProveedor" class="btn btn-primary" type="button"><i class="far fa-file"></i> Nuevo proveedor</button> ');
+    $("#grid-data").prev().find(".gridToolbar").append('<button id="bNuevaMarcaComercial" class="btn btn-primary" type="button"><i class="far fa-file"></i> Nueva marca comercial</button> ');
 
-    $('#cmdNuevoProveedor').on('click', function(event) {
-        $.blockUI({ message: $('#dWaitMessage') });
+
+    /**/
+    $("#bNuevaMarcaComercial").on("click", function(event) {
+        $.blockUI({ message: $("#dWaitMessage") });
         event.preventDefault();
-        fProveedorShow(0);
+        fMarcaComercialShow( 0 );
     });
 
-    $('#cmdNuevaMarcaComercial').on('click', function(event) {
-        $.blockUI({ message: $('#dWaitMessage') });
+    $("#fMarcaComercial_submit").on("click", function(event) {
+        $.blockUI({ message: $("#dWaitMessage"), });
         event.preventDefault();
-        fMarcaComercialShow(0);
+        fMarcaComercialSync();
     });
 
-    $('#cmdEnviarFormulario').on('click', function(event) {
-        $.blockUI({ message: $('#dWaitMessage'), });
+    $("#fMarcaComercialDelete_submit").on("click", function(event) {
+        $.blockUI({ message: $("#dWaitMessage"), });
         event.preventDefault();
-        $('#fMarcaComercial').resetValidation();
-
-        if ($('#marca_comercial_id').val() == "0") {
-            $.ajax({
-                type: "POST",
-                data: $('#fMarcaComercial').getJSONdata(),
-                url: "/api/v1/marca_comercial/",
-                success: function(data){ $("#grid-data").bootgrid("reload"); $('#dMarcaComercial').modal('hide'); },
-                error: function (jqXHR) { $('#fMarcaComercial').validateFromJSON(jqXHR.responseJSON); },
-            });
-        } else {
-            $.ajax({
-                type: "PUT",
-                data: $('#fMarcaComercial').getJSONdata(),
-                url: "/api/v1/marca_comercial/" + $('#marca_comercial_id').val() + "/",
-                success: function(data){ $("#grid-data").bootgrid("reload"); $('#dMarcaComercial').modal('hide'); },
-                error: function (jqXHR) { $('#fMarcaComercial').validateFromJSON(jqXHR.responseJSON); },
-            });
-        }
+        fMarcaComercialDeleteSync();
     });
+
+    $("#bNuevoProveedor").on("click", function(event) {
+        $.blockUI({ message: $("#dWaitMessage") });
+        event.preventDefault();
+        fProveedorShow( 0 );
+    });
+
+
+
+
 
     $('#fProveedor_submit').on('click', function(event) {
         $.blockUI({ message: $('#dWaitMessage'), });
@@ -599,18 +591,7 @@ $(document).ready(function() {
         });
     });
 
-    $('#fMarcaComercialDelete_submit').on('click', function(event) {
-        $.blockUI({ message: $('#dWaitMessage'), });
-        event.preventDefault();
 
-        $.ajax({
-            type: "DELETE",
-            data: $('#fMarcaComercialDelete').getJSONdata(),
-            url: "/api/v1/marca_comercial/" + $('#fMarcaComercialDelete_marca_comercial_id').val() + "/",
-            success: function(data){ $("#grid-data").bootgrid("reload"); $('#dMarcaComercialDelete').modal('hide'); },
-            error: function (jqXHR) { $('#fMarcaComercialDelete').validateFromJSON(jqXHR.responseJSON); },
-        });
-    });
 
 });
 </script>
