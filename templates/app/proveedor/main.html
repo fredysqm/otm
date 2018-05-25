@@ -270,6 +270,34 @@
         </div>
     </div>
 </div>
+<div id="fMarcaComercialCuentaDelete" class="modal" tabindex="-1" role="dialog" aria-hidden="true" data-backdrop="static">
+        <div class="modal-dialog" style="max-width: 500px;" role="document">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <form autocomplete="off">
+                        <input type="hidden" name="id">
+                        <fieldset>
+                            <legend>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                                <h5 class="modal-title"><i class="far fa-trash-alt"></i> Eliminar cuenta</h5>
+                                <hr/>
+                            </legend>
+                            <div class="alert alert-dismissible alert-danger detail">
+                                No se puede eliminar está cuenta porque esta siendo utilizada por otros módulos del sistema.
+                            </div>
+                            <div class="form-group">
+                                <label class="col-form-label col-form-label-sm">¿Está seguro(a) que desea eliminar esta cuenta?</label>
+                            </div>
+                            <button class="btn btn-secondary float-left" data-dismiss="modal"><i class="far fa-times-circle"></i> Cancelar</button>
+                            <button id="fMarcaComercialCuentaDelete_submit" class="btn btn-danger float-right"><i class="far fa-trash-alt"></i> Eliminar</button>
+                        </fieldset>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
 {% endblock %}
 
 {% block js %}
@@ -443,7 +471,8 @@ function fMarcaComercialCuentaListShow(marca_comercial) {
         dtCuentas.find(".command-edit").on("click", function(e) {
             fMarcaComercialCuentaShow( $(this).data("row-id"), marca_comercial );
         }).end().find(".command-delete").on("click", function(e) {
-            fMarcaComercialCuentaDelete( $(this).data("row-id") );
+            console.log("here");
+            fMarcaComercialCuentaDeleteShow( $(this).data("row-id") );
         });
     });
 
@@ -482,9 +511,59 @@ function fMarcaComercialCuentaShow(id, marca_comercial) {
     $(form).find("[name=banco]").focus();
 }
 
-function fMarcaComercialCuentaDelete(id) {
+function fMarcaComercialCuentaSync() {
+    var dialog = $("#fMarcaComercialCuenta");
+    var form = $(dialog).find("form");
+
+    var id = $(form).find("[name=id]").val();
+    var form_data = $(form).getJSONdata();
+    var base_url = "/api/v1/marca_comercial_cuenta/";
+
+    $(form).resetValidation();
+
+    if ( id==0 ) {
+        $.ajax({
+            type: "POST",
+            data: form_data,
+            url: base_url,
+            success: function(data){ $("#dtCuentas").bootgrid("reload"); $(dialog).modal("hide"); },
+            error: function (jqXHR) { $(form).validateFromJSON(jqXHR.responseJSON); },
+        });
+    } else {
+        $.ajax({
+            type: "PUT",
+            data: form_data,
+            url: base_url + id + "/",
+            success: function(data){ $("#dtCuentas").bootgrid("reload"); $(dialog).modal("hide"); },
+            error: function (jqXHR) { $(form).validateFromJSON(jqXHR.responseJSON); },
+        });
+    }
 }
 
+function fMarcaComercialCuentaDeleteShow(id) {
+    var dialog = $("#fMarcaComercialCuentaDelete");
+    var form = $(dialog).find("form");
+    var detail = $(form).find(".detail");
+
+    $(detail).hide();
+    $(form).find("[name=id]").val(id);
+    $(dialog).modal("show");
+}
+
+function fMarcaComercialCuentaDeleteSync() {
+    var dialog = $("#fMarcaComercialCuentaDelete");
+    var form = $(dialog).find("form");
+    var detail = $(form).find(".detail");
+    var id = $(form).find("[name=id]").val();
+
+    $.ajax({
+        type: "DELETE",
+        data: $(form).getJSONdata(),
+        url: "/api/v1/marca_comercial_cuenta/" + id + "/",
+        success: function(data){ $("#dtCuentas").bootgrid("reload"); $(dialog).modal('hide'); },
+        error: function (jqXHR) { $(form).validateFromJSON(jqXHR.responseJSON); $(detail).show();},
+     });
+}
 
 $(document).ready(function() {
     /*$("#fMarcaComercial").bind("keypress", function (e) {
@@ -563,6 +642,18 @@ $(document).ready(function() {
         $.blockUI({ message: $('#dWaitMessage'), });
         event.preventDefault();
         fProveedorSync();
+    });
+
+    $('#fMarcaComercialCuenta_submit').on('click', function(event) {
+        $.blockUI({ message: $('#dWaitMessage'), });
+        event.preventDefault();
+        fMarcaComercialCuentaSync();
+    });
+
+    $("#fMarcaComercialCuentaDelete_submit").on("click", function(event) {
+        $.blockUI({ message: $("#dWaitMessage"), });
+        event.preventDefault();
+        fMarcaComercialCuentaDeleteSync();
     });
 
 });
