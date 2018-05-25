@@ -396,7 +396,7 @@ function fProveedorSync() {
 }
 
 /*marca comercial cuentas*/
-function fMarcaComercialCuentaListShow(id) {
+function fMarcaComercialCuentaListShow(marca_comercial) {
     var dialog = $("#fMarcaComercialCuentaList");
     var detalle = $(dialog).find("dl");
     
@@ -404,7 +404,7 @@ function fMarcaComercialCuentaListShow(id) {
 
     $.ajax({
         type: "GET",
-        url: "/api/v1/marca_comercial/" + id + "/",
+        url: "/api/v1/marca_comercial/" + marca_comercial + "/",
         success: function(data){
             detalle.append("<dt class=\"col-sm-2\">Proveedor:</dt><dd class=\"col-sm-10\">" + data.proveedor__razon_social + " <small>(id: " + data.proveedor + ")</small></dd>");
             detalle.append("<dt class=\"col-sm-2\">Marca comercial:</dt><dd class=\"col-sm-10\">" + data.nombre + " <small>(id: " + data.id + ")</small></dd>");
@@ -418,7 +418,7 @@ function fMarcaComercialCuentaListShow(id) {
     var dtCuentas = $("#dtCuentas").bootgrid({
         rowCount: -1,
         url: function () {
-            return "/api/v1/marca_comercial_cuenta/?marca_comercial=" + id + "&page_size=100";
+            return "/api/v1/marca_comercial_cuenta/?marca_comercial=" + marca_comercial + "&page_size=100";
         },
         templates: {
             search: "",
@@ -441,24 +441,24 @@ function fMarcaComercialCuentaListShow(id) {
         }
     }).on("loaded.rs.jquery.bootgrid", function() {
         dtCuentas.find(".command-edit").on("click", function(e) {
-            //fMarcaComercialCuentaShow( $(this).data("row-id") );
+            fMarcaComercialCuentaShow( $(this).data("row-id"), marca_comercial );
         }).end().find(".command-delete").on("click", function(e) {
-            //fMarcaComercialDelete( $(this).data("row-id") );
+            fMarcaComercialCuentaDelete( $(this).data("row-id") );
         });
     });
 
     $("#dtCuentas").prev().find(".gridToolbar").append('<button id="bNuevaMarcaComercialCuenta" class="btn btn-primary" type="button"><i class="far fa-file"></i> Nueva cuenta</button> ');
 
     $("#bNuevaMarcaComercialCuenta").on("click", function(event) {
-        //$.blockUI({ message: $("#dWaitMessage") });
+        $.blockUI({ message: $("#dWaitMessage") });
         event.preventDefault();
-        fMarcaComercialCuentaShow( id );
+        fMarcaComercialCuentaShow( 0, marca_comercial );
     });
 
     $(dialog).modal("show");
 }
 
-function fMarcaComercialCuentaShow(id) {
+function fMarcaComercialCuentaShow(id, marca_comercial) {
     var dialog = $("#fMarcaComercialCuenta");
     var form = $(dialog).find("form");
     var title = $(form).find("h5");
@@ -466,20 +466,23 @@ function fMarcaComercialCuentaShow(id) {
     $(form)[0].reset();
     $(form).resetValidation();
     $(form).find("[name=id]").val(0);
-    $(form).find("[name=proveedor]").fillItems("/api/v1/proveedor/?page_size=100", "id", "razon_social");
-    $(form).find("[name=categoria_servicio]").fillItems("/api/v1/categoria_servicio/?page_size=100", "id", "nombre");
-    $(form).find("[name=modalidad_pago]").fillItems("/api/v1/modalidad_pago/?page_size=100", "id", "nombre");
-    $(form).find("[name=localidad]").fillItems("/api/v1/localidad/?page_size=100", "id", "nombre");
+    $(form).find("[name=marca_comercial]").val(marca_comercial);
+    $(form).find("[name=banco]").fillItems("/api/v1/banco/?page_size=100", "id", "nombre");
+    $(form).find("[name=moneda]").fillItems("/api/v1/moneda/?page_size=100", "id", "nombre");
+    $(form).find("[name=tipo_cuenta]").fillItems("/api/v1/tipo_cuenta_banco/?page_size=100", "id", "nombre");
     
     if ( id==0 ) {
-        $(title).html("<i class=\"far fa-file\"></i> Nueva marca comercial");
+        $(title).html("<i class=\"far fa-file\"></i> Nueva cuenta");
     } else {
-        $(form).fillForm("/api/v1/marca_comercial/" + id + "/");
-        $(title).html("<i class=\"far fa-edit\"></i> Modificar marca comercial");
+        $(form).fillForm("/api/v1/marca_comercial_cuenta/" + id + "/");
+        $(title).html("<i class=\"far fa-edit\"></i> Modificar cuenta");
     }
     
     $(dialog).modal("show");
-    $(form).find("[name=proveedor]").focus();
+    $(form).find("[name=banco]").focus();
+}
+
+function fMarcaComercialCuentaDelete(id) {
 }
 
 
