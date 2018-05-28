@@ -1,4 +1,5 @@
 mysqlclient
+requests
 python-memcached
 Django
 django-admin-view-permission

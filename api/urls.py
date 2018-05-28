@@ -1,9 +1,10 @@
-from django.urls import path, include
+from django.urls import path, re_path, include
 from rest_framework.routers import DefaultRouter
 from api.views import *
 
 
 router = DefaultRouter()
+
 router.register(r'pais', PaisViewSet)
 router.register(r'ciudad', CiudadViewSet)
 router.register(r'idioma', IdiomaViewSet)
@@ -22,4 +23,5 @@ router.register(r'marca_comercial_cuenta', MarcaComercialCuentaViewSet)
 
 urlpatterns = [
     path( '', include(router.urls) ),
+    re_path( r'consulta_ruc/(?P<ruc>\d{11})/$', ConsultaRucAPIView.as_view() ),
 ]

@@ -469,6 +469,7 @@ function fMarcaComercialCuentaListShow(marca_comercial) {
         }
     }).on("loaded.rs.jquery.bootgrid", function() {
         dtCuentas.find(".command-edit").on("click", function(e) {
+            $.blockUI({ message: $('#dWaitMessage'), });
             fMarcaComercialCuentaShow( $(this).data("row-id"), marca_comercial );
         }).end().find(".command-delete").on("click", function(e) {
             console.log("here");
@@ -587,9 +588,9 @@ $(document).ready(function() {
                     return "<a target=\"_blank\" href=\"" + row.sitio_web + "\"><i class=\"fas fa-external-link-alt\"></i> " + row.sitio_web + "</a>";
             },
             "acciones": function(column, row) {
-                return "<button type=\"button\" class=\"btn btn-xs btn-outline-primary command-bank\" data-row-id=\"" + row.id + "\"><i class=\"fas fa-piggy-bank\"></i></button> " +
-                "<button title=\"Hello World!\" type=\"button\" class=\"btn btn-xs btn-outline-warning command-edit\" data-row-id=\"" + row.id + "\"><i class=\"far fa-edit\"></i></button> " +
-                "<button type=\"button\" class=\"btn btn-xs btn-outline-danger command-delete\" data-row-id=\"" + row.id + "\"><i class=\"far fa-trash-alt\"></i></button>";
+                return "<button title=\"Cuentas\" type=\"button\" class=\"btn btn-xs btn-outline-primary command-bank\" data-row-id=\"" + row.id + "\"><i class=\"fas fa-piggy-bank\"></i></button> " +
+                "<button title=\"Modificar\" type=\"button\" class=\"btn btn-xs btn-outline-warning command-edit\" data-row-id=\"" + row.id + "\"><i class=\"far fa-edit\"></i></button> " +
+                "<button title=\"Eliminar\" type=\"button\" class=\"btn btn-xs btn-outline-danger command-delete\" data-row-id=\"" + row.id + "\"><i class=\"far fa-trash-alt\"></i></button>";
             }
         },
         converters: {

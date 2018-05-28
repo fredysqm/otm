@@ -1,3 +1,5 @@
+certifi==2018.4.16
+chardet==3.0.4
 Django==2.0.5
 django-admin-view-permission==1.6
 django-appconf==1.0.2
@@ -7,11 +9,14 @@ django-debug-toolbar==1.9.1
 django-filter==1.1.0
 django-reversion==2.0.13
 djangorestframework==3.8.2
+idna==2.6
 mysqlclient==1.3.12
 pkg-resources==0.0.0
 python-memcached==1.59
 pytz==2018.4
 rcssmin==1.0.6
+requests==2.18.4
 rjsmin==1.0.12
 six==1.11.0
 sqlparse==0.2.4
+urllib3==1.22
