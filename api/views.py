@@ -148,12 +148,12 @@ class ConsultaRucAPIView(views.APIView):
     serv64_baseurl = settings.SERVICES64_BASE_URL + settings.SERVICES64_SUNAT_RUC_URL
     serv64_headers = {
         "Content-Type": "application/json", 
-        "Authorization":"Token " + settings.SERVICES64_AUTHORIZATION_TOKEN
+        "Authorization": "Token " + settings.SERVICES64_AUTHORIZATION_TOKEN
     }
 
     def get(self, request, ruc, format=None):
         try:
-            r = requests.get( self.serv64_baseurl + ruc + "/", headers=self.serv64_headers, timeout=5 )
+            r = requests.get( self.serv64_baseurl+ruc+"/", headers=self.serv64_headers, timeout=5 )
             return response.Response( r.json(), status=r.status_code )
         except:
             return response.Response( { "detail": "Temporalmente no disponible." }, status=status.HTTP_503_SERVICE_UNAVAILABLE )

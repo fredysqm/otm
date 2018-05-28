@@ -10,7 +10,7 @@
 <table id="dtMain" class="table table-hover table-striped table-condensed table-sm">
     <thead>
         <tr>
-            <th data-column-id="id" data-identifier="true" data-width="40px">ID</th>
+            <th data-column-id="id" data-identifier="true" data-width="50px">ID</th>
             <th data-column-id="proveedor" data-width="90px">RUC</th>
             <th data-column-id="proveedor__razon_social" data-visible="false">Razon social</th>
             <th data-column-id="nombre">Nombre comercial</th>
@@ -196,10 +196,10 @@
                 <table id="dtCuentas" class="table table-hover table-striped table-condensed table-sm">
                     <thead>
                         <tr>
-                            <th data-column-id="id" data-identifier="true" data-width="40px">ID</th>
+                            <th data-column-id="id" data-identifier="true" data-width="50px">ID</th>
                             <th data-column-id="banco__nombre">Banco</th>
-                            <th data-column-id="moneda" data-width="40px">Moneda</th>
-                            <th data-column-id="tipo_cuenta" data-width="40px">Tipo</th>
+                            <th data-column-id="moneda" data-width="50px">Mo</th>
+                            <th data-column-id="tipo_cuenta" data-width="50px">Ti</th>
                             <th data-column-id="cta" data-width="160px">Cuenta</th>
                             <th data-column-id="titular">Titular</th>
                             <th data-column-id="cci" data-visible="false">CCI</th>
@@ -457,8 +457,8 @@ function fMarcaComercialCuentaListShow(marca_comercial) {
         },
         formatters: {
             "acciones": function(column, row) {
-                return "<button type=\"button\" class=\"btn btn-xs btn-outline-warning command-edit\" data-row-id=\"" + row.id + "\"><i class=\"far fa-edit\"></i></button> " +
-                "<button type=\"button\" class=\"btn btn-xs btn-outline-danger command-delete\" data-row-id=\"" + row.id + "\"><i class=\"far fa-trash-alt\"></i></button>";
+                return "<button title=\"Modificar\" type=\"button\" class=\"btn btn-xs btn-outline-warning command-edit\" data-row-id=\"" + row.id + "\"><i class=\"far fa-edit\"></i></button> " +
+                "<button title=\"Eliminar\" type=\"button\" class=\"btn btn-xs btn-outline-danger command-delete\" data-row-id=\"" + row.id + "\"><i class=\"far fa-trash-alt\"></i></button>";
             }
         },
         converters: {
