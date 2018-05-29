@@ -145,33 +145,27 @@
     </div>
 </div>
 <div id="fProveedor" class="modal" tabindex="-1" role="dialog" aria-hidden="true" data-backdrop="static">
-    <div class="modal-dialog" style="max-width: 600px;" role="document">
+    <div class="modal-dialog" style="max-width: 500px;" role="document">
         <div class="modal-content">
             <div class="modal-body">
                 <form autocomplete="off">
+                    <input type="hidden" name="tipo_documento" value="RUC">
                     <fieldset>
                         <legend>
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                 <span aria-hidden="true">&times;</span>
                             </button>
                             <h5 class="modal-title">TITULO</h5>
-                            <hr/>
+                            <hr class="mb-0" />
                         </legend>
-                        <div class="form-row">
-                            <div class="col">
-                                <label class="col-form-label col-form-label-sm" for="fProveedor_tipo_documento">Tipo de documento</label>
-                                <select class="form-control form-control-sm" id="fProveedor_tipo_documento" name="tipo_documento"></select>
-                                <div class="invalid-feedback"></div>
-                            </div>
-                            <div class="col">
-                                <label class="col-form-label col-form-label-sm" for="fProveedor_id">Número de documento</label>
-                                <input class="form-control form-control-sm" id="fProveedor_id" name="id" type="text">
-                                <div class="invalid-feedback"></div>
-                            </div>
+                        <div class="form-group">
+                            <label class="col-form-label col-form-label-sm" for="fProveedor_id">Número de documento / RUC</label>
+                            <input class="form-control form-control-sm" id="fProveedor_id" name="id" type="text">
+                            <div class="invalid-feedback"></div>
                         </div>
                         <div class="form-group">
                             <label class="col-form-label col-form-label-sm" for="fProveedor_razon_social">Razón social</label>
-                            <input class="form-control form-control-sm" id="fProveedor_razon_social" name="razon_social" type="text">
+                            <input class="form-control form-control-sm" id="fProveedor_razon_social" name="razon_social" readonly="" type="text">
                             <div class="invalid-feedback"></div>
                         </div>
                         <button class="btn btn-secondary float-left" data-dismiss="modal"><i class="far fa-times-circle"></i> Cancelar</button>
@@ -304,6 +298,8 @@
 
 {% block js %}
 <script>
+var regex_ruc = /^[1,2]{1}[0-9]{10}$/;
+
 $(document).ajaxStop($.unblockUI);
 
 $.ajaxSetup({
@@ -407,7 +403,7 @@ function fProveedorShow(id) {
     
     $(title).html("<i class=\"far fa-file\"></i> Nuevo proveedor");
     $(dialog).modal("show");
-    $(form).find("[name=tipo_documento]").focus();
+    $(form).find("[name=id]").focus();
 }
 
 function fProveedorSync() {
@@ -428,6 +424,10 @@ function fProveedorSync() {
 function fProveedorValidarRuc(ruc) {
     var dialog = $("#fProveedor");
     var form = $(dialog).find("form");
+
+    if (ruc==0) {
+        $(form).find("[name=razon_social]").val('');
+    }
 
     $.ajax({
         type: "GET",
@@ -672,9 +672,13 @@ $(document).ready(function() {
         fMarcaComercialCuentaDeleteSync();
     });
 
-    $("#fProveedor_id").focusout(function(){
-        $.blockUI({ message: $('#dWaitMessage'), });
-        fProveedorValidarRuc( $("#fProveedor_id").val() );
+    $("#fProveedor_id").on("keyup", function(event) {
+        if ( regex_ruc.test( $("#fProveedor_id").val() ) ) {
+            $.blockUI({ message: $("#dWaitMessage"), });
+            fProveedorValidarRuc( $("#fProveedor_id").val() );
+        } else {
+            fProveedorValidarRuc( 0 );
+        }
     });
 
 });
