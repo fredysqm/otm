@@ -168,6 +168,23 @@
                             <input class="form-control form-control-sm" id="fProveedor_razon_social" name="razon_social" readonly="" type="text">
                             <div class="invalid-feedback"></div>
                         </div>
+                        <div class="form-group">
+                                <label class="col-form-label col-form-label-sm" for="fProveedor_domicilio_fiscal">Domicilio fiscal</label>
+                                <input class="form-control form-control-sm" id="fProveedor_domicilio_fiscal" name="domicilio_fiscal" readonly="" type="text">
+                                <div class="invalid-feedback"></div>
+                            </div>
+                        <div class="form-row mb-3">
+                            <div class="col">
+                                <label class="col-form-label col-form-label-sm" for="fProveedor_condicion">Condición</label>
+                                <input class="form-control form-control-sm" id="fProveedor_condicion" name="condicion" readonly="" type="text">
+                                <div class="invalid-feedback"></div>
+                            </div>
+                            <div class="col">
+                                <label class="col-form-label col-form-label-sm" for="fProveedor_estado">Estado</label>
+                                <input class="form-control form-control-sm" id="fProveedor_estado" name="estado" readonly="" type="text">
+                                <div class="invalid-feedback"></div>
+                            </div>
+                        </div>
                         <button class="btn btn-secondary float-left" data-dismiss="modal"><i class="far fa-times-circle"></i> Cancelar</button>
                         <button id="fProveedor_submit" class="btn btn-primary float-right"><i class="far fa-save"></i> Guardar</button>
                     </fieldset>
@@ -242,17 +259,17 @@
                             </div>
                         </div>
                         <div class="form-row">
-                                <div class="col">
-                                    <label class="col-form-label col-form-label-sm" for="fMarcaComercialCuenta_cta">Nro Cuenta</label>
-                                    <input class="form-control form-control-sm" id="fMarcaComercialCuenta_cta" name="cta" type="text">
-                                    <div class="invalid-feedback"></div>
-                                </div>
-                                <div class="col">
-                                    <label class="col-form-label col-form-label-sm" for="fMarcaComercialCuenta_cci">Nro CCI</label>
-                                    <input class="form-control form-control-sm" id="fMarcaComercialCuenta_cci" name="cci" type="text">
-                                    <div class="invalid-feedback"></div>
-                                </div>
+                            <div class="col">
+                                <label class="col-form-label col-form-label-sm" for="fMarcaComercialCuenta_cta">Nro Cuenta</label>
+                                <input class="form-control form-control-sm" id="fMarcaComercialCuenta_cta" name="cta" type="text">
+                                <div class="invalid-feedback"></div>
                             </div>
+                            <div class="col">
+                                <label class="col-form-label col-form-label-sm" for="fMarcaComercialCuenta_cci">Nro CCI</label>
+                                <input class="form-control form-control-sm" id="fMarcaComercialCuenta_cci" name="cci" type="text">
+                                <div class="invalid-feedback"></div>
+                            </div>
+                        </div>
                         <div class="form-group">
                             <label class="col-form-label col-form-label-sm" for="fMarcaComercialCuenta_titular">Titular</label>
                             <input class="form-control form-control-sm" id="fMarcaComercialCuenta_titular" name="titular" type="text">
@@ -426,13 +443,22 @@ function fProveedorValidarRuc(ruc) {
     var form = $(dialog).find("form");
 
     if (ruc==0) {
+        $(form).resetValidation();
         $(form).find("[name=razon_social]").val('');
+        $(form).find("[name=domicilio_fiscal]").val('');
+        $(form).find("[name=condicion]").val('');
+        $(form).find("[name=estado]").val('');
     }
 
     $.ajax({
         type: "GET",
         url: "/api/v1/consulta_ruc/" + ruc + "/",
-        success: function(data){ $(form).find("[name=razon_social]").val(data.razon_social); },
+        success: function(data){ 
+            $(form).find("[name=razon_social]").val(data.razon_social);
+            $(form).find("[name=domicilio_fiscal]").val(data.domicilio_fiscal); 
+            $(form).find("[name=condicion]").val(data.condicion); 
+            $(form).find("[name=estado]").val(data.estado); 
+        },
         error: function (jqXHR) { console.log(jqXHR.responseJSON); },
     });
 }
@@ -583,6 +609,18 @@ function fMarcaComercialCuentaDeleteSync() {
 $(document).ready(function() {
 
     $("#fMarcaComercial").bind("keypress", function (e) {
+        if (e.keyCode == 13) {
+            return false;
+        }
+    });
+
+    $("#fProveedor").bind("keypress", function (e) {
+        if (e.keyCode == 13) {
+            return false;
+        }
+    });
+
+    $("#fMarcaComercialCuenta").bind("keypress", function (e) {
         if (e.keyCode == 13) {
             return false;
         }
