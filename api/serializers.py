@@ -75,7 +75,7 @@ class MarcaComercialSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = MarcaComercial
-        fields = ('id', 'nombre', 'proveedor', 'proveedor__razon_social', 'categoria_servicio', 'categoria_servicio__nombre', 'localidad', 'localidad__nombre', 'modalidad_pago', 'modalidad_pago__nombre', 'direccion', 'telefono_fijo', 'telefono_movil', 'email', 'sitio_web', 'observaciones', 'creado', 'modificado')
+        fields = ('id', 'nombre', 'proveedor', 'proveedor__razon_social', 'categoria_servicio', 'categoria_servicio__nombre', 'localidad', 'localidad__nombre', 'modalidad_pago', 'modalidad_pago__nombre', 'direccion', 'telefono_fijo', 'telefono_movil', 'central_reservas', 'email', 'sitio_web', 'observaciones', 'creado', 'modificado')
 
 class TipoCuentaBancoSerializer(serializers.ModelSerializer):
     class Meta:

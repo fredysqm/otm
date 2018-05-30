@@ -19,7 +19,8 @@
             <th data-column-id="localidad__nombre" data-width="150px">Localidad</th>
             <th data-column-id="direccion">Dirección</th>
             <th data-column-id="telefono_fijo" data-width="80px">Fijo</th>
-            <th data-column-id="telefono_movil" data-width="90px">Movil</th>
+            <th data-column-id="telefono_movil" data-visible="false" data-width="90px">Movil</th>
+            <th data-column-id="central_reservas" data-width="80px">Central reservas</th>
             <th data-column-id="email" data-visible="false" data-formatter="email" data-sortable="false">Email</th>
             <th data-column-id="sitio_web" data-visible="false" data-formatter="link" data-sortable="false">Web</th>
             <th data-column-id="creado" data-visible="false" data-width="150px" data-converter="datetime">Creado</th>
@@ -43,7 +44,7 @@
                                 <span aria-hidden="true">&times;</span>
                             </button>
                             <h5 class="modal-title">TITULO</h5>
-                            <hr/>
+                            <hr class="my-0" />
                         </legend>
                         <div class="form-group">
                             <label class="col-form-label col-form-label-sm" for="fMarcaComercial_proveedor">Proveedor</label>
@@ -90,6 +91,11 @@
                                 <input class="form-control form-control-sm" id="fMarcaComercial_telefono_movil" name="telefono_movil" type="text">
                                 <div class="invalid-feedback"></div>
                             </div>
+                            <div class="col">
+                                <label class="col-form-label col-form-label-sm" for="fMarcaComercial_central_reservas">Central de reservas</label>
+                                <input class="form-control form-control-sm" id="fMarcaComercial_central_reservas" name="central_reservas" type="text">
+                                <div class="invalid-feedback"></div>
+                            </div>
                         </div>
                         <div class="form-row">
                             <div class="col">
@@ -128,7 +134,7 @@
                                 <span aria-hidden="true">&times;</span>
                             </button>
                             <h5 class="modal-title"><i class="far fa-trash-alt"></i> Eliminar marca comercial</h5>
-                            <hr/>
+                            <hr class="my-0" />
                         </legend>
                         <div class="alert alert-dismissible alert-danger detail">
                             No se puede eliminar está marca comercial porque esta siendo utilizada por otros módulos del sistema.
@@ -202,7 +208,7 @@
                         <span aria-hidden="true">&times;</span>
                     </button>
                     <h5 class="modal-title"><i class="fas fa-piggy-bank"></i> Cuentas de la marca comercial</h5>
-                    <hr/>
+                    <hr class="my-0"/>
                 </legend>
                 <dl class="row">
                 </dl>
@@ -239,7 +245,7 @@
                                 <span aria-hidden="true">&times;</span>
                             </button>
                             <h5 class="modal-title">TITULO</h5>
-                            <hr />
+                            <hr class="my-0" />
                         </legend>
                         <div class="form-group">
                             <label class="col-form-label col-form-label-sm" for="fMarcaComercialCuenta_banco">Banco</label>
@@ -295,7 +301,7 @@
                                     <span aria-hidden="true">&times;</span>
                                 </button>
                                 <h5 class="modal-title"><i class="far fa-trash-alt"></i> Eliminar cuenta</h5>
-                                <hr/>
+                                <hr class="my-0" />
                             </legend>
                             <div class="alert alert-dismissible alert-danger detail">
                                 No se puede eliminar está cuenta porque esta siendo utilizada por otros módulos del sistema.

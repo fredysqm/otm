@@ -644,6 +644,19 @@ class MarcaComercial(models.Model):
         ]
     )
 
+    central_reservas = models.CharField(
+        max_length=12,
+        blank=True,
+        verbose_name='Central de reservas',
+        help_text='Ingrese solo números',
+        validators=[
+            validators.RegexValidator(
+                '^[0-9]{6,}$',
+                message='Ingrese un número de teléfono fijo (central de reservas) válido.'
+            ),
+        ]
+    )
+
     email = models.EmailField(
         max_length=128,
         blank=True,
