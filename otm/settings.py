@@ -11,7 +11,6 @@ ROOT_URLCONF = 'otm.urls'
 WSGI_APPLICATION = 'otm.wsgi.application'
 
 INSTALLED_APPS = [
-    'admin_view_permission',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
